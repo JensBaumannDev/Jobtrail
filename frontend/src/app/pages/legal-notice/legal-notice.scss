@@ -1,1 +1,37 @@
 @use 'src/styles/abstracts' as *;
+
+:host {
+  display: block;
+}
+
+.legal-notice {
+  @include flex(column, nowrap, flex-start, stretch);
+  gap: $space-xl;
+  max-width: $text-width;
+  margin-inline: auto;
+}
+
+.legal-notice__section {
+  @include flex(column, nowrap, flex-start, stretch);
+  gap: $space-sm;
+}
+
+.legal-notice__title {
+  color: $color-ink;
+  font-size: $font-size-large;
+  letter-spacing: -0.01em;
+}
+
+.legal-notice__text {
+  color: $color-text;
+  overflow-wrap: anywhere;
+}
+
+.legal-notice__link {
+  color: $color-link;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

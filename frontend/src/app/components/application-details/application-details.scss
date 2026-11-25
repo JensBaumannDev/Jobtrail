@@ -1,1 +1,76 @@
 @use 'src/styles/abstracts' as *;
+
+.application-details {
+  display: grid;
+  gap: $space-sm;
+  min-width: 0;
+}
+
+.application-details__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, #{$space-3xl * 3}), 1fr));
+  gap: $space-xs;
+  margin: 0;
+}
+
+.application-details__fact {
+  min-width: 0;
+  padding: $space-sm $space-md;
+  border-radius: $radius-button;
+  background: $color-surface;
+}
+
+.application-details__term {
+  color: $color-label;
+  font-weight: $font-weight-semibold;
+}
+
+.application-details__value {
+  margin: $space-2xs 0 0;
+  color: $color-ink;
+  font-weight: $font-weight-semibold;
+  overflow-wrap: anywhere;
+}
+
+.application-details__link {
+  @include flex(row, nowrap, flex-start, center);
+  display: inline-flex;
+  gap: $space-xs;
+  color: $color-link;
+  text-decoration: none;
+  transition: color $duration-fast;
+
+  &:hover {
+    color: $color-ink;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+}
+
+.application-details__icon {
+  flex: none;
+  width: $space-md;
+  height: $space-md;
+}
+
+.application-details__empty {
+  margin: 0;
+  color: $color-label;
+}
+
+.application-details__text-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: $color-link;
+  font: inherit;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: color $duration-fast;
+
+  &:hover {
+    color: $color-ink;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+}

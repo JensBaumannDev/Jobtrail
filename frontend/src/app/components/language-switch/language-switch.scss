@@ -1,1 +1,23 @@
 @use 'src/styles/abstracts' as *;
+
+:host {
+  display: block;
+  flex: none;
+}
+
+.language-switch {
+  @include icon-button;
+  gap: $space-tight;
+  width: auto;
+  padding-inline: $space-snug;
+}
+
+.language-switch__code {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+}
+
+.language-switch__icon {
+  width: $icon-size;
+  height: $icon-size;
+}

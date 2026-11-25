@@ -1,1 +1,62 @@
 @use 'src/styles/abstracts' as *;
+
+.applications {
+  display: block;
+  padding-block: $space-2xl $section-gap;
+}
+
+.applications__message {
+  margin: 0;
+  padding: $space-lg;
+  border-radius: $radius-surface;
+  background: $color-surface;
+  color: $color-label;
+}
+
+.applications__message--error {
+  color: $color-error;
+}
+
+.applications__pipeline {
+  padding-top: clamp(#{$space-2xl}, 6vw, #{$space-3xl});
+}
+
+.applications__head {
+  @include flex(column, nowrap, flex-start, stretch);
+  gap: $space-lg;
+  margin-bottom: $space-lg;
+}
+
+.applications__title {
+  margin: 0;
+  color: $color-ink;
+  font-size: $font-size-title;
+  font-weight: $font-weight-bold;
+  letter-spacing: -0.02em;
+  line-height: $line-height-heading;
+}
+
+.applications__title-second {
+  @include heading-second-line;
+  display: block;
+}
+
+.applications__panel {
+  margin-bottom: $space-lg;
+  padding: clamp(#{$space-lg}, 3vw, #{$space-xl});
+  border-radius: $radius-surface;
+  background: $color-surface;
+}
+
+.applications__empty {
+  @include flex(column, nowrap, flex-start, flex-start);
+  gap: $space-md;
+  padding: $space-xl;
+  border-radius: $radius-surface;
+  background: $color-surface;
+}
+
+.applications__empty-text {
+  margin: 0;
+  color: $color-text;
+}

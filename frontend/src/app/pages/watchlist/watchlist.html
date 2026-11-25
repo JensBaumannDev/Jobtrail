@@ -1,0 +1,37 @@
+<app-page-hero
+  [eyebrow]="'watchlist.eyebrow' | translate"
+  [title]="'watchlist.title' | translate" [subtitle]="'watchlist.subtitle' | translate" />
+
+<section class="watchlist container" [attr.aria-label]="'watchlist.sectionLabel' | translate">
+  <div class="watchlist__layout">
+    <app-watchlist-form
+      class="watchlist__form"
+      [item]="editing()"
+      (saved)="stopEditing()"
+      (cancelled)="stopEditing()"
+    />
+
+    <div class="watchlist__main">
+      <h2 class="visually-hidden" [id]="headingId" tabindex="-1">
+        {{ 'watchlist.listHeading' | translate }}
+      </h2>
+      @switch (loadState()) {
+        @case ('loading') {
+          <p class="watchlist__state" role="status">{{ 'watchlist.loading' | translate }}</p>
+        }
+        @case ('error') {
+          <p class="watchlist__state watchlist__state--error" role="alert">
+            {{ 'common.loadError' | translate }}
+          </p>
+        }
+        @default {
+          <app-watchlist-list
+            [editingId]="editing()?.id ?? null"
+            (edit)="startEditing($event)"
+            (removed)="handleRemoved($event)"
+          />
+        }
+      }
+    </div>
+  </div>
+</section>

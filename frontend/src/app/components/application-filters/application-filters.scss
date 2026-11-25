@@ -1,1 +1,86 @@
+@use 'sass:list';
 @use 'src/styles/abstracts' as *;
+
+.application-filters {
+  @include flex(row, nowrap, flex-start, center);
+  gap: $space-xs;
+  width: 100%;
+}
+
+.application-filters__search,
+.application-filters__status {
+  min-width: 0;
+  min-height: $field-height;
+  border: 1px solid $color-field-line;
+  border-radius: $radius-button;
+  background-color: $color-background;
+  color: $color-ink;
+  font: inherit;
+
+  &:hover {
+    border-color: $color-field-line-hover;
+  }
+}
+
+.application-filters__search {
+  flex: 2 1 0;
+  padding: 0 $space-md;
+}
+
+.application-filters__status {
+  flex: 1 1 0;
+  padding: 0 $space-md;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+}
+
+.application-filters__chip {
+  flex: none;
+  min-height: $field-height;
+  padding: 0 $space-md;
+  border: 1px solid $color-line;
+  border-radius: $radius-button;
+  background: $color-background;
+  color: $color-label;
+  font: inherit;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition:
+    background-color $duration-fast,
+    color $duration-fast;
+
+  &:hover {
+    color: $color-ink;
+  }
+
+  &[aria-pressed='true'] {
+    border-color: $color-ink;
+    background: $color-ink;
+    color: $color-background;
+  }
+}
+
+@each $name, $colors in $status-colors {
+  .application-filters__status--#{$name} {
+    border-color: transparent;
+    background-color: list.nth($colors, 1);
+    color: list.nth($colors, 2);
+  }
+}
+
+/* #region RESPONSIVE */
+@include phone {
+  .application-filters {
+    flex-wrap: wrap;
+  }
+
+  .application-filters__search,
+  .application-filters__status {
+    flex: 1 1 100%;
+  }
+
+  .application-filters__chip {
+    flex: 1 1 0;
+  }
+}
+/* #endregion */

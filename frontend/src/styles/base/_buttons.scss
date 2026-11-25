@@ -16,8 +16,12 @@
   white-space: nowrap;
   cursor: pointer;
   transition:
-    background-color $duration-base,
-    color $duration-base;
+    background-color $duration-base $ease,
+    color $duration-base $ease;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
 
   &:disabled {
     opacity: 0.5;

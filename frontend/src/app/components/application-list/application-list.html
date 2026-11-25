@@ -1,0 +1,214 @@
+<div class="application-list">
+  <div class="application-list__sort-select">
+    <label class="application-list__sort-label" for="application-list-sort">
+      {{ 'list.sortLabel' | translate }}
+    </label>
+    <select
+      class="application-list__sort-control"
+      id="application-list-sort"
+      [value]="sortValue()"
+      (change)="chooseSort($event)"
+    >
+      <option value="" [selected]="sortValue() === ''">{{ 'list.sortDefault' | translate }}</option>
+      @for (option of sortOptions; track option.value) {
+        <option [value]="option.value" [selected]="sortValue() === option.value">
+          {{
+            'list.sortOption'
+              | translate: { column: (option.labelKey | translate), direction: (option.directionKey | translate) }
+          }}
+        </option>
+      }
+    </select>
+  </div>
+
+  <div class="application-list__head">
+    @for (column of columns(); track column.key) {
+      <button
+        class="application-list__sort"
+        type="button"
+        [class.application-list__sort--active]="column.active"
+        [attr.aria-label]="
+          column.active
+            ? ('list.sortActive'
+              | translate
+                : {
+                    column: (column.labelKey | translate),
+                    direction: ('list.' + column.direction | translate),
+                  })
+            : ('list.sortBy' | translate: { column: (column.labelKey | translate) })
+        "
+        (click)="sortBy(column.key)"
+      >
+        {{ column.labelKey | translate }}
+        <span class="application-list__sort-icon" aria-hidden="true">
+          @if (!column.active) {
+            ↕
+          } @else if (column.direction === 'ascending') {
+            ↑
+          } @else {
+            ↓
+          }
+        </span>
+      </button>
+    }
+    <span></span>
+  </div>
+
+  @if (rows().length === 0) {
+    <p class="application-list__empty">{{ 'list.noMatches' | translate }}</p>
+  } @else {
+    <ul class="application-list__rows">
+      @for (row of rows(); track row.application.id) {
+        @let application = row.application;
+        @let expanded = expandedIds().has(application.id);
+        <li class="application-list__row">
+          <div class="application-list__cell">
+            <h3 class="application-list__company">
+              @if (row.websiteUrl) {
+                <a
+                  class="application-list__company-link"
+                  [href]="row.websiteUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {{ application.company }}
+                  <svg class="application-list__icon application-list__icon--small" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
+                  <span class="visually-hidden">({{ 'common.opensInNewTab' | translate }})</span>
+                </a>
+              } @else {
+                {{ application.company }}
+              }
+            </h3>
+            <p class="application-list__role">{{ application.role }}</p>
+            <div class="application-list__actions">
+              @if (!row.websiteUrl) {
+                <button
+                  class="application-list__action application-list__action--warning"
+                  type="button"
+                  [attr.aria-label]="'list.websiteMissingFor' | translate: { company: application.company }"
+                  (click)="startEdit(application)"
+                >
+                  <svg class="application-list__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
+                  {{ 'list.websiteMissing' | translate }}
+                </button>
+              }
+              <button
+                class="application-list__action"
+                type="button"
+                [class.application-list__action--open]="expanded"
+                [attr.aria-expanded]="expanded"
+                [attr.aria-controls]="expanded ? 'application-details-' + application.id : null"
+                [attr.aria-label]="
+                  'list.detailsFor'
+                    | translate: { company: application.company, count: application.notes.length }
+                "
+                (click)="toggleDetails(application.id)"
+              >
+                <svg class="application-list__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6" /><path d="M16 13H8" /><path d="M16 17H8" /></svg>
+                {{ 'list.details' | translate }}
+                @if (application.notes.length) {
+                  <span class="application-list__count" aria-hidden="true">{{ application.notes.length }}</span>
+                }
+                <svg class="application-list__icon application-list__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="application-list__cell">
+            <div class="application-list__tags">
+              <span class="application-list__tag">
+                {{ application.location || ('list.locationOpen' | translate) }}
+              </span>
+              <span
+                class="application-list__tag"
+                [class.application-list__tag--info]="application.work_mode === 'remote'"
+              >
+                {{ 'workMode.' + application.work_mode | translate }}
+              </span>
+              @if (row.followUpDue) {
+                <span class="application-list__tag application-list__tag--warning">
+                  {{ 'list.followUp' | translate }}
+                </span>
+              }
+            </div>
+          </div>
+
+          <div class="application-list__cell">
+            <p class="application-list__next">
+              {{ application.next_step || ('list.noNextStep' | translate) }}
+            </p>
+            <div class="application-list__next-meta">
+              @if (row.dateChip; as chip) {
+                <span
+                  class="application-list__tag application-list__date"
+                  [class]="'application-list__date--' + chip.kind"
+                >
+                  <svg class="application-list__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
+                  {{ 'list.date.' + chip.kind | translate: { date: chip.label } }}
+                </span>
+              }
+              <span class="application-list__applied">
+                {{ row.appliedKey | translate: { date: row.appliedDate, days: row.appliedDays } }}
+              </span>
+            </div>
+          </div>
+
+          <div class="application-list__status-cell">
+            <select
+              class="application-list__status"
+              [class]="row.statusClass"
+              [id]="'application-status-' + application.id"
+              [attr.aria-label]="'list.statusOf' | translate: { company: application.company }"
+              (change)="changeStatus(application, $event)"
+            >
+              @for (status of statuses; track status) {
+                <option [value]="status" [selected]="status === application.status">
+                  {{ 'status.' + status | translate }}
+                </option>
+              }
+            </select>
+          </div>
+
+          <div class="application-list__tools">
+            <button
+              class="application-list__action application-list__action--icon"
+              type="button"
+              [id]="'application-edit-' + application.id"
+              [attr.aria-label]="'list.editCompany' | translate: { company: application.company }"
+              (click)="startEdit(application)"
+            >
+              <svg class="application-list__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9" /><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" /></svg>
+            </button>
+            <button
+              class="application-list__action application-list__action--icon"
+              type="button"
+              [attr.aria-label]="'list.deleteCompany' | translate: { company: application.company }"
+              (click)="requestDelete(application)"
+            >
+              <svg class="application-list__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18" /><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" /></svg>
+            </button>
+          </div>
+
+          @if (editingId() === application.id) {
+            <div class="application-list__panel" [id]="'application-edit-panel-' + application.id">
+              <app-application-form
+                [application]="application"
+                (saved)="finishEdit($event)"
+                (cancelled)="cancelEdit(application)"
+              />
+            </div>
+          }
+
+          @if (expanded) {
+            <div class="application-list__details" [id]="'application-details-' + application.id">
+              <app-application-details
+                [application]="application"
+                (editRequested)="startEdit(application)"
+              />
+            </div>
+          }
+        </li>
+      }
+    </ul>
+  }
+</div>

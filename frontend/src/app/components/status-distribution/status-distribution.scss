@@ -1,1 +1,76 @@
+@use 'sass:list';
 @use 'src/styles/abstracts' as *;
+
+.status-distribution {
+  margin-top: $space-sm;
+  padding: $space-lg;
+  border-radius: $radius-surface;
+  background: $color-surface;
+}
+
+.status-distribution__head {
+  @include flex(row, wrap, space-between, baseline);
+  gap: $space-xs $space-md;
+  margin-bottom: $space-md;
+}
+
+.status-distribution__title {
+  margin: 0;
+  color: $color-ink;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+}
+
+.status-distribution__total {
+  margin: 0;
+  color: $color-label;
+}
+
+.status-distribution__bar {
+  @include flex(row, nowrap);
+  gap: $space-3xs;
+  height: $space-sm;
+  border-radius: $radius-pill;
+  background: $color-line;
+  overflow: clip;
+}
+
+.status-distribution__segment {
+  display: block;
+  min-width: $space-xs;
+  transition: flex-grow $duration-base $ease;
+}
+
+.status-distribution__legend {
+  @include flex(row, wrap);
+  gap: $space-xs $space-lg;
+  margin: $space-md 0 0;
+  padding: 0;
+  list-style: none;
+  color: $color-label;
+}
+
+.status-distribution__item {
+  @include flex(row, nowrap, flex-start, center);
+  gap: $space-xs;
+}
+
+.status-distribution__dot {
+  width: $space-sm;
+  height: $space-sm;
+  border-radius: 50%;
+}
+
+.status-distribution__count {
+  color: $color-ink;
+  font-weight: $font-weight-semibold;
+  font-variant-numeric: tabular-nums;
+}
+
+@each $name, $colors in $status-colors {
+  .status-distribution__segment--#{$name},
+  .status-distribution__dot--#{$name} {
+    background: list.nth($colors, 2);
+  }
+}
+

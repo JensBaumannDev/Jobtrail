@@ -1,0 +1,34 @@
+<app-page-hero
+  class="pdf-overview__hero"
+  [eyebrow]="'pdf.eyebrow' | translate"
+  [title]="'pdf.title' | translate"
+  [subtitle]="'pdf.subtitle' | translate"
+/>
+
+<section class="pdf-overview container" [attr.aria-label]="'pdf.sectionLabel' | translate">
+  <div class="pdf-overview__layout">
+    <app-pdf-options
+      class="pdf-overview__options"
+      [selectedCount]="selectedCount()"
+      [totalCount]="applications().length"
+      (optionsChange)="options.set($event)"
+      (printRequested)="print()"
+    />
+
+    <div class="pdf-overview__main">
+      @switch (loadState()) {
+        @case ('loading') {
+          <p class="pdf-overview__state" role="status">{{ 'pdf.loading' | translate }}</p>
+        }
+        @case ('error') {
+          <p class="pdf-overview__state pdf-overview__state--error" role="alert">
+            {{ 'common.loadError' | translate }}
+          </p>
+        }
+        @default {
+          <app-pdf-preview [options]="options()" [applications]="applications()" />
+        }
+      }
+    </div>
+  </div>
+</section>

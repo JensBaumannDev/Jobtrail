@@ -1,0 +1,44 @@
+<div class="application-filters" role="search" [attr.aria-label]="'filters.label' | translate">
+  <label class="visually-hidden" for="application-search">{{ 'filters.search' | translate }}</label>
+  <input
+    class="application-filters__search"
+    id="application-search"
+    type="search"
+    autocomplete="off"
+    [maxlength]="searchMaxLength"
+    [formControl]="search"
+    [placeholder]="'filters.searchPlaceholder' | translate"
+  />
+  <label class="visually-hidden" for="application-status-filter">
+    {{ 'filters.status' | translate }}
+  </label>
+  <select
+    class="application-filters__status"
+    id="application-status-filter"
+    [class]="statusClass()"
+    [formControl]="status"
+  >
+    <option value="all">{{ 'filters.allStatuses' | translate: { count: counts().all } }}</option>
+    @for (option of statuses; track option) {
+      <option [value]="option">
+        {{ 'status.' + option | translate }} ({{ counts().byStatus[option] }})
+      </option>
+    }
+  </select>
+  <button
+    class="application-filters__chip"
+    type="button"
+    [attr.aria-pressed]="filters().remoteOnly"
+    (click)="toggleRemote()"
+  >
+    {{ 'filters.remoteOnly' | translate }}
+  </button>
+  <button
+    class="application-filters__chip"
+    type="button"
+    [attr.aria-pressed]="filters().followUpOnly"
+    (click)="toggleFollowUp()"
+  >
+    {{ 'filters.followUpOnly' | translate }}
+  </button>
+</div>

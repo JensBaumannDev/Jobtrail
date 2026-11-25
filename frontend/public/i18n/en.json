@@ -1,1 +1,401 @@
-{}
+{
+  "common": {
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "undo": "Undo",
+    "loading": "Loading …",
+    "loadError": "Something went wrong. Please reload the page.",
+    "saveError": "Saving didn't work. Please try again.",
+    "required": "Required",
+    "invalidUrl": "Please enter a valid address, e.g. company.com",
+    "opensInNewTab": "opens in a new tab"
+  },
+  "status": {
+    "not_applied": "Not applied yet",
+    "awaiting_response": "Awaiting response",
+    "intro_call_scheduled": "Intro call scheduled",
+    "further_interview": "Further interview",
+    "offer": "Offer",
+    "rejected_after_application": "Rejected after application",
+    "rejected_after_interview": "Rejected after interview"
+  },
+  "workMode": {
+    "remote": "Remote",
+    "hybrid": "Hybrid",
+    "on_site": "On site"
+  },
+  "plan": {
+    "apply": "Application planned",
+    "watch": "Keep watching"
+  },
+  "toast": {
+    "deleteFailed": "Deleting didn't work, the entry is back."
+  },
+  "applicationForm": {
+    "createTitle": "New application",
+    "editTitle": "Edit {{company}}",
+    "saveNew": "Save application",
+    "saveChanges": "Save changes",
+    "fields": {
+      "company": "Company",
+      "website": "Website",
+      "role": "Role",
+      "location": "Location",
+      "work_mode": "Work mode",
+      "status": "Status",
+      "next_step": "Next step",
+      "next_step_on": "Date",
+      "job_ad_url": "Job ad",
+      "contact": "Contact person",
+      "salary_expectation": "Salary expectation"
+    },
+    "placeholders": {
+      "website": "e.g. company.com",
+      "location": "e.g. Hamburg",
+      "next_step": "e.g. Technical interview",
+      "job_ad_url": "Link to the job ad",
+      "contact": "Name, role",
+      "salary_expectation": "e.g. 52,000 EUR gross"
+    },
+    "errors": {
+      "tooLong": "That is too long. Please shorten it a little.",
+      "required": "Please fill in this field.",
+      "invalid": "Please check this field."
+    }
+  },
+  "details": {
+    "jobAd": "Job ad",
+    "contact": "Contact person",
+    "salary": "Salary expectation",
+    "appliedOn": "Applied on",
+    "respondedOn": "First response",
+    "empty": "No job ad, contact person or salary expectation added yet.",
+    "addNow": "Add them now"
+  },
+  "notes": {
+    "heading": "Notes",
+    "untitled": "Note",
+    "empty": "No notes on {{company}} yet.",
+    "formLabel": "New note on {{company}}",
+    "editFormLabel": "Edit note on {{company}}",
+    "titleLabel": "Title of the note on {{company}}",
+    "titlePlaceholder": "Title, e.g. questions for the interview",
+    "textLabel": "Text of the note on {{company}}",
+    "textPlaceholder": "What do you want to remember about {{company}}?",
+    "save": "Save note",
+    "saveChanges": "Save changes",
+    "saved": "Note saved",
+    "updated": "Note updated",
+    "deleted": "Note deleted",
+    "emptyError": "Add a title or some text so the note isn't empty.",
+    "tooLong": "The note is too long. Please shorten it a little."
+  },
+  "applications": {
+    "eyebrow": "Application tracker",
+    "title": "Every application at a glance",
+    "subtitle": "All the way to a permanent job",
+    "lead": "See where each Fullstack Developer application stands, when to follow up and what comes next.",
+    "add": "Add application",
+    "toList": "Go to list",
+    "overview": "Overview",
+    "listTitle": "Applications",
+    "listSubtitle": "Where each one stands",
+    "empty": "No applications yet. Use “Add application” to create your first one.",
+    "created": "{{company}} is now on your list"
+  },
+  "summary": {
+    "active": "Active",
+    "responseRate": "Response rate",
+    "percent": "%",
+    "upcoming": "Dates in the next 7 days",
+    "followUpDue": "Follow-up due",
+    "applicationOne": "application",
+    "applicationMany": "applications"
+  },
+  "distribution": {
+    "title": "Distribution by status",
+    "total": "{{total}} entries, {{sent}} sent"
+  },
+  "filters": {
+    "label": "Filter applications",
+    "search": "Search company, role, location or contact",
+    "searchPlaceholder": "Search company or role",
+    "status": "Filter by status",
+    "allStatuses": "All statuses ({{count}})",
+    "remoteOnly": "Remote only",
+    "followUpOnly": "Follow-up due"
+  },
+  "list": {
+    "columnCompany": "Company",
+    "columnLocation": "Location",
+    "columnNext": "Next step",
+    "columnStatus": "Status",
+    "sortBy": "Sort by {{column}}",
+    "sortActive": "Sort by {{column}}, currently {{direction}}",
+    "ascending": "ascending",
+    "descending": "descending",
+    "noMatches": "No applications match this selection.",
+    "websiteMissing": "Website missing",
+    "websiteMissingFor": "Website missing for {{company}}, add it now",
+    "details": "Details",
+    "detailsFor": "Details for {{company}}, notes: {{count}}",
+    "locationOpen": "Location open",
+    "followUp": "Follow up",
+    "noNextStep": "No next step",
+    "date": {
+      "overdue": "Overdue · {{date}}",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "soon": "{{date}}",
+      "later": "{{date}}"
+    },
+    "notApplied": "Not applied yet",
+    "appliedToday": "Applied {{date}} · today",
+    "appliedOneDay": "Applied {{date}} · 1 day ago",
+    "appliedDays": "Applied {{date}} · {{days}} days ago",
+    "statusOf": "Status of {{company}}",
+    "editCompany": "Edit {{company}}",
+    "deleteCompany": "Delete {{company}}",
+    "saved": "{{company}} saved",
+    "statusChanged": "{{company}} is now “{{status}}”",
+    "deleted": "{{company}} deleted",
+    "appliedPlanned": "Application planned for {{date}}",
+    "sortLabel": "Sort by",
+    "sortDefault": "Next steps first",
+    "sortOption": "{{column}}, {{direction}}"
+  },
+  "nav": {
+    "skipToContent": "Skip to content",
+    "label": "Sections",
+    "applications": "Applications",
+    "watchlist": "Watchlist",
+    "pdf": "Create PDF",
+    "login": "Log in",
+    "logout": "Log out",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "guestNotice": "You're using the demo as a guest. Your data will be deleted at {{time}}.",
+    "logoutFailed": "Logging out didn't work. Please try again."
+  },
+  "footer": {
+    "label": "Legal",
+    "imprint": "Legal notice",
+    "privacy": "Privacy"
+  },
+  "theme": {
+    "darkMode": "Dark mode"
+  },
+  "language": {
+    "switchTo": "Switch language to {{language}}"
+  },
+  "login": {
+    "eyebrow": "Welcome",
+    "title": "Jobtrail",
+    "subtitle": "The job application tracker",
+    "accountTitle": "Login",
+    "username": "Username",
+    "password": "Password",
+    "usernameRequired": "Please enter your username.",
+    "passwordRequired": "Please enter your password.",
+    "submit": "Log in",
+    "guestTitle": "Try it without an account",
+    "guestText": "As a guest you get your own demo account with sample data. Try out everything you like. After 3 hours, or when you log out, it's all deleted again.",
+    "guestButton": "Try as a guest",
+    "credentialsError": "Username or password is not correct.",
+    "rateLimitError": "Too many attempts. Wait a moment and try again.",
+    "genericError": "That didn't work. Please try again.",
+    "sessionExpired": "Your session has expired. Please log in again."
+  },
+  "notFound": {
+    "eyebrow": "Error 404",
+    "title": "Page not found",
+    "subtitle": "This address doesn't exist here",
+    "back": "Back to overview"
+  },
+  "legal": {
+    "title": "Legal Notice",
+    "date": "Status: November 2026",
+    "country": "Germany",
+    "addressStreet": "Ginsterweg 15",
+    "addressZip": "26725",
+    "providerTitle": "Information pursuant to § 5 DDG",
+    "contactTitle": "Contact",
+    "emailLabel": "Email:",
+    "formLabel": "Contact form:",
+    "liabilityContentTitle": "Liability for content",
+    "liabilityContentText": "As a service provider, I am responsible for my own content on these pages in accordance with general laws pursuant to § 7 (1) DDG. According to §§ 8 to 10 DDG, however, I am not obliged to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity. Obligations to remove or block the use of information under general law remain unaffected. Liability in this respect is only possible from the point in time at which knowledge of a specific infringement of the law becomes known. Upon becoming aware of corresponding legal violations, I will remove this content immediately.",
+    "liabilityLinksTitle": "Liability for links",
+    "liabilityLinksText": "My website contains links to external third-party websites over whose content I have no influence. Therefore, I cannot accept any liability for this external content. The respective provider or operator of the linked pages is always responsible for their content. The linked pages were checked for possible legal violations at the time of linking. Illegal content was not recognisable at the time of linking. However, permanent monitoring of the content of the linked pages is not reasonable without concrete evidence of an infringement. Upon becoming aware of legal violations, I will remove such links immediately.",
+    "copyrightTitle": "Copyright",
+    "copyrightText": "The content and works created by the site operator on these pages are subject to German copyright law. Duplication, processing, distribution and any kind of exploitation outside the limits of copyright require the written consent of the respective author or creator. Downloads and copies of this site are only permitted for private, non-commercial use. Insofar as the content on this site was not created by the operator, the copyrights of third parties are respected. Should you nevertheless become aware of a copyright infringement, please inform me accordingly. Upon becoming aware of legal violations, I will remove such content immediately."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "date": "Status: November 2026",
+    "overview": {
+      "title": "1. Data protection at a glance",
+      "text1": "The following information provides a simple overview of what happens to your personal data when you use Jobtrail. Personal data is any data with which you can be personally identified. Jobtrail does not use any advertising services, does no tracking and does not create user profiles."
+    },
+    "controller": {
+      "title": "2. Responsible party (controller)",
+      "text1": "The party responsible for data processing in this application is:"
+    },
+    "serverLogs": {
+      "title": "3. Server log files",
+      "text1": "The hosting provider automatically collects and stores information in so-called server log files, which your browser automatically transmits. These are:",
+      "item1": "browser type and version",
+      "item2": "operating system used",
+      "item3": "referrer URL",
+      "item4": "host name of the accessing computer",
+      "item5": "time of the server request",
+      "item6": "IP address",
+      "closing1": "This data is not merged with other data sources. It is collected on the basis of Art. 6 (1) (f) GDPR for the purpose of ensuring a technically error-free presentation and the security of the application."
+    },
+    "cookies": {
+      "title": "4. Cookies",
+      "text1": "Jobtrail only sets two technically necessary cookies: a session cookie that keeps you logged in, and a CSRF cookie that protects requests to the server against forgery. Logging in does not work without these cookies.",
+      "text2": "The cookies are not used for tracking, advertising or analytics. The legal basis is § 25 (2) no. 2 TDDDG and Art. 6 (1) (f) GDPR; I have a legitimate interest in a secure login."
+    },
+    "applicationData": {
+      "title": "5. Stored application data",
+      "text1": "When you are logged in, Jobtrail stores the applications, notes and watchlist entries you create on the server.",
+      "text2": "This data belongs to your account and is only visible to you. It is not shared with other users."
+    },
+    "guestAccess": {
+      "title": "6. Guest access",
+      "text1": "When you try Jobtrail as a guest, a temporary guest account with sample data is created at login. Everything you enter as a guest is stored under this guest account.",
+      "text2": "After 3 hours, or as soon as you log out, the guest account and all its data are deleted completely. Please don't enter real personal data as a guest."
+    },
+    "localStorage": {
+      "title": "7. Storage on your device",
+      "text1": "Your choice of light or dark mode and of the language is saved in your browser's local storage (localStorage), so it stays the same on your next visit.",
+      "text2": "These settings stay on your device and are not sent to the server. You can delete them at any time in your browser settings. The legal basis is § 25 (2) no. 2 TDDDG."
+    },
+    "rights": {
+      "title": "8. Your rights",
+      "text1": "You have the following rights at any time:",
+      "item1": "the right to information about your stored data (Art. 15 GDPR)",
+      "item2": "the right to rectification of incorrect data (Art. 16 GDPR)",
+      "item3": "the right to erasure (Art. 17 GDPR)",
+      "item4": "the right to restriction of processing (Art. 18 GDPR)",
+      "item5": "the right to data portability (Art. 20 GDPR)",
+      "item6": "the right to object to processing (Art. 21 GDPR)",
+      "item7": "the right to withdraw consent given at any time (Art. 7 (3) GDPR)",
+      "item8": "the right to lodge a complaint with a supervisory authority (Art. 77 GDPR), for example the data protection authority of Lower Saxony (LfD Niedersachsen), which is responsible for me",
+      "closing1": "To exercise these rights, you can contact me at any time using the contact details in section 2."
+    }
+  },
+  "watchlist": {
+    "eyebrow": "Watchlist",
+    "title": "Companies to watch",
+    "subtitle": "Before you apply",
+    "sectionLabel": "Saved companies",
+    "loading": "Loading your watchlist …",
+    "searchPlaceholder": "Search company, location or note",
+    "searchLabel": "Search watchlist",
+    "filterLabel": "Filter watchlist",
+    "allCompanies": "All companies",
+    "empty": "No companies saved yet. Add the first one with the form.",
+    "noMatches": "No companies match this selection.",
+    "careersPage": "Careers page",
+    "convert": "Create application",
+    "editLabel": "Edit {{company}}",
+    "removeLabel": "Remove {{company}}",
+    "removed": "{{company}} removed",
+    "converted": "{{company}} is now in your applications",
+    "convertFailed": "Couldn't create the application for {{company}}. Please try again.",
+    "convertedHint": "{{company}} is now in your applications.",
+    "toApplications": "Go to applications",
+    "listHeading": "Your saved companies"
+  },
+  "watchForm": {
+    "createTitle": "Save a company",
+    "editTitle": "Edit company",
+    "company": "Company",
+    "website": "Website",
+    "websitePlaceholder": "e.g. company.com",
+    "careersUrl": "Careers page",
+    "careersUrlPlaceholder": "e.g. company.com/jobs",
+    "optional": "(optional)",
+    "location": "Location",
+    "locationPlaceholder": "e.g. Hamburg",
+    "plan": "Plan",
+    "note": "Note",
+    "notePlaceholder": "What do you want to remember about this company?",
+    "create": "Save company",
+    "saveChanges": "Save changes",
+    "created": "{{company}} saved",
+    "updated": "{{company}} updated",
+    "errors": {
+      "companyRequired": "Enter the company name.",
+      "websiteRequired": "Enter the company's website, e.g. company.com.",
+      "websiteInvalid": "The website doesn't look right. Enter it like company.com.",
+      "careersUrlInvalid": "The careers page doesn't look right. Enter it like company.com/jobs.",
+      "tooLong": "This text is too long.",
+      "required": "Please fill in this field.",
+      "checkField": "Please check this field."
+    }
+  },
+  "pdf": {
+    "eyebrow": "Create a PDF",
+    "title": "Your overview",
+    "subtitle": "as a PDF",
+    "sectionLabel": "Build your PDF",
+    "loading": "Loading your applications …"
+  },
+  "pdfOptions": {
+    "title": "Title",
+    "sectionsLegend": "Contents",
+    "sections": {
+      "stats": "Key figures",
+      "distribution": "Distribution by status",
+      "list": "Application list"
+    },
+    "columnsLegend": "List columns",
+    "columns": {
+      "role": "Role",
+      "location": "Location and work mode",
+      "nextStep": "Next step",
+      "nextStepOn": "Date",
+      "appliedOn": "Applied on",
+      "contact": "Contact",
+      "website": "Website"
+    },
+    "statusesLegend": "Status",
+    "sort": "Sort order",
+    "sorts": {
+      "status": "By status",
+      "company": "By company",
+      "date": "By date, newest first"
+    },
+    "download": "Download PDF",
+    "count": "{{selected}} of {{total}} applications selected",
+    "printHint": "In the print dialog, choose \"Save as PDF\"."
+  },
+  "pdfPreview": {
+    "regionLabel": "Preview",
+    "author": "Jens Baumann · Fullstack Developer",
+    "defaultTitle": "Application overview",
+    "asOf": "As of {{date}}",
+    "statsHeading": "Key figures",
+    "stats": {
+      "sent": "Applications",
+      "active": "Active",
+      "responseRate": "Response rate",
+      "averageResponse": "Avg. response time"
+    },
+    "number": "{{value}}",
+    "percent": "{{value}} %",
+    "days": "{{value}} days",
+    "distributionHeading": "Distribution by status",
+    "listHeading": "Applications",
+    "columns": {
+      "company": "Company",
+      "status": "Status"
+    },
+    "empty": "No applications with the selected statuses.",
+    "countOne": "{{count}} application",
+    "countOther": "{{count}} applications"
+  }
+}

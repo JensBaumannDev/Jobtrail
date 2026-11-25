@@ -1,1 +1,223 @@
+@use 'sass:map';
 @use 'src/styles/abstracts' as *;
+
+$status-chart-colors: (
+  'not-applied': map.get($theme-light, 'subtle'),
+  'awaiting-response': map.get($theme-light, 'blue'),
+  'intro-call-scheduled': map.get($theme-light, 'status-yellow-text'),
+  'further-interview': map.get($theme-light, 'status-yellow-text'),
+  'offer': map.get($theme-light, 'status-green-text'),
+  'rejected-after-application': map.get($theme-light, 'error'),
+  'rejected-after-interview': map.get($theme-light, 'status-red-text'),
+);
+
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.pdf-preview {
+  overflow-x: auto;
+  padding: clamp(#{$space-md}, 3vw, #{$space-xl});
+  border-radius: $radius-surface;
+  background: $color-surface;
+}
+
+.pdf-preview__sheet {
+  @each $name, $value in $theme-light {
+    --color-#{$name}: #{$value};
+  }
+
+  @include flex(column, nowrap);
+  gap: $space-xl;
+  width: 100%;
+  min-width: $pdf-sheet-min-width;
+  max-width: $pdf-sheet-width;
+  aspect-ratio: 210 / 297;
+  margin-inline: auto;
+  padding: clamp(#{$space-lg}, 4vw, #{$space-2xl});
+  border-radius: $radius-small;
+  background: $color-white;
+  color: $color-text;
+  color-scheme: light;
+  print-color-adjust: exact;
+}
+
+.pdf-preview__head {
+  @include flex(row, wrap, space-between, flex-end);
+  gap: $space-md;
+  padding-bottom: $space-md;
+  border-bottom: 2px solid $color-ink;
+}
+
+.pdf-preview__author {
+  margin: 0;
+  color: $color-label;
+  font-weight: $font-weight-semibold;
+}
+
+.pdf-preview__title {
+  margin: $space-2xs 0 0;
+  color: $color-ink;
+  font-size: $font-size-title;
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+
+.pdf-preview__date {
+  margin: 0;
+  color: $color-label;
+  font-variant-numeric: tabular-nums;
+}
+
+.pdf-preview__section {
+  break-inside: avoid-page;
+}
+
+.pdf-preview__heading {
+  margin: 0 0 $space-sm;
+  color: $color-ink;
+  font-size: $font-size-medium;
+  letter-spacing: normal;
+}
+
+.pdf-preview__stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: $space-xs;
+  margin: 0;
+}
+
+.pdf-preview__stat {
+  padding: $space-sm $space-md;
+  border: 1px solid $color-line;
+  border-radius: $radius-small;
+}
+
+.pdf-preview__stat-label {
+  color: $color-label;
+  font-weight: $font-weight-semibold;
+}
+
+.pdf-preview__stat-value {
+  margin: 0;
+  color: $color-ink;
+  font-size: $font-size-large;
+  font-weight: $font-weight-bold;
+  font-variant-numeric: tabular-nums;
+}
+
+.pdf-preview__bar {
+  @include flex(row, nowrap);
+  gap: $space-3xs;
+  height: $space-xs;
+  overflow: clip;
+  border-radius: $radius-pill;
+  background: $color-surface;
+}
+
+.pdf-preview__segment {
+  display: block;
+}
+
+.pdf-preview__legend {
+  @include flex(row, wrap);
+  gap: $space-2xs $space-md;
+  margin: $space-sm 0 0;
+  padding: 0;
+  color: $color-label;
+  list-style: none;
+}
+
+.pdf-preview__legend-item {
+  @include flex(row, nowrap, flex-start, center);
+  gap: $space-xs;
+  font-variant-numeric: tabular-nums;
+}
+
+.pdf-preview__dot {
+  flex: none;
+  width: $space-xs;
+  height: $space-xs;
+  border-radius: $radius-pill;
+}
+
+@each $status, $color in $status-chart-colors {
+  .pdf-preview__segment--#{$status},
+  .pdf-preview__dot--#{$status} {
+    background: $color;
+  }
+}
+
+.pdf-preview__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pdf-preview__header {
+  padding: 0 $space-xs $space-xs;
+  border-bottom: 1px solid $color-ink;
+  color: $color-label;
+  font-weight: $font-weight-semibold;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.pdf-preview__row {
+  break-inside: avoid;
+}
+
+.pdf-preview__company,
+.pdf-preview__cell {
+  padding: $space-sm $space-xs;
+  border-bottom: 1px solid $color-line;
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.pdf-preview__company {
+  color: $color-ink;
+  font-weight: $font-weight-bold;
+}
+
+.pdf-preview__secondary {
+  display: block;
+  color: $color-label;
+}
+
+.pdf-preview__empty {
+  margin: 0;
+  color: $color-label;
+}
+
+.pdf-preview__foot {
+  margin-top: auto;
+  padding-top: $space-sm;
+  border-top: 1px solid $color-line;
+  color: $color-label;
+}
+
+/* #region RESPONSIVE */
+@media print {
+  .pdf-preview {
+    overflow: visible;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+  }
+
+  .pdf-preview__sheet {
+    min-width: 0;
+    max-width: none;
+    aspect-ratio: auto;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .pdf-preview__table thead {
+    display: table-header-group;
+  }
+}
+
+/* #endregion */

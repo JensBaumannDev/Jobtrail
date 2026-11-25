@@ -1,1 +1,40 @@
 @use 'src/styles/abstracts' as *;
+
+:host {
+  display: block;
+}
+
+.footer {
+  margin-top: $section-gap;
+  border-top: 1px solid $color-line;
+}
+
+.footer__inner {
+  @include flex(row, wrap, center, center);
+  gap: $space-xs $space-xl;
+  padding-block: $space-xl;
+  color: $color-label;
+}
+
+.footer__links {
+  @include flex(row, wrap, center, center);
+  gap: $space-2xs $space-xl;
+}
+
+.footer__link {
+  color: $color-label;
+  transition: color $duration-base $ease;
+
+  &:hover {
+    color: $color-link;
+    text-decoration: underline;
+  }
+}
+
+/* #region RESPONSIVE */
+@include phone {
+  .footer__inner {
+    flex-direction: column;
+  }
+}
+/* #endregion */

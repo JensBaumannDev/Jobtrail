@@ -1,0 +1,120 @@
+<div
+  class="pdf-preview"
+  role="region"
+  tabindex="0"
+  [attr.aria-label]="'pdfPreview.regionLabel' | translate"
+>
+  <article class="pdf-preview__sheet">
+    <header class="pdf-preview__head">
+      <div>
+        <p class="pdf-preview__author">{{ 'pdfPreview.author' | translate }}</p>
+        <h2 class="pdf-preview__title">{{ options().title || ('pdfPreview.defaultTitle' | translate) }}</h2>
+      </div>
+      <p class="pdf-preview__date">{{ 'pdfPreview.asOf' | translate: { date: formatDate(today) } }}</p>
+    </header>
+
+    @if (hasSection('stats')) {
+      <section class="pdf-preview__section">
+        <h3 class="pdf-preview__heading">{{ 'pdfPreview.statsHeading' | translate }}</h3>
+        <dl class="pdf-preview__stats">
+          @for (stat of stats(); track stat.labelKey) {
+            <div class="pdf-preview__stat">
+              <dt class="pdf-preview__stat-label">{{ stat.labelKey | translate }}</dt>
+              <dd class="pdf-preview__stat-value">{{ stat.valueKey | translate: { value: stat.value } }}</dd>
+            </div>
+          }
+        </dl>
+      </section>
+    }
+
+    @if (hasSection('distribution')) {
+      <section class="pdf-preview__section">
+        <h3 class="pdf-preview__heading">{{ 'pdfPreview.distributionHeading' | translate }}</h3>
+        <div class="pdf-preview__bar" aria-hidden="true">
+          @for (entry of counts(); track entry.status) {
+            @if (entry.count) {
+              <span
+                [class]="'pdf-preview__segment pdf-preview__segment--' + modifier(entry.status)"
+                [style.flex-grow]="entry.count"
+              ></span>
+            }
+          }
+        </div>
+        <ul class="pdf-preview__legend" role="list">
+          @for (entry of counts(); track entry.status) {
+            <li class="pdf-preview__legend-item">
+              <span
+                [class]="'pdf-preview__dot pdf-preview__dot--' + modifier(entry.status)"
+                aria-hidden="true"
+              ></span>
+              {{ 'status.' + entry.status | translate }}: {{ entry.count }}
+            </li>
+          }
+        </ul>
+      </section>
+    }
+
+    @if (hasSection('list')) {
+      <section class="pdf-preview__section">
+        <h3 class="pdf-preview__heading">{{ 'pdfPreview.listHeading' | translate }}</h3>
+        @if (items().length) {
+          <table class="pdf-preview__table">
+            <thead>
+              <tr>
+                <th class="pdf-preview__header" scope="col">{{ 'pdfPreview.columns.company' | translate }}</th>
+                @for (column of options().columns; track column) {
+                  <th class="pdf-preview__header" scope="col">{{ 'pdfOptions.columns.' + column | translate }}</th>
+                }
+                <th class="pdf-preview__header" scope="col">{{ 'pdfPreview.columns.status' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (application of items(); track application.id) {
+                <tr class="pdf-preview__row">
+                  <th class="pdf-preview__company" scope="row">{{ application.company }}</th>
+                  @for (column of options().columns; track column) {
+                    <td class="pdf-preview__cell">
+                      @switch (column) {
+                        @case ('role') {
+                          {{ application.role || '–' }}
+                        }
+                        @case ('location') {
+                          {{ application.location || '–' }}
+                          <span class="pdf-preview__secondary">{{ 'workMode.' + application.work_mode | translate }}</span>
+                        }
+                        @case ('nextStep') {
+                          {{ application.next_step || '–' }}
+                        }
+                        @case ('nextStepOn') {
+                          {{ formatDate(application.next_step_on) }}
+                        }
+                        @case ('appliedOn') {
+                          {{ formatDate(application.applied_on) }}
+                        }
+                        @case ('contact') {
+                          {{ application.contact || '–' }}
+                        }
+                        @case ('website') {
+                          {{ host(application.website) }}
+                        }
+                      }
+                    </td>
+                  }
+                  <td class="pdf-preview__cell">
+                    <app-status-pill [status]="application.status" />
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        } @else {
+          <p class="pdf-preview__empty">{{ 'pdfPreview.empty' | translate }}</p>
+        }
+      </section>
+    }
+
+    <footer class="pdf-preview__foot">
+      {{ (items().length === 1 ? 'pdfPreview.countOne' : 'pdfPreview.countOther') | translate: { count: items().length } }}
+    </footer>
+  </article>
+</div>

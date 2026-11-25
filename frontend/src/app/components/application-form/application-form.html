@@ -1,0 +1,107 @@
+<ng-template #title>
+  @if (application(); as current) {
+    {{ 'applicationForm.editTitle' | translate: { company: current.company } }}
+  } @else {
+    {{ 'applicationForm.createTitle' | translate }}
+  }
+</ng-template>
+
+@if (headingLevel() === 4) {
+  <h4 class="application-form__title" [id]="idPrefix + '-title'">
+    <ng-container [ngTemplateOutlet]="title" />
+  </h4>
+} @else {
+  <h3 class="application-form__title" [id]="idPrefix + '-title'">
+    <ng-container [ngTemplateOutlet]="title" />
+  </h3>
+}
+
+<form
+  class="application-form__grid"
+  [formGroup]="form"
+  [attr.aria-labelledby]="idPrefix + '-title'"
+  [attr.aria-busy]="saving()"
+  novalidate
+  (ngSubmit)="submit()"
+>
+  @for (field of fields; track field.name) {
+    @let invalid = hasError(field.name);
+    @let placeholder = placeholderKey(field.name);
+    <div class="application-form__field" [class.application-form__field--wide]="field.wide">
+      <label class="application-form__label" [for]="fieldId(field.name)">
+        {{ 'applicationForm.fields.' + field.name | translate }}
+        @if (field.required) {
+          <span class="application-form__required">({{ 'common.required' | translate }})</span>
+        }
+      </label>
+
+      @switch (field.kind) {
+        @case ('workMode') {
+          <select class="application-form__control" [id]="fieldId(field.name)" [formControlName]="field.name">
+            @for (mode of workModes; track mode) {
+              <option [value]="mode">{{ 'workMode.' + mode | translate }}</option>
+            }
+          </select>
+        }
+        @case ('status') {
+          <select class="application-form__control" [id]="fieldId(field.name)" [formControlName]="field.name">
+            @for (status of statuses; track status) {
+              <option [value]="status">{{ 'status.' + status | translate }}</option>
+            }
+          </select>
+        }
+        @case ('date') {
+          <input
+            class="application-form__control"
+            type="date"
+            [id]="fieldId(field.name)"
+            [formControlName]="field.name"
+            [attr.aria-invalid]="invalid"
+            [attr.aria-describedby]="invalid ? errorId(field.name) : null"
+          />
+        }
+        @default {
+          <input
+            class="application-form__control"
+            type="text"
+            autocomplete="off"
+            [id]="fieldId(field.name)"
+            [formControlName]="field.name"
+            [attr.inputmode]="field.kind === 'url' ? 'url' : null"
+            [attr.maxlength]="field.maxLength"
+            [attr.placeholder]="placeholder ? (placeholder | translate) : null"
+            [attr.aria-required]="field.required"
+            [attr.aria-invalid]="invalid"
+            [attr.aria-describedby]="invalid ? errorId(field.name) : null"
+          />
+        }
+      }
+
+      @if (invalid) {
+        <div class="application-form__error" [id]="errorId(field.name)">
+          @for (key of serverErrors(field.name); track key) {
+            <p class="application-form__error-text">{{ key | translate }}</p>
+          } @empty {
+            @if (clientErrorKey(field.name); as key) {
+              <p class="application-form__error-text">{{ key | translate }}</p>
+            }
+          }
+        </div>
+      }
+    </div>
+  }
+
+  <div class="application-form__actions">
+    <button class="button button--primary" type="submit" [disabled]="saving()">
+      {{ (isEditing() ? 'applicationForm.saveChanges' : 'applicationForm.saveNew') | translate }}
+    </button>
+    <button class="button button--secondary" type="button" (click)="cancel()">
+      {{ 'common.cancel' | translate }}
+    </button>
+    <p class="application-form__save-error" role="alert">
+      @if (saveFailed()) {
+        {{ 'common.saveError' | translate }}
+      }
+    </p>
+  </div>
+</form>

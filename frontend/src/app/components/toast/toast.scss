@@ -1,1 +1,60 @@
 @use 'src/styles/abstracts' as *;
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(#{$space-lg} + env(safe-area-inset-bottom, 0px));
+  z-index: $z-index-toast;
+  @include flex(column, nowrap, flex-start, stretch);
+  gap: $space-xs;
+  width: max-content;
+  max-width: calc(100% - 2 * #{$gutter});
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.toast__box {
+  @include flex(row, nowrap, flex-start, center);
+  gap: $space-md;
+  padding: $space-sm $space-md $space-sm $space-lg;
+  border-radius: $radius-button;
+  background: $color-ink;
+  color: $color-background;
+  font-weight: $font-weight-semibold;
+  pointer-events: auto;
+  animation: toast-in $duration-base $ease;
+}
+
+.toast__message {
+  overflow-wrap: anywhere;
+}
+
+.toast__undo {
+  flex: none;
+  padding: $space-tight $space-sm;
+  border-radius: $radius-small;
+  background: color-mix(in srgb, #{$color-background} 18%, transparent);
+  color: $color-background;
+  font-weight: $font-weight-bold;
+  transition: background-color $duration-fast $ease;
+
+  &:hover {
+    background: color-mix(in srgb, #{$color-background} 30%, transparent);
+  }
+
+  &:focus-visible {
+    @include focus-ring($color-background, 2px);
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,1 +1,401 @@
-{}
+{
+  "common": {
+    "cancel": "Abbrechen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "undo": "Rückgängig",
+    "loading": "Wird geladen …",
+    "loadError": "Das hat nicht geklappt. Bitte lade die Seite neu.",
+    "saveError": "Speichern hat nicht geklappt. Bitte versuch es noch einmal.",
+    "required": "Pflichtfeld",
+    "invalidUrl": "Bitte gib eine gültige Adresse ein, z. B. firma.de",
+    "opensInNewTab": "öffnet in neuem Tab"
+  },
+  "status": {
+    "not_applied": "Noch nicht beworben",
+    "awaiting_response": "Warten auf Rückmeldung",
+    "intro_call_scheduled": "Kennenlerngespräch geplant",
+    "further_interview": "Weitere Gesprächsrunde",
+    "offer": "Zusage",
+    "rejected_after_application": "Absage nach Bewerbung",
+    "rejected_after_interview": "Absage nach Gespräch"
+  },
+  "workMode": {
+    "remote": "Remote",
+    "hybrid": "Hybrid",
+    "on_site": "Vor Ort"
+  },
+  "plan": {
+    "apply": "Bewerbung geplant",
+    "watch": "Im Blick behalten"
+  },
+  "toast": {
+    "deleteFailed": "Löschen hat nicht geklappt, der Eintrag ist wieder da."
+  },
+  "applicationForm": {
+    "createTitle": "Neue Bewerbung",
+    "editTitle": "{{company}} bearbeiten",
+    "saveNew": "Bewerbung speichern",
+    "saveChanges": "Änderungen speichern",
+    "fields": {
+      "company": "Firma",
+      "website": "Website",
+      "role": "Rolle",
+      "location": "Ort",
+      "work_mode": "Arbeitsmodell",
+      "status": "Status",
+      "next_step": "Nächster Schritt",
+      "next_step_on": "Termin",
+      "job_ad_url": "Stellenanzeige",
+      "contact": "Ansprechpartner",
+      "salary_expectation": "Gehaltsvorstellung"
+    },
+    "placeholders": {
+      "website": "z. B. firma.de",
+      "location": "z. B. Hamburg",
+      "next_step": "z. B. Technisches Interview",
+      "job_ad_url": "Link zur Anzeige",
+      "contact": "Name, Rolle",
+      "salary_expectation": "z. B. 52.000 € brutto"
+    },
+    "errors": {
+      "tooLong": "Das ist zu lang. Bitte kürz den Text etwas.",
+      "required": "Bitte füll dieses Feld aus.",
+      "invalid": "Bitte prüf dieses Feld."
+    }
+  },
+  "details": {
+    "jobAd": "Stellenanzeige",
+    "contact": "Ansprechpartner",
+    "salary": "Gehaltsvorstellung",
+    "appliedOn": "Beworben am",
+    "respondedOn": "Erste Rückmeldung",
+    "empty": "Noch keine Stellenanzeige, kein Ansprechpartner und keine Gehaltsvorstellung eingetragen.",
+    "addNow": "Jetzt ergänzen"
+  },
+  "notes": {
+    "heading": "Notizen",
+    "untitled": "Notiz",
+    "empty": "Noch keine Notizen zu {{company}}.",
+    "formLabel": "Neue Notiz zu {{company}}",
+    "editFormLabel": "Notiz zu {{company}} bearbeiten",
+    "titleLabel": "Titel der Notiz zu {{company}}",
+    "titlePlaceholder": "Titel, z. B. Fragen fürs Gespräch",
+    "textLabel": "Text der Notiz zu {{company}}",
+    "textPlaceholder": "Was willst du zu {{company}} festhalten?",
+    "save": "Notiz speichern",
+    "saveChanges": "Änderungen speichern",
+    "saved": "Notiz gespeichert",
+    "updated": "Notiz aktualisiert",
+    "deleted": "Notiz gelöscht",
+    "emptyError": "Schreib einen Titel oder etwas Text, damit die Notiz nicht leer ist.",
+    "tooLong": "Die Notiz ist zu lang. Bitte kürz sie etwas."
+  },
+  "applications": {
+    "eyebrow": "Bewerbungstracker",
+    "title": "Jede Bewerbung im Blick",
+    "subtitle": "Bis zur Festanstellung",
+    "lead": "Hier siehst du, wo jede Bewerbung als Fullstack Developer gerade steht, wann du nachhaken solltest und was als Nächstes ansteht.",
+    "add": "Bewerbung hinzufügen",
+    "toList": "Zur Liste",
+    "overview": "Überblick",
+    "listTitle": "Bewerbungen",
+    "listSubtitle": "Wo jede gerade steht",
+    "empty": "Noch keine Bewerbungen. Leg über „Bewerbung hinzufügen“ die erste an.",
+    "created": "{{company}} ist jetzt in deiner Liste"
+  },
+  "summary": {
+    "active": "Aktiv",
+    "responseRate": "Antwortquote",
+    "percent": "%",
+    "upcoming": "Termine in 7 Tagen",
+    "followUpDue": "Nachhaken fällig",
+    "applicationOne": "Bewerbung",
+    "applicationMany": "Bewerbungen"
+  },
+  "distribution": {
+    "title": "Verteilung nach Status",
+    "total": "{{total}} Einträge, {{sent}} verschickt"
+  },
+  "filters": {
+    "label": "Bewerbungen filtern",
+    "search": "Firma, Rolle, Ort oder Ansprechpartner suchen",
+    "searchPlaceholder": "Firma oder Rolle suchen",
+    "status": "Nach Status filtern",
+    "allStatuses": "Alle Status ({{count}})",
+    "remoteOnly": "Nur Remote",
+    "followUpOnly": "Nachhaken fällig"
+  },
+  "list": {
+    "columnCompany": "Firma",
+    "columnLocation": "Ort",
+    "columnNext": "Nächster Schritt",
+    "columnStatus": "Status",
+    "sortBy": "Nach {{column}} sortieren",
+    "sortActive": "Nach {{column}} sortieren, gerade {{direction}}",
+    "ascending": "aufsteigend",
+    "descending": "absteigend",
+    "noMatches": "Keine Bewerbungen für diese Auswahl.",
+    "websiteMissing": "Website fehlt",
+    "websiteMissingFor": "Website fehlt bei {{company}}, jetzt ergänzen",
+    "details": "Details",
+    "detailsFor": "Details zu {{company}}, Notizen: {{count}}",
+    "locationOpen": "Ort offen",
+    "followUp": "Nachhaken",
+    "noNextStep": "Kein nächster Schritt",
+    "date": {
+      "overdue": "Überfällig · {{date}}",
+      "today": "Heute",
+      "tomorrow": "Morgen",
+      "soon": "{{date}}",
+      "later": "{{date}}"
+    },
+    "notApplied": "Noch nicht beworben",
+    "appliedToday": "Beworben {{date}} · heute",
+    "appliedOneDay": "Beworben {{date}} · vor 1 Tag",
+    "appliedDays": "Beworben {{date}} · vor {{days}} Tagen",
+    "statusOf": "Status von {{company}}",
+    "editCompany": "{{company}} bearbeiten",
+    "deleteCompany": "{{company}} löschen",
+    "saved": "{{company}} gespeichert",
+    "statusChanged": "{{company}} steht jetzt auf „{{status}}“",
+    "deleted": "{{company}} gelöscht",
+    "appliedPlanned": "Bewerbung geplant für {{date}}",
+    "sortLabel": "Sortieren nach",
+    "sortDefault": "Nächste Schritte zuerst",
+    "sortOption": "{{column}}, {{direction}}"
+  },
+  "nav": {
+    "skipToContent": "Zum Inhalt springen",
+    "label": "Bereiche",
+    "applications": "Bewerbungen",
+    "watchlist": "Merkliste",
+    "pdf": "PDF erstellen",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "guestNotice": "Du nutzt die Demo als Gast. Deine Daten werden um {{time}} Uhr gelöscht.",
+    "logoutFailed": "Abmelden hat nicht geklappt. Bitte versuch es noch einmal."
+  },
+  "footer": {
+    "label": "Rechtliches",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz"
+  },
+  "theme": {
+    "darkMode": "Dunkles Design"
+  },
+  "language": {
+    "switchTo": "Sprache wechseln zu {{language}}"
+  },
+  "login": {
+    "eyebrow": "Willkommen",
+    "title": "Jobtrail",
+    "subtitle": "Der Bewerbungsmanager",
+    "accountTitle": "Login",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "usernameRequired": "Bitte gib deinen Benutzernamen ein.",
+    "passwordRequired": "Bitte gib dein Passwort ein.",
+    "submit": "Anmelden",
+    "guestTitle": "Ohne Konto ausprobieren",
+    "guestText": "Als Gast bekommst du ein eigenes Demo-Konto mit Beispieldaten. Du kannst alles ausprobieren. Nach 3 Stunden oder wenn du dich abmeldest, wird alles wieder gelöscht.",
+    "guestButton": "Als Gast ausprobieren",
+    "credentialsError": "Benutzername oder Passwort stimmt nicht.",
+    "rateLimitError": "Zu viele Versuche. Warte kurz und versuch es dann noch einmal.",
+    "genericError": "Das hat nicht geklappt. Bitte versuch es noch einmal.",
+    "sessionExpired": "Deine Sitzung ist abgelaufen. Bitte melde dich neu an."
+  },
+  "notFound": {
+    "eyebrow": "Fehler 404",
+    "title": "Seite nicht gefunden",
+    "subtitle": "Diese Adresse gibt es hier nicht",
+    "back": "Zur Übersicht"
+  },
+  "legal": {
+    "title": "Impressum",
+    "date": "Stand: November 2026",
+    "country": "Deutschland",
+    "addressStreet": "Ginsterweg 15",
+    "addressZip": "26725",
+    "providerTitle": "Angaben gemäß § 5 DDG",
+    "contactTitle": "Kontakt",
+    "emailLabel": "E-Mail:",
+    "formLabel": "Kontaktformular:",
+    "liabilityContentTitle": "Haftung für Inhalte",
+    "liabilityContentText": "Als Diensteanbieter bin ich gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG bin ich als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werde ich diese Inhalte umgehend entfernen.",
+    "liabilityLinksTitle": "Haftung für Links",
+    "liabilityLinksText": "Meine Website enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann ich für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Links umgehend entfernen.",
+    "copyrightTitle": "Urheberrecht",
+    "copyrightText": "Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Solltest du trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitte ich um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Inhalte umgehend entfernen."
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung",
+    "date": "Stand: November 2026",
+    "overview": {
+      "title": "1. Datenschutz auf einen Blick",
+      "text1": "Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit deinen personenbezogenen Daten passiert, wenn du Jobtrail nutzt. Personenbezogene Daten sind alle Daten, mit denen du persönlich identifiziert werden kannst. Jobtrail nutzt keine Werbedienste, kein Tracking und erstellt keine Nutzerprofile."
+    },
+    "controller": {
+      "title": "2. Verantwortliche Stelle",
+      "text1": "Verantwortlich für die Datenverarbeitung in dieser Anwendung ist:"
+    },
+    "serverLogs": {
+      "title": "3. Server-Logfiles",
+      "text1": "Der Hosting-Anbieter erhebt und speichert automatisch Informationen in sogenannten Server-Logfiles, die dein Browser automatisch übermittelt. Dies sind:",
+      "item1": "Browsertyp und Browserversion",
+      "item2": "verwendetes Betriebssystem",
+      "item3": "Referrer URL",
+      "item4": "Hostname des zugreifenden Rechners",
+      "item5": "Uhrzeit der Serveranfrage",
+      "item6": "IP-Adresse",
+      "closing1": "Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Die Erfassung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO zum Zweck der technisch fehlerfreien Darstellung und der Sicherheit der Anwendung."
+    },
+    "cookies": {
+      "title": "4. Cookies",
+      "text1": "Jobtrail setzt nur zwei technisch notwendige Cookies: ein Sitzungs-Cookie, das dich nach der Anmeldung angemeldet hält, und ein CSRF-Cookie, das Anfragen an den Server vor Fälschung schützt. Ohne diese Cookies funktioniert die Anmeldung nicht.",
+      "text2": "Die Cookies dienen nicht dem Tracking und werden nicht für Werbung oder Analysen genutzt. Rechtsgrundlage ist § 25 Abs. 2 Nr. 2 TDDDG sowie Art. 6 Abs. 1 lit. f DSGVO; ich habe ein berechtigtes Interesse an einer sicheren Anmeldung."
+    },
+    "applicationData": {
+      "title": "5. Gespeicherte Bewerbungsdaten",
+      "text1": "Wenn du angemeldet bist, speichert Jobtrail die Bewerbungen, Notizen und Merklisten-Einträge, die du anlegst, auf dem Server.",
+      "text2": "Diese Daten gehören zu deinem Konto und sind nur für dich sichtbar. Sie werden nicht mit anderen Nutzern geteilt."
+    },
+    "guestAccess": {
+      "title": "6. Gastzugang",
+      "text1": "Wenn du Jobtrail als Gast ausprobierst, wird bei der Anmeldung ein temporäres Gastkonto mit Beispieldaten angelegt. Alles, was du als Gast eingibst, wird unter diesem Gastkonto gespeichert.",
+      "text2": "Nach 3 Stunden oder sobald du dich abmeldest, werden das Gastkonto und alle zugehörigen Daten vollständig gelöscht. Gib als Gast bitte keine echten personenbezogenen Daten ein."
+    },
+    "localStorage": {
+      "title": "7. Speicherung auf deinem Gerät",
+      "text1": "Deine Auswahl für das helle oder dunkle Design und für die Sprache wird im lokalen Speicher deines Browsers (localStorage) gespeichert, damit sie beim nächsten Besuch erhalten bleibt.",
+      "text2": "Diese Einstellungen bleiben auf deinem Gerät und werden nicht an den Server übertragen. Du kannst sie jederzeit über die Einstellungen deines Browsers löschen. Rechtsgrundlage ist § 25 Abs. 2 Nr. 2 TDDDG."
+    },
+    "rights": {
+      "title": "8. Deine Rechte",
+      "text1": "Dir stehen jederzeit folgende Rechte zu:",
+      "item1": "Recht auf Auskunft über deine gespeicherten Daten (Art. 15 DSGVO)",
+      "item2": "Recht auf Berichtigung unrichtiger Daten (Art. 16 DSGVO)",
+      "item3": "Recht auf Löschung (Art. 17 DSGVO)",
+      "item4": "Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)",
+      "item5": "Recht auf Datenübertragbarkeit (Art. 20 DSGVO)",
+      "item6": "Recht auf Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)",
+      "item7": "Recht auf Widerruf einer erteilten Einwilligung (Art. 7 Abs. 3 DSGVO)",
+      "item8": "Recht auf Beschwerde bei einer Aufsichtsbehörde (Art. 77 DSGVO), zum Beispiel bei der für mich zuständigen Datenschutzaufsicht in Niedersachsen (LfD Niedersachsen)",
+      "closing1": "Zur Ausübung dieser Rechte kannst du dich jederzeit über die im Abschnitt 2 genannten Kontaktdaten an mich wenden."
+    }
+  },
+  "watchlist": {
+    "eyebrow": "Merkliste",
+    "title": "Firmen im Blick",
+    "subtitle": "Bevor du dich bewirbst",
+    "sectionLabel": "Gemerkte Firmen",
+    "loading": "Deine Merkliste wird geladen …",
+    "searchPlaceholder": "Firma, Ort oder Notiz suchen",
+    "searchLabel": "Merkliste durchsuchen",
+    "filterLabel": "Merkliste filtern",
+    "allCompanies": "Alle Firmen",
+    "empty": "Noch keine Firmen gemerkt. Trag die erste im Formular ein.",
+    "noMatches": "Keine Firmen für diese Auswahl.",
+    "careersPage": "Karriereseite",
+    "convert": "Bewerbung anlegen",
+    "editLabel": "{{company}} bearbeiten",
+    "removeLabel": "{{company}} entfernen",
+    "removed": "{{company}} entfernt",
+    "converted": "{{company}} steht jetzt in deinen Bewerbungen",
+    "convertFailed": "Die Bewerbung für {{company}} konnte nicht angelegt werden. Bitte versuch es noch einmal.",
+    "convertedHint": "{{company}} steht jetzt in deinen Bewerbungen.",
+    "toApplications": "Zu den Bewerbungen",
+    "listHeading": "Deine gemerkten Firmen"
+  },
+  "watchForm": {
+    "createTitle": "Firma merken",
+    "editTitle": "Firma bearbeiten",
+    "company": "Firma",
+    "website": "Website",
+    "websitePlaceholder": "z. B. firma.de",
+    "careersUrl": "Karriereseite",
+    "careersUrlPlaceholder": "z. B. firma.de/jobs",
+    "optional": "(optional)",
+    "location": "Ort",
+    "locationPlaceholder": "z. B. Hamburg",
+    "plan": "Vorhaben",
+    "note": "Notiz",
+    "notePlaceholder": "Was willst du dir zu der Firma merken?",
+    "create": "Firma merken",
+    "saveChanges": "Änderungen speichern",
+    "created": "{{company}} gemerkt",
+    "updated": "{{company}} aktualisiert",
+    "errors": {
+      "companyRequired": "Trag den Namen der Firma ein.",
+      "websiteRequired": "Trag die Website der Firma ein, z. B. firma.de.",
+      "websiteInvalid": "Die Website sieht nicht richtig aus. Gib sie z. B. als firma.de ein.",
+      "careersUrlInvalid": "Die Karriereseite sieht nicht richtig aus. Gib sie z. B. als firma.de/jobs ein.",
+      "tooLong": "Der Text ist zu lang.",
+      "required": "Bitte füll dieses Feld aus.",
+      "checkField": "Bitte prüf dieses Feld."
+    }
+  },
+  "pdf": {
+    "eyebrow": "PDF erstellen",
+    "title": "Deine Übersicht",
+    "subtitle": "als PDF",
+    "sectionLabel": "PDF zusammenstellen",
+    "loading": "Deine Bewerbungen werden geladen …"
+  },
+  "pdfOptions": {
+    "title": "Titel",
+    "sectionsLegend": "Inhalte",
+    "sections": {
+      "stats": "Kennzahlen",
+      "distribution": "Verteilung nach Status",
+      "list": "Bewerbungsliste"
+    },
+    "columnsLegend": "Spalten der Liste",
+    "columns": {
+      "role": "Rolle",
+      "location": "Ort und Arbeitsmodell",
+      "nextStep": "Nächster Schritt",
+      "nextStepOn": "Termin",
+      "appliedOn": "Beworben am",
+      "contact": "Ansprechpartner",
+      "website": "Website"
+    },
+    "statusesLegend": "Status",
+    "sort": "Sortierung",
+    "sorts": {
+      "status": "Nach Status",
+      "company": "Nach Firma",
+      "date": "Nach Datum, neueste zuerst"
+    },
+    "download": "PDF herunterladen",
+    "count": "{{selected}} von {{total}} Bewerbungen ausgewählt",
+    "printHint": "Im Druckdialog wählst du „Als PDF speichern“."
+  },
+  "pdfPreview": {
+    "regionLabel": "Vorschau",
+    "author": "Jens Baumann · Fullstack Developer",
+    "defaultTitle": "Bewerbungsübersicht",
+    "asOf": "Stand {{date}}",
+    "statsHeading": "Kennzahlen",
+    "stats": {
+      "sent": "Bewerbungen",
+      "active": "Aktiv",
+      "responseRate": "Antwortquote",
+      "averageResponse": "Ø Antwortzeit"
+    },
+    "number": "{{value}}",
+    "percent": "{{value}} %",
+    "days": "{{value}} Tage",
+    "distributionHeading": "Verteilung nach Status",
+    "listHeading": "Bewerbungen",
+    "columns": {
+      "company": "Firma",
+      "status": "Status"
+    },
+    "empty": "Keine Bewerbungen mit den gewählten Status.",
+    "countOne": "{{count}} Bewerbung",
+    "countOther": "{{count}} Bewerbungen"
+  }
+}

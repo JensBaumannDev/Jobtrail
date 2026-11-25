@@ -19,10 +19,10 @@ $theme-light: (
   'line': #e5e5e5,
   'surface': #f4f4f4,
   'surface-hover': #e8e8ea,
-  'field-line': #d2d2d7,
-  'field-line-hover': #b0b0b5,
+  'field-line': #86868b,
+  'field-line-hover': #6e6e73,
   'blue': #0071e3,
-  'blue-hover': #1a84f0,
+  'blue-hover': #006edb,
   'blue-active': #0062c4,
   'link': #0062c4,
   'dark-button': #2c2c2e,
@@ -50,10 +50,10 @@ $theme-dark: (
   'line': #2c2c2e,
   'surface': #1c1c1e,
   'surface-hover': #2c2c2e,
-  'field-line': #48484a,
-  'field-line-hover': #636366,
+  'field-line': #6e6e73,
+  'field-line-hover': #8e8e93,
   'blue': #0071e3,
-  'blue-hover': #1a84f0,
+  'blue-hover': #006edb,
   'blue-active': #0062c4,
   'link': #2997ff,
   'dark-button': #2c2c2e,
@@ -112,6 +112,8 @@ $font-family-base:
 $font-size-base: fn.rem(16);
 $font-size-medium: fn.rem(17);
 $font-size-large: fn.rem(20);
+$font-size-brand: fn.rem(19);
+$font-size-heading-small: fn.rem(22);
 $font-size-title: clamp(#{fn.rem(24)}, 2vw, #{fn.rem(32)});
 $font-size-page: clamp(#{fn.rem(44)}, 6vw, #{fn.rem(88)});
 $font-weight-regular: 400;
@@ -124,8 +126,11 @@ $letter-spacing-heading: -0.05em;
 
 // Spacing
 
+$space-3xs: fn.rem(2);
 $space-2xs: fn.rem(4);
+$space-tight: fn.rem(6);
 $space-xs: fn.rem(8);
+$space-snug: fn.rem(10);
 $space-sm: fn.rem(12);
 $space-md: fn.rem(16);
 $space-lg: fn.rem(24);
@@ -143,6 +148,21 @@ $content-width: fn.rem(1180);
 $text-width: fn.rem(760);
 $button-height: fn.rem(46);
 $field-height: fn.rem(46);
+$control-size: fn.rem(40);
+$control-size-small: fn.rem(36);
+$icon-size-small: fn.rem(14);
+$icon-size-medium: fn.rem(18);
+$icon-size: fn.rem(20);
+$icon-size-large: fn.rem(22);
+$textarea-height: fn.rem(120);
+$textarea-max-height: fn.rem(240);
+$sidebar-width: fn.rem(336);
+$page-hero-min-height: clamp(#{fn.rem(320)}, 34vw, #{fn.rem(480)});
+$page-hero-padding-top: clamp(#{fn.rem(56)}, 8vw, #{fn.rem(112)});
+$page-hero-padding-bottom: clamp(#{fn.rem(48)}, 6vw, #{fn.rem(88)});
+$page-hero-margin-bottom: clamp(#{fn.rem(32)}, 4vw, #{fn.rem(56)});
+$pdf-sheet-width: fn.rem(832);
+$pdf-sheet-min-width: fn.rem(600);
 
 // Radius
 

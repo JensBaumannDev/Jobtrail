@@ -1,1 +1,17 @@
+@use 'sass:list';
 @use 'src/styles/abstracts' as *;
+
+.status-pill {
+  display: inline-block;
+  padding: $space-2xs $space-xs;
+  border-radius: $radius-small;
+  font-weight: $font-weight-semibold;
+  line-height: 1.3;
+}
+
+@each $name, $colors in $status-colors {
+  .status-pill--#{$name} {
+    background: list.nth($colors, 1);
+    color: list.nth($colors, 2);
+  }
+}

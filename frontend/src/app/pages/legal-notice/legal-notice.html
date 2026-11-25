@@ -1,0 +1,35 @@
+<app-page-hero [title]="'legal.title' | translate" [subtitle]="'legal.date' | translate" />
+
+<div class="container">
+  <article class="legal-notice">
+    <section class="legal-notice__section">
+      <h2 class="legal-notice__title">{{ 'legal.providerTitle' | translate }}</h2>
+      <p class="legal-notice__text">
+        Jens Baumann<br />
+        {{ 'legal.addressStreet' | translate }}<br />
+        {{ 'legal.addressZip' | translate }} Emden<br />
+        {{ 'legal.country' | translate }}
+      </p>
+    </section>
+
+    <section class="legal-notice__section">
+      <h2 class="legal-notice__title">{{ 'legal.contactTitle' | translate }}</h2>
+      <p class="legal-notice__text">
+        {{ 'legal.emailLabel' | translate }}
+        <a class="legal-notice__link" [href]="'mailto:' + email">{{ email }}</a><br />
+        {{ 'legal.formLabel' | translate }}
+        <a class="legal-notice__link" [href]="contactFormUrl" target="_blank" rel="noopener noreferrer">
+          jensbaumann.com/contact
+          <span class="visually-hidden">({{ 'common.opensInNewTab' | translate }})</span>
+        </a>
+      </p>
+    </section>
+
+    @for (section of sections; track section.titleKey) {
+      <section class="legal-notice__section">
+        <h2 class="legal-notice__title">{{ section.titleKey | translate }}</h2>
+        <p class="legal-notice__text">{{ section.textKey | translate }}</p>
+      </section>
+    }
+  </article>
+</div>

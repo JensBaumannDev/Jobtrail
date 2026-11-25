@@ -38,3 +38,21 @@ body {
 .visually-hidden {
   @include visually-hidden;
 }
+
+/* #region RESPONSIVE */
+@media print {
+  body.is-printing-pdf .skip-link,
+  body.is-printing-pdf app-navigation,
+  body.is-printing-pdf app-footer,
+  body.is-printing-pdf app-toast {
+    display: none;
+  }
+
+  body.is-printing-pdf,
+  body.is-printing-pdf .main {
+    margin: 0;
+    padding: 0;
+    background: $color-white;
+  }
+}
+/* #endregion */

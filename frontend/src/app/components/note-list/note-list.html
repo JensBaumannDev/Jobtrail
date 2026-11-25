@@ -1,0 +1,102 @@
+@let company = application().company;
+
+<h4 class="note-list__heading" tabindex="-1" [id]="idPrefix + '-heading'">{{ 'notes.heading' | translate }}</h4>
+
+@if (notes().length) {
+  <ul class="note-list__items" [attr.aria-labelledby]="idPrefix + '-heading'">
+    @for (note of notes(); track note.id) {
+      @let noteName = note.title || ('notes.untitled' | translate);
+      <li class="note-list__item" [class.note-list__item--editing]="editingId() === note.id">
+        @if (editingId() === note.id) {
+          <ng-container [ngTemplateOutlet]="noteForm" />
+        } @else {
+          <div class="note-list__head">
+            <strong class="note-list__title">{{ noteName }}</strong>
+            <time class="note-list__date" [attr.datetime]="note.updated_at">{{ formatDate(note.updated_at) }}</time>
+          </div>
+          @if (note.text) {
+            <p class="note-list__text">{{ note.text }}</p>
+          }
+          <div class="note-list__tools">
+            <button
+              class="note-list__text-button"
+              type="button"
+              [id]="editButtonId(note.id)"
+              (click)="startEdit(note)"
+            >
+              {{ 'common.edit' | translate }}<span class="visually-hidden">: {{ noteName }}</span>
+            </button>
+            <button
+              class="note-list__text-button note-list__text-button--danger"
+              type="button"
+              (click)="remove(note)"
+            >
+              {{ 'common.delete' | translate }}<span class="visually-hidden">: {{ noteName }}</span>
+            </button>
+          </div>
+        }
+      </li>
+    }
+  </ul>
+} @else {
+  <p class="note-list__empty">{{ 'notes.empty' | translate: { company } }}</p>
+}
+
+@if (editingId() === null) {
+  <ng-container [ngTemplateOutlet]="noteForm" />
+}
+
+<ng-template #noteForm>
+  @let hasError = errorKey() !== null;
+  <form
+    class="note-list__form"
+    [formGroup]="form"
+    [attr.aria-label]="(editingId() === null ? 'notes.formLabel' : 'notes.editFormLabel') | translate: { company }"
+    [attr.aria-busy]="saving()"
+    novalidate
+    (ngSubmit)="submit()"
+  >
+    <label class="visually-hidden" [for]="idPrefix + '-title'">
+      {{ 'notes.titleLabel' | translate: { company } }}
+    </label>
+    <input
+      class="note-list__input"
+      type="text"
+      autocomplete="off"
+      maxlength="120"
+      formControlName="title"
+      [id]="idPrefix + '-title'"
+      [attr.placeholder]="'notes.titlePlaceholder' | translate"
+      [attr.aria-invalid]="hasError"
+      [attr.aria-describedby]="hasError ? idPrefix + '-error' : null"
+    />
+    <label class="visually-hidden" [for]="idPrefix + '-text'">
+      {{ 'notes.textLabel' | translate: { company } }}
+    </label>
+    <textarea
+      class="note-list__textarea"
+      rows="3"
+      maxlength="5000"
+      formControlName="text"
+      [id]="idPrefix + '-text'"
+      [attr.placeholder]="'notes.textPlaceholder' | translate: { company }"
+      [attr.aria-invalid]="hasError"
+      [attr.aria-describedby]="hasError ? idPrefix + '-error' : null"
+    ></textarea>
+    <div class="note-list__actions">
+      <button class="button button--primary" type="submit" [disabled]="saving()">
+        {{ (editingId() === null ? 'notes.save' : 'notes.saveChanges') | translate }}
+      </button>
+      @if (editingId() !== null) {
+        <button class="button button--secondary" type="button" (click)="cancelEdit()">
+          {{ 'common.cancel' | translate }}
+        </button>
+      }
+    </div>
+    <p class="note-list__error" role="alert" [id]="idPrefix + '-error'">
+      @if (errorKey(); as key) {
+        {{ key | translate }}
+      }
+    </p>
+  </form>
+</ng-template>

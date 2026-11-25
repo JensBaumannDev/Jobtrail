@@ -1,0 +1,11 @@
+<footer class="footer">
+  <div class="footer__inner container">
+    <p class="footer__copyright">© {{ year }} Jens Baumann</p>
+    <nav [attr.aria-label]="'footer.label' | translate">
+      <ul class="footer__links">
+        <li><a class="footer__link" routerLink="/imprint">{{ 'footer.imprint' | translate }}</a></li>
+        <li><a class="footer__link" routerLink="/privacy">{{ 'footer.privacy' | translate }}</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>

@@ -1,1 +1,71 @@
 @use 'src/styles/abstracts' as *;
+
+:host {
+  display: block;
+}
+
+.pdf-overview {
+  padding-block: $space-2xl $section-gap;
+}
+
+.pdf-overview__layout {
+  display: grid;
+  grid-template-columns: $sidebar-width minmax(0, 1fr);
+  gap: $space-lg;
+  align-items: start;
+}
+
+.pdf-overview__options {
+  position: sticky;
+  top: calc(#{$nav-height} + #{$space-md});
+}
+
+.pdf-overview__main {
+  min-width: 0;
+}
+
+.pdf-overview__state {
+  margin: 0;
+  padding: $space-lg;
+  border-radius: $radius-surface;
+  background: $color-surface;
+  color: $color-label;
+}
+
+.pdf-overview__state--error {
+  color: $color-error;
+}
+
+/* #region RESPONSIVE */
+@include below-tablet {
+  .pdf-overview__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pdf-overview__options {
+    position: static;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
+  .pdf-overview__hero,
+  .pdf-overview__options {
+    display: none;
+  }
+
+  .pdf-overview {
+    width: auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pdf-overview__layout {
+    display: block;
+  }
+}
+/* #endregion */

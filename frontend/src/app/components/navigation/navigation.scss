@@ -1,1 +1,175 @@
 @use 'src/styles/abstracts' as *;
+
+:host {
+  position: sticky;
+  top: 0;
+  z-index: $z-index-navigation;
+  display: block;
+}
+
+.navigation {
+  position: relative;
+  border-bottom: 1px solid $color-line;
+  background: $color-background;
+}
+
+.navigation__bar {
+  @include flex(row, nowrap, space-between, center);
+  gap: $space-md;
+  height: $nav-height;
+}
+
+.navigation__brand {
+  margin-right: auto;
+  color: $color-ink;
+  font-size: $font-size-brand;
+  font-weight: $font-weight-bold;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.navigation__menu-button {
+  display: none;
+  width: $control-size;
+  height: $control-size;
+  border: 1px solid $color-line;
+  border-radius: $radius-button;
+  background: $color-surface;
+  color: $color-ink;
+}
+
+.navigation__menu-icon {
+  width: $icon-size-large;
+  height: $icon-size-large;
+}
+
+.navigation__menu {
+  display: contents;
+}
+
+.navigation__links {
+  order: 1;
+}
+
+.navigation__theme {
+  order: 2;
+}
+
+.navigation__actions {
+  @include flex(row, nowrap, flex-start, center);
+  order: 3;
+  gap: $space-md;
+}
+
+.navigation__guest-actions {
+  @include flex(row, nowrap, flex-end, center);
+  gap: $space-md;
+}
+
+.navigation__list {
+  @include flex(row, nowrap, flex-start, center);
+  gap: $space-2xs;
+}
+
+.navigation__link {
+  display: block;
+  padding: $space-xs $space-sm;
+  border-radius: $radius-button;
+  color: $color-label;
+  font-weight: $font-weight-semibold;
+  white-space: nowrap;
+  transition:
+    background-color $duration-fast $ease,
+    color $duration-fast $ease;
+
+  &:hover {
+    background: $color-surface;
+    color: $color-ink;
+  }
+}
+
+.navigation__link--active {
+  color: $color-ink;
+}
+
+.navigation__button {
+  min-height: $control-size;
+  padding-inline: $space-md;
+}
+
+.navigation__button--current {
+  display: none;
+}
+
+.navigation__guest-notice {
+  border-top: 1px solid $color-line;
+  background: $color-surface;
+  color: $color-text;
+}
+
+.navigation__guest-text {
+  display: block;
+  padding-block: $space-xs;
+}
+
+/* #region RESPONSIVE */
+@include below-tablet {
+  .navigation__bar {
+    gap: $space-sm;
+  }
+
+  .navigation__actions,
+  .navigation__guest-actions {
+    gap: $space-sm;
+  }
+
+  .navigation__link {
+    padding-inline: $space-sm;
+  }
+}
+
+@include phone {
+  .navigation__theme {
+    order: 0;
+  }
+
+  .navigation__menu-button {
+    @include flex(row, nowrap, center, center);
+    flex: none;
+    order: 1;
+  }
+
+  .navigation__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: $z-index-dropdown;
+    display: none;
+    padding: $space-sm $gutter $space-lg;
+    border-bottom: 1px solid $color-line;
+    background: $color-background;
+  }
+
+  .navigation__menu--open {
+    @include flex(column, nowrap, flex-start, stretch);
+    gap: $space-md;
+  }
+
+  .navigation__list {
+    @include flex(column, nowrap, flex-start, stretch);
+  }
+
+  .navigation__link {
+    padding: $space-sm;
+  }
+
+  .navigation__actions {
+    justify-content: space-between;
+  }
+
+  .navigation__guest-actions {
+    gap: $space-xs;
+  }
+}
+/* #endregion */

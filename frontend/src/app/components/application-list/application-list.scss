@@ -1,1 +1,324 @@
+@use 'sass:list';
+@use 'sass:map';
 @use 'src/styles/abstracts' as *;
+
+$icon-button-size: $space-xl;
+$tools-width: calc(2 * #{$icon-button-size} + #{$space-2xs});
+$tone-info: map.get($status-colors, 'awaiting-response');
+$tone-warning: map.get($status-colors, 'intro-call-scheduled');
+$tone-danger: map.get($status-colors, 'rejected-after-application');
+
+.application-list {
+  display: grid;
+  gap: $space-tight;
+  padding: $space-xs;
+  border-radius: $radius-surface;
+  background: $color-surface;
+}
+
+.application-list__head,
+.application-list__row {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.8fr) minmax(0, 1.6fr)
+    $tools-width;
+  gap: $space-md;
+  align-items: center;
+}
+
+.application-list__head {
+  padding: $space-snug $space-xl $space-tight;
+}
+
+.application-list__sort {
+  @include flex(row, nowrap, flex-start, center);
+  justify-self: start;
+  gap: $space-tight;
+  padding: $space-2xs 0;
+  border: 0;
+  background: none;
+  color: $color-label;
+  font: inherit;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: color $duration-fast;
+
+  &:hover {
+    color: $color-ink;
+  }
+}
+
+.application-list__sort--active {
+  color: $color-ink;
+}
+
+.application-list__sort-icon {
+  color: $color-subtle;
+  line-height: 1;
+}
+
+.application-list__sort--active .application-list__sort-icon {
+  color: $color-blue;
+}
+
+.application-list__sort-select {
+  display: none;
+}
+
+.application-list__sort-label {
+  color: $color-label;
+  font-weight: $font-weight-semibold;
+}
+
+.application-list__sort-control {
+  min-height: $field-height;
+  padding: 0 $space-sm;
+  border: 1px solid $color-field-line;
+  border-radius: $radius-button;
+  background: $color-background;
+  color: $color-ink;
+  font: inherit;
+}
+
+.application-list__empty {
+  margin: 0;
+  padding: $space-lg $space-md;
+  color: $color-label;
+}
+
+.application-list__rows {
+  display: grid;
+  gap: $space-tight;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.application-list__row {
+  min-width: 0;
+  padding: $space-md $space-xl;
+  border-radius: $radius-button;
+  background: $color-background;
+}
+
+.application-list__cell,
+.application-list__status-cell {
+  display: grid;
+  gap: $space-tight;
+  min-width: 0;
+}
+
+.application-list__company {
+  margin: 0;
+  color: $color-ink;
+  font-size: $font-size-medium;
+  font-weight: $font-weight-bold;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.application-list__company-link {
+  @include flex(row, nowrap, flex-start, center);
+  display: inline-flex;
+  gap: $space-tight;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-link;
+  }
+}
+
+.application-list__role,
+.application-list__next {
+  margin: 0;
+  color: $color-text;
+  overflow-wrap: anywhere;
+}
+
+.application-list__actions {
+  @include flex(row, wrap, flex-start, center);
+  gap: $space-tight;
+  margin-top: $space-2xs;
+}
+
+.application-list__action {
+  @include flex(row, nowrap, flex-start, center);
+  display: inline-flex;
+  gap: $space-tight;
+  min-height: $icon-button-size;
+  padding: 0 $space-snug;
+  border: 0;
+  border-radius: $radius-small;
+  background: $color-surface;
+  color: $color-label;
+  font: inherit;
+  font-weight: $font-weight-semibold;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color $duration-fast,
+    color $duration-fast;
+
+  &:hover {
+    background: $color-surface-hover;
+    color: $color-ink;
+  }
+}
+
+.application-list__action--warning,
+.application-list__action--warning:hover {
+  background: list.nth($tone-warning, 1);
+  color: list.nth($tone-warning, 2);
+}
+
+.application-list__action--open,
+.application-list__action--open:hover {
+  background: $color-ink;
+  color: $color-background;
+}
+
+.application-list__action--icon {
+  justify-content: center;
+  width: $icon-button-size;
+  padding: 0;
+}
+
+.application-list__icon {
+  flex: none;
+  width: $space-md;
+  height: $space-md;
+}
+
+.application-list__icon--small {
+  width: $icon-size-small;
+  height: $icon-size-small;
+  color: $color-subtle;
+}
+
+.application-list__chevron {
+  transition: transform $duration-base $ease;
+}
+
+.application-list__action--open .application-list__chevron {
+  transform: rotate(180deg);
+}
+
+.application-list__count {
+  display: inline-grid;
+  place-items: center;
+  min-width: $icon-size-large;
+  height: $icon-size-large;
+  padding: 0 $space-tight;
+  border-radius: $radius-pill;
+  background: $color-blue;
+  color: $color-white;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.application-list__tags,
+.application-list__next-meta {
+  @include flex(row, wrap, flex-start, center);
+  gap: $space-tight $space-snug;
+}
+
+.application-list__tag {
+  @include flex(row, nowrap, flex-start, center);
+  display: inline-flex;
+  gap: $space-tight;
+  padding: $space-tight $space-xs;
+  border-radius: $radius-small;
+  background: $color-surface;
+  color: $color-label;
+  font-weight: $font-weight-semibold;
+  line-height: 1;
+}
+
+.application-list__tag--info,
+.application-list__date--soon {
+  background: list.nth($tone-info, 1);
+  color: list.nth($tone-info, 2);
+}
+
+.application-list__tag--warning,
+.application-list__date--today,
+.application-list__date--tomorrow {
+  background: list.nth($tone-warning, 1);
+  color: list.nth($tone-warning, 2);
+}
+
+.application-list__date--overdue {
+  background: list.nth($tone-danger, 1);
+  color: list.nth($tone-danger, 2);
+}
+
+.application-list__applied {
+  color: $color-label;
+  font-variant-numeric: tabular-nums;
+}
+
+.application-list__status {
+  justify-self: start;
+  max-width: 100%;
+  padding: $space-tight $space-sm;
+  border: 0;
+  border-radius: $radius-small;
+  font: inherit;
+  font-weight: $font-weight-semibold;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+@each $name, $colors in $status-colors {
+  .application-list__status--#{$name} {
+    background-color: list.nth($colors, 1);
+    color: list.nth($colors, 2);
+  }
+}
+
+.application-list__tools {
+  @include flex(row, nowrap, flex-end, center);
+  justify-self: end;
+  gap: $space-2xs;
+}
+
+.application-list__panel,
+.application-list__details {
+  grid-column: 1 / -1;
+  min-width: 0;
+  padding-top: $space-md;
+  border-top: 1px solid $color-line;
+}
+
+/* #region RESPONSIVE */
+@include phone {
+  .application-list__head {
+    display: none;
+  }
+
+  .application-list__sort-select {
+    display: grid;
+    gap: $space-2xs;
+    padding: $space-2xs $space-xs $space-xs;
+  }
+
+  .application-list__row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: $space-md $space-lg;
+  }
+
+  .application-list__cell:not(:first-child),
+  .application-list__status-cell,
+  .application-list__panel,
+  .application-list__details {
+    grid-column: 1 / -1;
+  }
+
+  .application-list__tools {
+    grid-row: 1;
+    grid-column: 2;
+    align-self: start;
+  }
+}
+/* #endregion */

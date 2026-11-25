@@ -1,0 +1,82 @@
+<app-page-hero
+  [eyebrow]="'login.eyebrow' | translate"
+  [title]="'login.title' | translate"
+  [subtitle]="'login.subtitle' | translate"
+/>
+
+<div class="login container">
+  @if (showExpired()) {
+    <p class="login__notice" role="status">{{ 'login.sessionExpired' | translate }}</p>
+  }
+  @if (errorKey(); as key) {
+    <p class="login__error" role="alert">{{ key | translate }}</p>
+  }
+
+  <div class="login__grid">
+    <section class="login__card" aria-labelledby="login-account-title">
+      <h2 id="login-account-title" class="login__card-title">{{ 'login.accountTitle' | translate }}</h2>
+      <form class="login__form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="login__field">
+          <label class="login__label" for="login-username">{{ 'login.username' | translate }}</label>
+          <input
+            id="login-username"
+            class="login__input"
+            type="text"
+            formControlName="username"
+            autocomplete="username"
+            autocapitalize="none"
+            spellcheck="false"
+            required
+            [attr.maxlength]="usernameMaxLength"
+            [attr.aria-invalid]="showRequired('username')"
+            [attr.aria-describedby]="showRequired('username') ? 'login-username-error' : null"
+          />
+          @if (showRequired('username')) {
+            <p id="login-username-error" class="login__field-error">
+              {{ 'login.usernameRequired' | translate }}
+            </p>
+          }
+        </div>
+        <div class="login__field">
+          <label class="login__label" for="login-password">{{ 'login.password' | translate }}</label>
+          <input
+            id="login-password"
+            class="login__input"
+            type="password"
+            formControlName="password"
+            autocomplete="current-password"
+            required
+            [attr.maxlength]="passwordMaxLength"
+            [attr.aria-invalid]="showRequired('password')"
+            [attr.aria-describedby]="showRequired('password') ? 'login-password-error' : null"
+          />
+          @if (showRequired('password')) {
+            <p id="login-password-error" class="login__field-error">
+              {{ 'login.passwordRequired' | translate }}
+            </p>
+          }
+        </div>
+        <div class="button-row">
+          <button class="button button--primary" type="submit" [disabled]="submitting()">
+            {{ 'login.submit' | translate }}
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section class="login__card" aria-labelledby="login-guest-title">
+      <h2 id="login-guest-title" class="login__card-title">{{ 'login.guestTitle' | translate }}</h2>
+      <p class="login__text">{{ 'login.guestText' | translate }}</p>
+      <div class="button-row login__guest-actions">
+        <button
+          class="button button--secondary"
+          type="button"
+          [disabled]="submitting()"
+          (click)="loginAsGuest()"
+        >
+          {{ 'login.guestButton' | translate }}
+        </button>
+      </div>
+    </section>
+  </div>
+</div>
