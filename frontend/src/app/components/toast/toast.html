@@ -1,0 +1,19 @@
+<div class="toast" role="status" aria-live="polite">
+  @if (currentUndo(); as message) {
+    <div
+      class="toast__box"
+      (mouseenter)="pause()"
+      (mouseleave)="resume()"
+      (focusin)="pause()"
+      (focusout)="resume()"
+    >
+      <span class="toast__message">{{ message.messageKey | translate: message.messageParams }}</span>
+      <button class="toast__undo" type="button" (click)="undo()">{{ 'common.undo' | translate }}</button>
+    </div>
+  }
+  @if (current(); as message) {
+    <div class="toast__box">
+      <span class="toast__message">{{ message.messageKey | translate: message.messageParams }}</span>
+    </div>
+  }
+</div>

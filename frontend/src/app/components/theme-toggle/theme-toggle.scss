@@ -1,1 +1,15 @@
 @use 'src/styles/abstracts' as *;
+
+:host {
+  display: block;
+  flex: none;
+}
+
+.theme-toggle {
+  @include icon-button;
+}
+
+.theme-toggle__icon {
+  width: $icon-size;
+  height: $icon-size;
+}

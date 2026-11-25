@@ -1,0 +1,69 @@
+@let current = application();
+
+@if (hasFacts()) {
+  <dl class="application-details__facts">
+    @if (current.job_ad_url) {
+      <div class="application-details__fact">
+        <dt class="application-details__term">{{ 'details.jobAd' | translate }}</dt>
+        <dd class="application-details__value">
+          @if (jobAdUrl(); as url) {
+            <a class="application-details__link" [href]="url" target="_blank" rel="noopener noreferrer">
+              {{ jobAdHost() }}
+              <svg
+                class="application-details__icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M7 17 17 7M8 7h9v9" />
+              </svg>
+              <span class="visually-hidden">({{ 'common.opensInNewTab' | translate }})</span>
+            </a>
+          } @else {
+            {{ current.job_ad_url }}
+          }
+        </dd>
+      </div>
+    }
+    @if (current.contact) {
+      <div class="application-details__fact">
+        <dt class="application-details__term">{{ 'details.contact' | translate }}</dt>
+        <dd class="application-details__value">{{ current.contact }}</dd>
+      </div>
+    }
+    @if (current.salary_expectation) {
+      <div class="application-details__fact">
+        <dt class="application-details__term">{{ 'details.salary' | translate }}</dt>
+        <dd class="application-details__value">{{ current.salary_expectation }}</dd>
+      </div>
+    }
+    @if (appliedOn()) {
+      <div class="application-details__fact">
+        <dt class="application-details__term">{{ 'details.appliedOn' | translate }}</dt>
+        <dd class="application-details__value">{{ appliedOn() }}</dd>
+      </div>
+    }
+    @if (respondedOn()) {
+      <div class="application-details__fact">
+        <dt class="application-details__term">{{ 'details.respondedOn' | translate }}</dt>
+        <dd class="application-details__value">{{ respondedOn() }}</dd>
+      </div>
+    }
+  </dl>
+}
+
+@if (isMissingDetails()) {
+  <p class="application-details__empty">
+    {{ 'details.empty' | translate }}
+    <button class="application-details__text-button" type="button" (click)="requestEdit()">
+      {{ 'details.addNow' | translate }}
+    </button>
+  </p>
+}
+
+<app-note-list [application]="current" />

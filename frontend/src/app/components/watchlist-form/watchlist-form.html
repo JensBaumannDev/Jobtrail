@@ -1,0 +1,151 @@
+<form
+  class="watchlist-form"
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+  novalidate
+  aria-labelledby="watch-form-title"
+>
+  <h2 class="watchlist-form__title" id="watch-form-title">
+    {{ (isEditing() ? 'watchForm.editTitle' : 'watchForm.createTitle') | translate }}
+  </h2>
+
+  <div class="watchlist-form__field">
+    <label class="watchlist-form__label" for="watch-company">{{ 'watchForm.company' | translate }}</label>
+    <input
+      class="watchlist-form__input"
+      id="watch-company"
+      formControlName="company"
+      autocomplete="off"
+      maxlength="120"
+      required
+      [attr.aria-invalid]="showError('company')"
+      [attr.aria-describedby]="showError('company') ? 'watch-company-error' : null"
+    />
+    @if (showError('company')) {
+      <p class="watchlist-form__error" id="watch-company-error">
+        {{ (serverErrorKey('company') || errorKey('company')) | translate }}
+      </p>
+    }
+  </div>
+
+  <div class="watchlist-form__field">
+    <label class="watchlist-form__label" for="watch-website">{{ 'watchForm.website' | translate }}</label>
+    <input
+      class="watchlist-form__input"
+      id="watch-website"
+      formControlName="website"
+      type="text"
+      inputmode="url"
+      autocomplete="off"
+      maxlength="500"
+      required
+      [placeholder]="'watchForm.websitePlaceholder' | translate"
+      [attr.aria-invalid]="showError('website')"
+      [attr.aria-describedby]="showError('website') ? 'watch-website-error' : null"
+    />
+    @if (showError('website')) {
+      <p class="watchlist-form__error" id="watch-website-error">
+        {{ (serverErrorKey('website') || errorKey('website')) | translate }}
+      </p>
+    }
+  </div>
+
+  <div class="watchlist-form__field">
+    <label class="watchlist-form__label" for="watch-careersUrl">
+      {{ 'watchForm.careersUrl' | translate }}
+      <span class="watchlist-form__optional">{{ 'watchForm.optional' | translate }}</span>
+    </label>
+    <input
+      class="watchlist-form__input"
+      id="watch-careersUrl"
+      formControlName="careersUrl"
+      type="text"
+      inputmode="url"
+      autocomplete="off"
+      maxlength="500"
+      [placeholder]="'watchForm.careersUrlPlaceholder' | translate"
+      [attr.aria-invalid]="showError('careersUrl')"
+      [attr.aria-describedby]="showError('careersUrl') ? 'watch-careersUrl-error' : null"
+    />
+    @if (showError('careersUrl')) {
+      <p class="watchlist-form__error" id="watch-careersUrl-error">
+        {{ (serverErrorKey('careersUrl') || errorKey('careersUrl')) | translate }}
+      </p>
+    }
+  </div>
+
+  <div class="watchlist-form__field">
+    <label class="watchlist-form__label" for="watch-location">{{ 'watchForm.location' | translate }}</label>
+    <input
+      class="watchlist-form__input"
+      id="watch-location"
+      formControlName="location"
+      autocomplete="off"
+      maxlength="120"
+      [placeholder]="'watchForm.locationPlaceholder' | translate"
+      [attr.aria-invalid]="showError('location')"
+      [attr.aria-describedby]="showError('location') ? 'watch-location-error' : null"
+    />
+    @if (showError('location')) {
+      <p class="watchlist-form__error" id="watch-location-error">
+        {{ (serverErrorKey('location') || errorKey('location')) | translate }}
+      </p>
+    }
+  </div>
+
+  <div class="watchlist-form__field">
+    <label class="watchlist-form__label" for="watch-plan">{{ 'watchForm.plan' | translate }}</label>
+    <select
+      class="watchlist-form__input watchlist-form__select"
+      id="watch-plan"
+      formControlName="plan"
+      [attr.aria-invalid]="showError('plan')"
+      [attr.aria-describedby]="showError('plan') ? 'watch-plan-error' : null"
+    >
+      @for (plan of plans; track plan) {
+        <option [value]="plan">{{ 'plan.' + plan | translate }}</option>
+      }
+    </select>
+    @if (showError('plan')) {
+      <p class="watchlist-form__error" id="watch-plan-error">
+        {{ (serverErrorKey('plan') || errorKey('plan')) | translate }}
+      </p>
+    }
+  </div>
+
+  <div class="watchlist-form__field">
+    <label class="watchlist-form__label" for="watch-note">{{ 'watchForm.note' | translate }}</label>
+    <textarea
+      class="watchlist-form__input watchlist-form__textarea"
+      id="watch-note"
+      formControlName="note"
+      rows="4"
+      maxlength="5000"
+      [placeholder]="'watchForm.notePlaceholder' | translate"
+      [attr.aria-invalid]="showError('note')"
+      [attr.aria-describedby]="showError('note') ? 'watch-note-error' : null"
+    ></textarea>
+    @if (showError('note')) {
+      <p class="watchlist-form__error" id="watch-note-error">
+        {{ (serverErrorKey('note') || errorKey('note')) | translate }}
+      </p>
+    }
+  </div>
+
+  <div class="watchlist-form__actions">
+    <button class="button button--primary" type="submit" [disabled]="isSaving()">
+      {{ (isEditing() ? 'watchForm.saveChanges' : 'watchForm.create') | translate }}
+    </button>
+    @if (isEditing()) {
+      <button class="button button--secondary" type="button" (click)="cancel()">
+        {{ 'common.cancel' | translate }}
+      </button>
+    }
+  </div>
+
+  <p class="watchlist-form__error" role="alert">
+    @if (generalError()) {
+      {{ generalError() | translate }}
+    }
+  </p>
+</form>

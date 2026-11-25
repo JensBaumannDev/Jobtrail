@@ -85,3 +85,21 @@
   @include flex(row, wrap, flex-start, center);
   gap: fn.rem(10);
 }
+
+@mixin icon-button {
+  @include flex(row, nowrap, center, center);
+  width: vars.$control-size;
+  height: vars.$control-size;
+  border: 0;
+  border-radius: vars.$radius-button;
+  background: transparent;
+  color: vars.$color-label;
+  transition:
+    background-color vars.$duration-fast vars.$ease,
+    color vars.$duration-fast vars.$ease;
+
+  &:hover {
+    background: vars.$color-surface;
+    color: vars.$color-ink;
+  }
+}

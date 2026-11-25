@@ -1,1 +1,45 @@
 @use 'src/styles/abstracts' as *;
+
+:host {
+  display: block;
+}
+
+.privacy-policy {
+  @include flex(column, nowrap, flex-start, stretch);
+  gap: $space-xl;
+  max-width: $text-width;
+  margin-inline: auto;
+}
+
+.privacy-policy__section {
+  @include flex(column, nowrap, flex-start, stretch);
+  gap: $space-sm;
+}
+
+.privacy-policy__title {
+  color: $color-ink;
+  font-size: $font-size-large;
+  letter-spacing: -0.01em;
+}
+
+.privacy-policy__text {
+  color: $color-text;
+  overflow-wrap: anywhere;
+}
+
+.privacy-policy__list {
+  @include flex(column, nowrap, flex-start, stretch);
+  gap: $space-2xs;
+  padding-left: $space-lg;
+  color: $color-text;
+  list-style: disc;
+}
+
+.privacy-policy__link {
+  color: $color-link;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

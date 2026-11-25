@@ -1,1 +1,239 @@
+@use 'sass:list';
+@use 'sass:map';
 @use 'src/styles/abstracts' as *;
+
+$plan-apply-colors: map.get($status-colors, 'awaiting-response');
+
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.watchlist-list {
+  display: grid;
+  gap: $space-md;
+  min-width: 0;
+}
+
+.watchlist-list__tools {
+  @include flex(row, nowrap, flex-start, center);
+  gap: $space-xs;
+}
+
+.watchlist-list__search,
+.watchlist-list__filter {
+  min-width: 0;
+  min-height: $field-height;
+  padding: 0 $space-md;
+  border: 1px solid $color-field-line;
+  border-radius: $radius-button;
+  background: $color-background;
+  color: $color-ink;
+  font: inherit;
+  transition: border-color $duration-fast;
+
+  &:hover {
+    border-color: $color-field-line-hover;
+  }
+}
+
+.watchlist-list__search {
+  flex: 2 1 0;
+}
+
+.watchlist-list__filter {
+  flex: 1 1 0;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+}
+
+.watchlist-list__hint {
+  margin: 0;
+  color: $color-text;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.watchlist-list__hint-link {
+  margin-left: $space-2xs;
+  color: $color-link;
+  font-weight: $font-weight-semibold;
+  text-underline-offset: 0.2em;
+}
+
+.watchlist-list__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, #{$sidebar-width}), 1fr));
+  gap: $space-xs;
+  margin: 0;
+  padding: $space-xs;
+  border-radius: $radius-surface;
+  background: $color-surface;
+  list-style: none;
+}
+
+.watchlist-list__card {
+  @include flex(column, nowrap);
+  gap: $space-sm;
+  min-width: 0;
+  padding: $space-md $space-lg;
+  border-radius: $radius-button;
+  background: $color-background;
+}
+
+.watchlist-list__card--editing {
+  outline: 2px solid $color-blue;
+  outline-offset: -2px;
+}
+
+.watchlist-list__meta {
+  @include flex(row, wrap, space-between, center);
+  gap: $space-xs $space-sm;
+}
+
+.watchlist-list__plan {
+  padding: $space-2xs $space-xs;
+  border-radius: $radius-small;
+  background: $color-surface;
+  color: $color-label;
+  font-weight: $font-weight-semibold;
+  line-height: 1.25;
+}
+
+.watchlist-list__plan--apply {
+  background: list.nth($plan-apply-colors, 1);
+  color: list.nth($plan-apply-colors, 2);
+}
+
+.watchlist-list__location {
+  color: $color-label;
+  font-weight: $font-weight-semibold;
+  overflow-wrap: anywhere;
+}
+
+.watchlist-list__company {
+  margin: 0;
+  color: $color-ink;
+  font-size: $font-size-large;
+  letter-spacing: normal;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.watchlist-list__company-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color $duration-fast;
+
+  &:hover {
+    color: $color-link;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+}
+
+.watchlist-list__link {
+  @include flex(row, nowrap, flex-start, center);
+  align-self: flex-start;
+  gap: $space-xs;
+  color: $color-link;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+}
+
+.watchlist-list__plain-link {
+  margin: 0;
+  color: $color-label;
+  overflow-wrap: anywhere;
+}
+
+.watchlist-list__note {
+  margin: 0;
+  color: $color-text;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.watchlist-list__actions {
+  @include flex(row, nowrap, flex-start, center);
+  gap: $space-xs;
+  margin-top: auto;
+  padding-top: $space-sm;
+  border-top: 1px solid $color-line;
+}
+
+.watchlist-list__action {
+  @include flex(row, nowrap, center, center);
+  gap: $space-xs;
+  min-height: $control-size;
+  padding: 0 $space-sm;
+  border: 0;
+  border-radius: $radius-button;
+  background: $color-surface;
+  color: $color-label;
+  font: inherit;
+  font-weight: $font-weight-semibold;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color $duration-fast,
+    color $duration-fast;
+
+  &:hover {
+    background: $color-surface-hover;
+    color: $color-ink;
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: progress;
+  }
+}
+
+.watchlist-list__action--convert {
+  margin-right: auto;
+}
+
+.watchlist-list__action--icon {
+  width: $control-size;
+  padding: 0;
+}
+
+.watchlist-list__icon {
+  flex: none;
+  width: $icon-size-medium;
+  height: $icon-size-medium;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.watchlist-list__empty {
+  margin: 0;
+  padding: $space-lg;
+  border-radius: $radius-surface;
+  background: $color-surface;
+  color: $color-label;
+}
+
+/* #region RESPONSIVE */
+@include phone {
+  .watchlist-list__tools {
+    flex-wrap: wrap;
+  }
+
+  .watchlist-list__search,
+  .watchlist-list__filter {
+    flex: 1 1 100%;
+  }
+}
+/* #endregion */

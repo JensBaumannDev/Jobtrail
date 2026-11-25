@@ -1,1 +1,97 @@
 @use 'src/styles/abstracts' as *;
+
+.application-form {
+  @include surface-card;
+  display: block;
+}
+
+.application-form__title {
+  margin: 0 0 $space-lg;
+  color: $color-ink;
+  font-size: $font-size-title;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-heading;
+}
+
+.application-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-md;
+}
+
+.application-form__field {
+  display: grid;
+  align-content: start;
+  gap: $space-xs;
+  min-width: 0;
+}
+
+.application-form__field--wide {
+  grid-column: 1 / -1;
+}
+
+.application-form__label {
+  color: $color-label;
+  font-weight: $font-weight-semibold;
+}
+
+.application-form__required {
+  color: $color-label;
+  font-weight: $font-weight-medium;
+}
+
+.application-form__control {
+  width: 100%;
+  min-height: $field-height;
+  padding: 0 $space-sm;
+  border: 1px solid $color-field-line;
+  border-radius: $radius-button;
+  background: $color-background;
+  color: $color-ink;
+  font: inherit;
+  transition: border-color $duration-fast;
+
+  &:hover {
+    border-color: $color-field-line-hover;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: $color-error;
+  }
+}
+
+.application-form__error {
+  display: grid;
+  gap: $space-2xs;
+}
+
+.application-form__error-text {
+  margin: 0;
+  color: $color-error;
+  font-weight: $font-weight-semibold;
+}
+
+.application-form__actions {
+  @include button-row;
+  grid-column: 1 / -1;
+  gap: $space-sm;
+  padding-top: $space-xs;
+}
+
+.application-form__save-error {
+  margin: 0;
+  color: $color-error;
+  font-weight: $font-weight-semibold;
+}
+
+/* #region RESPONSIVE */
+@include phone {
+  .application-form__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .application-form__actions .button {
+    flex: 1 1 100%;
+  }
+}
+/* #endregion */

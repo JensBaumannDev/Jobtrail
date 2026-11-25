@@ -1,0 +1,13 @@
+<dl class="application-summary">
+  @for (stat of stats(); track stat.labelKey) {
+    <div class="application-summary__stat">
+      <dt class="application-summary__label">{{ stat.labelKey | translate }}</dt>
+      <dd class="application-summary__value">
+        {{ stat.value }}
+        @if (stat.unitKey) {
+          <small class="application-summary__unit">{{ stat.unitKey | translate }}</small>
+        }
+      </dd>
+    </div>
+  }
+</dl>

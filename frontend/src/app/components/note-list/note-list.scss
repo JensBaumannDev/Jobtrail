@@ -1,1 +1,149 @@
 @use 'src/styles/abstracts' as *;
+
+.note-list {
+  display: grid;
+  gap: $space-xs;
+  min-width: 0;
+}
+
+.note-list__heading {
+  margin: $space-xs 0 0;
+  color: $color-ink;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+}
+
+.note-list__items {
+  display: grid;
+  gap: $space-xs;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.note-list__item {
+  min-width: 0;
+  padding: $space-sm $space-md;
+  border-radius: $radius-button;
+  background: $color-surface;
+}
+
+.note-list__item--editing {
+  outline: 2px solid $color-blue;
+  outline-offset: -2px;
+}
+
+.note-list__head {
+  @include flex(row, nowrap, space-between, baseline);
+  gap: $space-md;
+}
+
+.note-list__title {
+  min-width: 0;
+  color: $color-ink;
+  font-weight: $font-weight-bold;
+  overflow-wrap: anywhere;
+}
+
+.note-list__date {
+  flex: none;
+  color: $color-label;
+  font-variant-numeric: tabular-nums;
+}
+
+.note-list__text {
+  margin: $space-xs 0 0;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.note-list__tools {
+  @include flex(row, wrap, flex-start, center);
+  gap: $space-lg;
+  margin-top: $space-xs;
+}
+
+.note-list__text-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: $color-label;
+  font: inherit;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: color $duration-fast;
+
+  &:hover {
+    color: $color-link;
+  }
+}
+
+.note-list__text-button--danger:hover {
+  color: $color-error;
+}
+
+.note-list__empty {
+  margin: 0;
+  color: $color-label;
+}
+
+.note-list__form {
+  display: grid;
+  gap: $space-xs;
+  padding-top: $space-2xs;
+}
+
+.note-list__input,
+.note-list__textarea {
+  width: 100%;
+  padding: $space-xs $space-sm;
+  border: 1px solid $color-field-line;
+  border-radius: $radius-button;
+  background: $color-background;
+  color: $color-ink;
+  font: inherit;
+  transition: border-color $duration-fast;
+
+  &:hover {
+    border-color: $color-field-line-hover;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: $color-error;
+  }
+}
+
+.note-list__input {
+  min-height: $field-height;
+}
+
+.note-list__textarea {
+  min-height: $textarea-height;
+  max-height: $textarea-max-height;
+  line-height: $line-height-base;
+  resize: vertical;
+}
+
+.note-list__actions {
+  @include button-row;
+  gap: $space-sm;
+}
+
+.note-list__error {
+  margin: 0;
+  color: $color-error;
+  font-weight: $font-weight-semibold;
+}
+
+/* #region RESPONSIVE */
+@include phone {
+  .note-list__head {
+    flex-wrap: wrap;
+    gap: $space-2xs $space-md;
+  }
+
+  .note-list__actions .button {
+    flex: 1 1 100%;
+  }
+}
+/* #endregion */

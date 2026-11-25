@@ -1,0 +1,60 @@
+<form class="pdf-options" [formGroup]="form" novalidate>
+  <div class="pdf-options__field">
+    <label class="pdf-options__label" for="pdf-title">{{ 'pdfOptions.title' | translate }}</label>
+    <input
+      class="pdf-options__input"
+      id="pdf-title"
+      formControlName="title"
+      autocomplete="off"
+      maxlength="120"
+      [placeholder]="'pdfPreview.defaultTitle' | translate"
+    />
+  </div>
+
+  <fieldset class="pdf-options__group" formGroupName="sections">
+    <legend class="pdf-options__legend">{{ 'pdfOptions.sectionsLegend' | translate }}</legend>
+    @for (section of sections; track section) {
+      <label class="pdf-options__check">
+        <input class="pdf-options__checkbox" type="checkbox" [formControlName]="section" />
+        {{ 'pdfOptions.sections.' + section | translate }}
+      </label>
+    }
+  </fieldset>
+
+  <fieldset class="pdf-options__group" formGroupName="columns">
+    <legend class="pdf-options__legend">{{ 'pdfOptions.columnsLegend' | translate }}</legend>
+    @for (column of columns; track column) {
+      <label class="pdf-options__check">
+        <input class="pdf-options__checkbox" type="checkbox" [formControlName]="column" />
+        {{ 'pdfOptions.columns.' + column | translate }}
+      </label>
+    }
+  </fieldset>
+
+  <fieldset class="pdf-options__group" formGroupName="statuses">
+    <legend class="pdf-options__legend">{{ 'pdfOptions.statusesLegend' | translate }}</legend>
+    @for (status of statuses; track status) {
+      <label class="pdf-options__check">
+        <input class="pdf-options__checkbox" type="checkbox" [formControlName]="status" />
+        <app-status-pill [status]="status" />
+      </label>
+    }
+  </fieldset>
+
+  <div class="pdf-options__field">
+    <label class="pdf-options__label" for="pdf-sort">{{ 'pdfOptions.sort' | translate }}</label>
+    <select class="pdf-options__input pdf-options__select" id="pdf-sort" formControlName="sort">
+      @for (sort of sorts; track sort) {
+        <option [value]="sort">{{ 'pdfOptions.sorts.' + sort | translate }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="pdf-options__actions">
+    <button class="button button--primary" type="button" (click)="printRequested.emit()">{{ 'pdfOptions.download' | translate }}</button>
+    <p class="pdf-options__count" role="status">
+      {{ 'pdfOptions.count' | translate: { selected: selectedCount(), total: totalCount() } }}
+    </p>
+    <p class="pdf-options__hint">{{ 'pdfOptions.printHint' | translate }}</p>
+  </div>
+</form>

@@ -1,0 +1,78 @@
+<header class="navigation">
+  <div class="navigation__bar container">
+    <a class="navigation__brand" routerLink="/applications">Jobtrail</a>
+
+    @if (isAuthenticated()) {
+      <button
+        #menuButton
+        class="navigation__menu-button"
+        type="button"
+        aria-controls="navigation-menu"
+        [attr.aria-expanded]="menuOpen()"
+        [attr.aria-label]="(menuOpen() ? 'nav.closeMenu' : 'nav.openMenu') | translate"
+        (click)="toggleMenu()"
+      >
+        @if (menuOpen()) {
+          <svg class="navigation__menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        } @else {
+          <svg class="navigation__menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        }
+      </button>
+
+      <div id="navigation-menu" class="navigation__menu" [class.navigation__menu--open]="menuOpen()">
+        <nav class="navigation__links" [attr.aria-label]="'nav.label' | translate">
+          <ul class="navigation__list">
+            @for (link of links; track link.path) {
+              <li>
+                <a
+                  class="navigation__link"
+                  routerLinkActive="navigation__link--active"
+                  ariaCurrentWhenActive="page"
+                  [routerLink]="link.path"
+                >
+                  {{ link.labelKey | translate }}
+                </a>
+              </li>
+            }
+          </ul>
+        </nav>
+        <div class="navigation__actions">
+          <app-language-switch />
+          <button
+            class="button button--secondary navigation__button"
+            type="button"
+            [disabled]="loggingOut()"
+            (click)="logout()"
+          >
+            {{ 'nav.logout' | translate }}
+          </button>
+        </div>
+      </div>
+      <app-theme-toggle class="navigation__theme" />
+    } @else {
+      <div class="navigation__guest-actions">
+        <app-theme-toggle />
+        <app-language-switch />
+        <a
+          class="button button--secondary navigation__button"
+          routerLink="/login"
+          routerLinkActive="navigation__button--current"
+        >
+          {{ 'nav.login' | translate }}
+        </a>
+      </div>
+    }
+  </div>
+
+  @if (currentUser()?.expires_at; as expiresAt) {
+    <p class="navigation__guest-notice">
+      <span class="container navigation__guest-text">
+        {{ 'nav.guestNotice' | translate: { time: (expiresAt | date: 'shortTime' : undefined : locale()) } }}
+      </span>
+    </p>
+  }
+</header>

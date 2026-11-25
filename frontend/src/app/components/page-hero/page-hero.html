@@ -1,0 +1,19 @@
+<section class="page-hero">
+  <div class="page-hero__inner container">
+    @if (eyebrow()) {
+      <p class="page-hero__eyebrow">{{ eyebrow() }}</p>
+    }
+    <h1 class="page-hero__title">
+      <span class="page-hero__title-line">{{ title() }}</span>
+      @if (subtitle()) {
+        <span class="page-hero__title-line page-hero__title-line--second">{{ subtitle() }}</span>
+      }
+    </h1>
+    @if (lead()) {
+      <p class="page-hero__lead">{{ lead() }}</p>
+    }
+    <div class="page-hero__actions">
+      <ng-content />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,30 @@
+<div class="status-distribution">
+  <div class="status-distribution__head">
+    <h3 class="status-distribution__title">{{ 'distribution.title' | translate }}</h3>
+    <p class="status-distribution__total">
+      {{ 'distribution.total' | translate: { total: total(), sent: sent() } }}
+    </p>
+  </div>
+  <div class="status-distribution__bar" aria-hidden="true">
+    @for (share of filledShares(); track share.status) {
+      <span
+        class="status-distribution__segment"
+        [class]="'status-distribution__segment--' + share.modifier"
+        [style.flex-grow]="share.count"
+      ></span>
+    }
+  </div>
+  <ul class="status-distribution__legend">
+    @for (share of shares(); track share.status) {
+      <li class="status-distribution__item">
+        <span
+          class="status-distribution__dot"
+          [class]="'status-distribution__dot--' + share.modifier"
+          aria-hidden="true"
+        ></span>
+        {{ 'status.' + share.status | translate }}
+        <span class="status-distribution__count">{{ share.count }}</span>
+      </li>
+    }
+  </ul>
+</div>

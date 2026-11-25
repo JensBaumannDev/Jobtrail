@@ -1,1 +1,80 @@
 @use 'src/styles/abstracts' as *;
+
+:host {
+  display: block;
+  scroll-margin-top: calc(#{$nav-height} + #{$space-lg});
+}
+
+.watchlist-form {
+  @include surface-card;
+  display: grid;
+  gap: $space-lg;
+}
+
+.watchlist-form__title {
+  margin: 0;
+  color: $color-ink;
+  font-size: $font-size-large;
+}
+
+.watchlist-form__field {
+  display: grid;
+  gap: $space-xs;
+  min-width: 0;
+}
+
+.watchlist-form__label {
+  color: $color-label;
+  font-weight: $font-weight-semibold;
+}
+
+.watchlist-form__optional {
+  color: $color-label;
+  font-weight: $font-weight-medium;
+}
+
+.watchlist-form__input {
+  width: 100%;
+  min-height: $field-height;
+  padding: 0 $space-sm;
+  border: 1px solid $color-field-line;
+  border-radius: $radius-button;
+  background: $color-background;
+  color: $color-ink;
+  font: inherit;
+  transition: border-color $duration-fast;
+
+  &:hover {
+    border-color: $color-field-line-hover;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: $color-error;
+  }
+}
+
+.watchlist-form__select {
+  cursor: pointer;
+}
+
+.watchlist-form__textarea {
+  height: $textarea-height;
+  min-height: $textarea-height;
+  max-height: $textarea-max-height;
+  padding: $space-sm;
+  line-height: $line-height-base;
+  resize: vertical;
+}
+
+.watchlist-form__actions {
+  @include button-row;
+}
+
+.watchlist-form__error {
+  margin: 0;
+  color: $color-error;
+
+  &:empty {
+    display: none;
+  }
+}

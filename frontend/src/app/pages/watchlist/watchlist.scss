@@ -1,1 +1,49 @@
 @use 'src/styles/abstracts' as *;
+
+:host {
+  display: block;
+}
+
+.watchlist {
+  padding-block: $space-2xl $section-gap;
+}
+
+.watchlist__layout {
+  display: grid;
+  grid-template-columns: $sidebar-width minmax(0, 1fr);
+  gap: $space-lg;
+  align-items: start;
+}
+
+.watchlist__form {
+  position: sticky;
+  top: calc(#{$nav-height} + #{$space-md});
+}
+
+.watchlist__main {
+  min-width: 0;
+}
+
+.watchlist__state {
+  margin: 0;
+  padding: $space-lg;
+  border-radius: $radius-surface;
+  background: $color-surface;
+  color: $color-label;
+}
+
+.watchlist__state--error {
+  color: $color-error;
+}
+
+/* #region RESPONSIVE */
+@include below-tablet {
+  .watchlist__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .watchlist__form {
+    position: static;
+  }
+}
+/* #endregion */

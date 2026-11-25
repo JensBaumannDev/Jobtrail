@@ -1,10 +1,14 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-page-hero',
-  imports: [],
   templateUrl: './page-hero.html',
   styleUrl: './page-hero.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PageHero {}
+export class PageHero {
+  readonly title = input.required<string>();
+  readonly subtitle = input('');
+  readonly eyebrow = input('');
+  readonly lead = input('');
+}

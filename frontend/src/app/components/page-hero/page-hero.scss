@@ -1,1 +1,77 @@
 @use 'src/styles/abstracts' as *;
+
+:host {
+  display: block;
+  margin-bottom: $page-hero-margin-bottom;
+}
+
+.page-hero {
+  @include stage;
+  @include flex(column, nowrap, center, stretch);
+  min-height: $page-hero-min-height;
+  padding-block: $page-hero-padding-top $page-hero-padding-bottom;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: $z-index-below;
+    background:
+      radial-gradient(ellipse 45% 60% at 50% 70%, #{$color-glow}, transparent 70%),
+      radial-gradient(ellipse 80% 40% at 50% 100%, #{fade($color-white, 0.06)}, transparent 70%);
+    pointer-events: none;
+  }
+}
+
+:host-context([data-theme='dark']) .page-hero {
+  overflow: visible;
+  background: transparent;
+
+  &::before {
+    inset: -10% 10% auto;
+    height: 120%;
+    background: radial-gradient(50% 50% at 50% 40%, #{$color-glow}, transparent 70%);
+  }
+}
+
+.page-hero__inner {
+  @include flex(column, nowrap, center, center);
+  text-align: center;
+}
+
+.page-hero__eyebrow {
+  margin-bottom: $space-sm;
+  color: $color-subtle;
+  font-weight: $font-weight-semibold;
+}
+
+.page-hero__title {
+  @include heading-page;
+  color: $color-on-stage;
+  text-wrap: balance;
+}
+
+.page-hero__title-line {
+  display: block;
+}
+
+.page-hero__title-line--second {
+  @include heading-second-line;
+}
+
+.page-hero__lead {
+  max-width: $text-width;
+  margin-top: $space-lg;
+  color: $color-subtle;
+  font-size: $font-size-large;
+}
+
+.page-hero__actions {
+  @include button-row;
+  justify-content: center;
+  margin-top: $space-xl;
+
+  &:empty {
+    display: none;
+  }
+}

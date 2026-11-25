@@ -1,1 +1,94 @@
 @use 'src/styles/abstracts' as *;
+
+:host {
+  display: block;
+}
+
+.login {
+  @include flex(column, nowrap, flex-start, stretch);
+  gap: $space-md;
+  max-width: $content-width;
+}
+
+.login__notice,
+.login__error {
+  font-weight: $font-weight-semibold;
+}
+
+.login__notice {
+  color: $color-ink;
+}
+
+.login__error {
+  color: $color-error;
+}
+
+.login__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-md;
+}
+
+.login__card {
+  @include surface-card;
+  @include flex(column, nowrap, flex-start, stretch);
+  gap: $space-lg;
+}
+
+.login__card-title {
+  color: $color-ink;
+  font-size: $font-size-title;
+}
+
+.login__form {
+  @include flex(column, nowrap, flex-start, stretch);
+  gap: $space-lg;
+}
+
+.login__field {
+  @include flex(column, nowrap, flex-start, stretch);
+  gap: $space-xs;
+}
+
+.login__label {
+  color: $color-label;
+  font-weight: $font-weight-semibold;
+}
+
+.login__input {
+  height: $field-height;
+  padding-inline: $space-sm;
+  border: 1px solid $color-field-line;
+  border-radius: $radius-button;
+  background: $color-background;
+  color: $color-ink;
+  transition: border-color $duration-fast $ease;
+
+  &:hover {
+    border-color: $color-field-line-hover;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: $color-error;
+  }
+}
+
+.login__field-error {
+  color: $color-error;
+}
+
+.login__text {
+  color: $color-text;
+}
+
+.login__guest-actions {
+  margin-top: auto;
+}
+
+/* #region RESPONSIVE */
+@include below-tablet {
+  .login__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* #endregion */

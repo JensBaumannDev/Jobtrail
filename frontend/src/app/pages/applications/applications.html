@@ -1,0 +1,73 @@
+<app-page-hero
+  [title]="'applications.title' | translate"
+  [subtitle]="'applications.subtitle' | translate"
+  [eyebrow]="'applications.eyebrow' | translate"
+  [lead]="'applications.lead' | translate"
+>
+  <button
+    class="button button--primary"
+    type="button"
+    [disabled]="loadState() !== 'ready'"
+    [attr.aria-expanded]="formOpen()"
+    [attr.aria-controls]="formOpen() ? 'application-add-panel' : null"
+    (click)="openForm($event)"
+  >
+    {{ 'applications.add' | translate }}
+  </button>
+  <button class="button button--secondary" type="button" (click)="showList()">
+    {{ 'applications.toList' | translate }}
+  </button>
+</app-page-hero>
+
+<div class="applications container">
+  @switch (loadState()) {
+    @case ('loading') {
+      <p class="applications__message" role="status">{{ 'common.loading' | translate }}</p>
+    }
+    @case ('error') {
+      <p class="applications__message applications__message--error" role="alert">
+        {{ 'common.loadError' | translate }}
+      </p>
+    }
+    @default {
+      <section class="applications__overview" aria-labelledby="applications-overview-title">
+        <h2 class="visually-hidden" id="applications-overview-title">
+          {{ 'applications.overview' | translate }}
+        </h2>
+        <app-application-summary [summary]="summary()" />
+        <app-status-distribution [applications]="applications()" />
+      </section>
+
+      <section class="applications__pipeline" aria-labelledby="applications-list-title">
+        <div class="applications__head">
+          <h2 class="applications__title" id="applications-list-title" tabindex="-1" #listTitle>
+            {{ 'applications.listTitle' | translate }}
+            <span class="applications__title-second">{{ 'applications.listSubtitle' | translate }}</span>
+          </h2>
+          <app-application-filters [(filters)]="filters" [counts]="statusCounts()" />
+        </div>
+
+        @if (formOpen()) {
+          <div class="applications__panel" id="application-add-panel" #addPanel>
+            <app-application-form (saved)="formSaved($event)" (cancelled)="formCancelled()" />
+          </div>
+        }
+
+        @if (applications().length === 0) {
+          <div class="applications__empty">
+            <p class="applications__empty-text">{{ 'applications.empty' | translate }}</p>
+            <button class="button button--primary" type="button" (click)="openForm($event)">
+              {{ 'applications.add' | translate }}
+            </button>
+          </div>
+        } @else {
+          <app-application-list
+            [applications]="filteredApplications()"
+            [today]="today"
+            (deleteRequested)="deleteApplication($event)"
+          />
+        }
+      </section>
+    }
+  }
+</div>

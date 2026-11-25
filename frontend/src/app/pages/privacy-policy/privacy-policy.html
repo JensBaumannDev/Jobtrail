@@ -1,0 +1,33 @@
+<app-page-hero [title]="'privacy.title' | translate" [subtitle]="'privacy.date' | translate" />
+
+<div class="container">
+  <article class="privacy-policy">
+    @for (section of sections; track section.titleKey) {
+      <section class="privacy-policy__section">
+        <h2 class="privacy-policy__title">{{ section.titleKey | translate }}</h2>
+        @for (key of section.paragraphKeys; track key) {
+          <p class="privacy-policy__text">{{ key | translate }}</p>
+        }
+        @if (section.showsAddress) {
+          <p class="privacy-policy__text">
+            Jens Baumann<br />
+            {{ 'legal.addressStreet' | translate }}, {{ 'legal.addressZip' | translate }} Emden,
+            {{ 'legal.country' | translate }}<br />
+            {{ 'legal.emailLabel' | translate }}
+            <a class="privacy-policy__link" [href]="'mailto:' + email">{{ email }}</a>
+          </p>
+        }
+        @if (section.itemKeys.length) {
+          <ul class="privacy-policy__list">
+            @for (key of section.itemKeys; track key) {
+              <li>{{ key | translate }}</li>
+            }
+          </ul>
+        }
+        @for (key of section.closingKeys; track key) {
+          <p class="privacy-policy__text">{{ key | translate }}</p>
+        }
+      </section>
+    }
+  </article>
+</div>

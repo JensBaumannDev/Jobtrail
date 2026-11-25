@@ -1,1 +1,86 @@
 @use 'src/styles/abstracts' as *;
+
+:host {
+  display: block;
+}
+
+.pdf-options {
+  @include surface-card;
+  display: grid;
+  gap: $space-lg;
+}
+
+.pdf-options__field {
+  display: grid;
+  gap: $space-xs;
+  min-width: 0;
+}
+
+.pdf-options__label {
+  color: $color-label;
+  font-weight: $font-weight-semibold;
+}
+
+.pdf-options__input {
+  width: 100%;
+  min-height: $field-height;
+  padding: 0 $space-sm;
+  border: 1px solid $color-field-line;
+  border-radius: $radius-button;
+  background: $color-background;
+  color: $color-ink;
+  font: inherit;
+  transition: border-color $duration-fast;
+
+  &:hover {
+    border-color: $color-field-line-hover;
+  }
+}
+
+.pdf-options__select {
+  cursor: pointer;
+}
+
+.pdf-options__group {
+  display: grid;
+  gap: $space-sm;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.pdf-options__legend {
+  margin-bottom: $space-sm;
+  padding: 0;
+  color: $color-ink;
+  font-weight: $font-weight-bold;
+}
+
+.pdf-options__check {
+  @include flex(row, nowrap, flex-start, center);
+  gap: $space-sm;
+  color: $color-text;
+  cursor: pointer;
+}
+
+.pdf-options__checkbox {
+  flex: none;
+  width: $icon-size-medium;
+  height: $icon-size-medium;
+  margin: 0;
+  accent-color: $color-blue;
+  cursor: pointer;
+}
+
+.pdf-options__actions {
+  display: grid;
+  gap: $space-sm;
+  justify-items: start;
+}
+
+.pdf-options__count,
+.pdf-options__hint {
+  margin: 0;
+  color: $color-label;
+}

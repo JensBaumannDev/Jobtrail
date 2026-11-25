@@ -1,1 +1,32 @@
 @use 'src/styles/abstracts' as *;
+
+:host {
+  @include flex(column, nowrap);
+  min-height: 100svh;
+}
+
+.skip-link {
+  position: fixed;
+  top: $space-xs;
+  left: $space-xs;
+  z-index: $z-index-skip-link;
+  padding: $space-sm $space-md;
+  border-radius: $radius-button;
+  background: $color-blue;
+  color: $color-white;
+  font-weight: $font-weight-semibold;
+  transform: translateY(-200%);
+
+  &:focus-visible {
+    transform: none;
+    @include focus-ring($color-ink);
+  }
+}
+
+.main {
+  flex: 1 0 auto;
+
+  &:focus {
+    outline: none;
+  }
+}
