@@ -1,0 +1,178 @@
+@use 'functions' as fn;
+
+// Colors
+
+$color-white: #ffffff;
+$color-black: #000000;
+$color-stage: $color-black;
+$color-on-stage: #f5f5f7;
+$color-glow: rgba(150, 165, 255, 0.22);
+
+// Themes
+
+$theme-light: (
+  'background': #ffffff,
+  'ink': #171a20,
+  'text': #393c41,
+  'label': #5c5e62,
+  'subtle': #86868b,
+  'line': #e5e5e5,
+  'surface': #f4f4f4,
+  'surface-hover': #e8e8ea,
+  'field-line': #d2d2d7,
+  'field-line-hover': #b0b0b5,
+  'blue': #0071e3,
+  'blue-hover': #1a84f0,
+  'blue-active': #0062c4,
+  'link': #0062c4,
+  'dark-button': #2c2c2e,
+  'dark-button-hover': #3a3a3c,
+  'on-dark-button': #f5f5f7,
+  'error': #d70015,
+  'status-grey': #e8e8ea,
+  'status-grey-text': #393c41,
+  'status-blue': #e5f1fc,
+  'status-blue-text': #0058b0,
+  'status-yellow': #fff3d1,
+  'status-yellow-text': #7a5200,
+  'status-green': #e2f5e7,
+  'status-green-text': #17703a,
+  'status-red': #fde8ea,
+  'status-red-text': #b8001a,
+);
+
+$theme-dark: (
+  'background': #000000,
+  'ink': #f5f5f7,
+  'text': #d2d2d7,
+  'label': #a1a1a6,
+  'subtle': #86868b,
+  'line': #2c2c2e,
+  'surface': #1c1c1e,
+  'surface-hover': #2c2c2e,
+  'field-line': #48484a,
+  'field-line-hover': #636366,
+  'blue': #0071e3,
+  'blue-hover': #1a84f0,
+  'blue-active': #0062c4,
+  'link': #2997ff,
+  'dark-button': #2c2c2e,
+  'dark-button-hover': #3a3a3c,
+  'on-dark-button': #f5f5f7,
+  'error': #ff6961,
+  'status-grey': #2c2c2e,
+  'status-grey-text': #d2d2d7,
+  'status-blue': rgba(41, 151, 255, 0.18),
+  'status-blue-text': #64b5ff,
+  'status-yellow': rgba(255, 204, 0, 0.16),
+  'status-yellow-text': #ffd60a,
+  'status-green': rgba(48, 209, 88, 0.16),
+  'status-green-text': #30d158,
+  'status-red': rgba(255, 69, 58, 0.18),
+  'status-red-text': #ff8a80,
+);
+
+$color-background: var(--color-background);
+$color-ink: var(--color-ink);
+$color-text: var(--color-text);
+$color-label: var(--color-label);
+$color-subtle: var(--color-subtle);
+$color-line: var(--color-line);
+$color-surface: var(--color-surface);
+$color-surface-hover: var(--color-surface-hover);
+$color-field-line: var(--color-field-line);
+$color-field-line-hover: var(--color-field-line-hover);
+$color-blue: var(--color-blue);
+$color-blue-hover: var(--color-blue-hover);
+$color-blue-active: var(--color-blue-active);
+$color-link: var(--color-link);
+$color-dark-button: var(--color-dark-button);
+$color-dark-button-hover: var(--color-dark-button-hover);
+$color-on-dark-button: var(--color-on-dark-button);
+$color-error: var(--color-error);
+
+$status-colors: (
+  'not-applied': (var(--color-status-grey), var(--color-status-grey-text)),
+  'awaiting-response': (var(--color-status-blue), var(--color-status-blue-text)),
+  'intro-call-scheduled': (var(--color-status-yellow), var(--color-status-yellow-text)),
+  'further-interview': (var(--color-status-yellow), var(--color-status-yellow-text)),
+  'offer': (var(--color-status-green), var(--color-status-green-text)),
+  'rejected-after-application': (var(--color-status-red), var(--color-status-red-text)),
+  'rejected-after-interview': (var(--color-status-red), var(--color-status-red-text)),
+);
+
+// Typography
+
+$font-family-base:
+  'Urbanist',
+  -apple-system,
+  'Segoe UI',
+  system-ui,
+  sans-serif;
+$font-size-base: fn.rem(16);
+$font-size-medium: fn.rem(17);
+$font-size-large: fn.rem(20);
+$font-size-title: clamp(#{fn.rem(24)}, 2vw, #{fn.rem(32)});
+$font-size-page: clamp(#{fn.rem(44)}, 6vw, #{fn.rem(88)});
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$line-height-base: 1.5;
+$line-height-heading: 1.1;
+$letter-spacing-heading: -0.05em;
+
+// Spacing
+
+$space-2xs: fn.rem(4);
+$space-xs: fn.rem(8);
+$space-sm: fn.rem(12);
+$space-md: fn.rem(16);
+$space-lg: fn.rem(24);
+$space-xl: fn.rem(32);
+$space-2xl: fn.rem(48);
+$space-3xl: fn.rem(64);
+$gutter: clamp(#{fn.rem(16)}, 2vw, #{fn.rem(40)});
+$section-gap: clamp(#{fn.rem(72)}, 9vw, #{fn.rem(150)});
+
+// Layout
+
+$nav-height: fn.rem(56);
+$container-width: fn.rem(1440);
+$content-width: fn.rem(1180);
+$text-width: fn.rem(760);
+$button-height: fn.rem(46);
+$field-height: fn.rem(46);
+
+// Radius
+
+$radius-small: fn.rem(6);
+$radius-button: fn.rem(10);
+$radius-surface: fn.rem(16);
+$radius-pill: fn.rem(999);
+
+// Motion
+
+$duration-fast: 150ms;
+$duration-base: 250ms;
+$ease: cubic-bezier(0.22, 0.8, 0.2, 1);
+
+// Breakpoints
+
+$breakpoint-small: 400px;
+$breakpoint-phone: 760px;
+$breakpoint-tablet: 1000px;
+$breakpoint-desktop: 1180px;
+
+// Z-index
+
+$z-index-below: -1;
+$z-index-base: 0;
+$z-index-raised: 1;
+$z-index-sticky: 10;
+$z-index-navigation: 100;
+$z-index-dropdown: 200;
+$z-index-overlay: 300;
+$z-index-dialog: 400;
+$z-index-toast: 500;
+$z-index-skip-link: 600;

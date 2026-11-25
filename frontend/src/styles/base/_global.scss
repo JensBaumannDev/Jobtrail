@@ -1,0 +1,40 @@
+@use 'src/styles/abstracts' as *;
+
+:root {
+  color-scheme: light;
+
+  @each $name, $value in $theme-light {
+    --color-#{$name}: #{$value};
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  @each $name, $value in $theme-dark {
+    --color-#{$name}: #{$value};
+  }
+}
+
+html {
+  scroll-padding-top: calc(#{$nav-height} + #{$space-xs});
+  background: $color-background;
+  overflow-x: clip;
+}
+
+body {
+  background: $color-background;
+  overflow-x: clip;
+}
+
+:focus-visible {
+  @include focus-ring;
+}
+
+.container {
+  @include container;
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}

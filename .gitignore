@@ -1,0 +1,30 @@
+# Secrets and local settings
+.env
+.env.*
+!.env.example
+.claude/settings.local.json
+compose.override.yaml
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+db.sqlite3
+backend/staticfiles/
+backend/media/
+
+# Logs
+*.log
+
+# Editors
+/.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini

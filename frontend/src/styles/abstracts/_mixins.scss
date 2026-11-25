@@ -1,0 +1,87 @@
+@use 'variables' as vars;
+@use 'functions' as fn;
+
+@mixin flex(
+  $flex-direction: row,
+  $flex-wrap: wrap,
+  $justify-content: flex-start,
+  $align-items: stretch
+) {
+  display: flex;
+  flex-direction: $flex-direction;
+  flex-wrap: $flex-wrap;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin small {
+  @media (max-width: #{vars.$breakpoint-small}) {
+    @content;
+  }
+}
+
+@mixin phone {
+  @media (max-width: #{vars.$breakpoint-phone}) {
+    @content;
+  }
+}
+
+@mixin below-tablet {
+  @media (max-width: #{vars.$breakpoint-tablet}) {
+    @content;
+  }
+}
+
+@mixin below-desktop {
+  @media (max-width: #{vars.$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+@mixin container {
+  width: min(#{vars.$container-width}, 100% - 2 * #{vars.$gutter});
+  margin-inline: auto;
+}
+
+@mixin focus-ring($color: vars.$color-blue, $offset: 3px) {
+  outline: 2px solid $color;
+  outline-offset: $offset;
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: fn.rem(1);
+  height: fn.rem(1);
+  overflow: clip;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@mixin heading-page {
+  font-size: vars.$font-size-page;
+  letter-spacing: vars.$letter-spacing-heading;
+  line-height: 1;
+}
+
+@mixin heading-second-line {
+  color: vars.$color-subtle;
+}
+
+@mixin surface-card {
+  padding: clamp(#{fn.rem(24)}, 2.6vw, #{fn.rem(36)});
+  border-radius: vars.$radius-surface;
+  background: vars.$color-surface;
+}
+
+@mixin stage {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  background: vars.$color-stage;
+  color: vars.$color-on-stage;
+}
+
+@mixin button-row {
+  @include flex(row, wrap, flex-start, center);
+  gap: fn.rem(10);
+}

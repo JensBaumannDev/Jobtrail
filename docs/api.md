@@ -1,0 +1,95 @@
+# API
+
+All endpoints live under `/api/`. Requests and responses use JSON. Authentication uses the session cookie; every request that changes data needs the `X-CSRFToken` header.
+
+All endpoints except `csrf`, `login` and `guest` need a logged-in user. Everyone only sees their own data. Asking for someone else's object returns `404`.
+
+> This is the plan. I update the examples as I build the endpoints.
+
+## Auth
+
+| Method | Path | Purpose |
+|---|---|---|
+| GET | `/api/auth/csrf/` | Set the CSRF cookie |
+| POST | `/api/auth/login/` | Log in with username and password |
+| POST | `/api/auth/guest/` | Log in as a guest; creates a new temporary guest user |
+| POST | `/api/auth/logout/` | Log out; a guest is deleted right away |
+| GET | `/api/auth/me/` | Current user |
+| POST | `/api/auth/password/change/` | Change own password (not for guests) |
+
+`GET /api/auth/me/`
+
+```json
+{
+  "username": "jens",
+  "is_guest": false,
+  "expires_at": null
+}
+```
+
+For a guest, `is_guest` is `true` and `expires_at` is the time the guest gets deleted.
+
+## Applications
+
+| Method | Path | Purpose |
+|---|---|---|
+| GET | `/api/applications/` | All applications of the user, including notes |
+| POST | `/api/applications/` | Create |
+| GET | `/api/applications/{id}/` | One application |
+| PATCH | `/api/applications/{id}/` | Update, including status only |
+| DELETE | `/api/applications/{id}/` | Delete, notes included |
+
+`POST /api/applications/`
+
+```json
+{
+  "company": "Example GmbH",
+  "website": "example.com",
+  "role": "Fullstack Developer",
+  "location": "Hamburg",
+  "work_mode": "hybrid",
+  "status": "awaiting_response",
+  "applied_on": "2026-11-27",
+  "next_step": "Technical interview",
+  "next_step_on": "2026-12-03",
+  "job_ad_url": "example.com/jobs/42",
+  "contact": "Jane Doe, Team Lead",
+  "salary_expectation": "52,000 EUR gross"
+}
+```
+
+Response `201`: the created application with `id`, the normalized `website` (`https://example.com/`), `responded_on`, `notes: []`, `created_at` and `updated_at`.
+
+Validation errors return `400` with one list of messages per field.
+
+## Notes
+
+| Method | Path | Purpose |
+|---|---|---|
+| POST | `/api/applications/{id}/notes/` | Add a note to an application |
+| PATCH | `/api/notes/{id}/` | Update a note |
+| DELETE | `/api/notes/{id}/` | Delete a note |
+
+Notes are listed inside each application, so there is no separate list endpoint.
+
+## Watchlist
+
+| Method | Path | Purpose |
+|---|---|---|
+| GET | `/api/watchlist/` | All watchlist entries |
+| POST | `/api/watchlist/` | Add a company |
+| PATCH | `/api/watchlist/{id}/` | Update |
+| DELETE | `/api/watchlist/{id}/` | Remove |
+| POST | `/api/watchlist/{id}/convert/` | Turn the entry into an application |
+
+`convert` runs in one transaction. It creates an application with status `not_applied`, moves the entry's note over, deletes the watchlist entry and returns the new application (`201`).
+
+## Errors
+
+| Status | Meaning |
+|---|---|
+| 400 | Validation failed |
+| 401 | Not logged in, or guest session expired |
+| 403 | Missing CSRF token, or not allowed (for example a guest changing the password) |
+| 404 | Not found, or belongs to another user |
+| 429 | Too many login or guest login attempts, or a guest limit reached |

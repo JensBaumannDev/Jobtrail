@@ -1,0 +1,17 @@
+@use 'src/styles/abstracts' as *;
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-base;
+  color: $color-ink;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: $font-weight-bold;
+  line-height: $line-height-heading;
+  letter-spacing: $letter-spacing-heading;
+}
