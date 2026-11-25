@@ -42,7 +42,7 @@ What version 1 does, and what I'm leaving out for now.
 - German and English
 - Light and dark mode
 - Installable as a PWA
-- Works down to 375 px, WCAG AA
+- Responsive down to 320 px, WCAG AA
 
 ## Not in version 1
 

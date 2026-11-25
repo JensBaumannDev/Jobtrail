@@ -66,7 +66,8 @@ Apply to all TypeScript and Python files, including tests:
 - Clear and simple names for classes and methods.
 - Tests use helper functions (for example `create_application(user, **fields)`, `login_as_guest(client)`) in a shared `tests/helpers.py` or fixtures in `conftest.py`, so each test stays short and readable.
 - One Django app per domain area (`accounts`, `tracker`). API code lives in `<app>/api/` (`serializers.py`, `views.py`, `urls.py`), tests in `<app>/tests/` with one file per resource and shared helpers in `tests/helpers.py`.
-- ViewSets with `get_queryset` filtered by user and `perform_create` setting the user.
+- ViewSets with `get_queryset` filtered by user and `perform_create` setting the user, so another user's id always returns 404.
+- Unauthenticated requests must return 401, not 403: use a `SessionAuthentication` subclass whose `authenticate_header()` returns a value. The frontend ends the session on 401.
 - Validation in serializers, not in views.
 - Avoid N+1 queries: `select_related` / `prefetch_related`.
 - Settings from environment variables. No secrets, `.env` files or local databases in git.
@@ -116,6 +117,7 @@ src/styles/
 ## Accessibility
 
 - AXE clean, WCAG AA (focus, contrast, ARIA)
+- Responsive down to 320px: no horizontal scrolling, nothing cut off or overlapping
 - Min. font size 16px
 - Respect `prefers-reduced-motion`
 
