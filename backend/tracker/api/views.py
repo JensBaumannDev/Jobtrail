@@ -2,6 +2,7 @@ from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
+from accounts.guests import ensure_guest_can_create
 from tracker.models import Application, Note, WatchItem
 from tracker.services import convert_watch_item
 
@@ -16,6 +17,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         return Application.objects.filter(user=self.request.user).prefetch_related('notes')
 
     def perform_create(self, serializer):
+        ensure_guest_can_create(self.request.user, 'applications')
         serializer.save(user=self.request.user)
 
     @action(detail=True, methods=['post'], serializer_class=NoteSerializer)
@@ -23,6 +25,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         application = self.get_object()
         serializer = NoteSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        ensure_guest_can_create(request.user, 'notes')
         serializer.save(application=application)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -43,9 +46,13 @@ class WatchItemViewSet(viewsets.ModelViewSet):
         return WatchItem.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
+        ensure_guest_can_create(self.request.user, 'watch_items')
         serializer.save(user=self.request.user)
 
     @action(detail=True, methods=['post'])
     def convert(self, request, pk=None):
-        application = convert_watch_item(self.get_object())
+        watch_item = self.get_object()
+        ensure_guest_can_create(request.user, 'applications')
+        ensure_guest_can_create(request.user, 'notes', amount=1 if watch_item.note else 0)
+        application = convert_watch_item(watch_item)
         return Response(ApplicationSerializer(application).data, status=status.HTTP_201_CREATED)
