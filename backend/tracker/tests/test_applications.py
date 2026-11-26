@@ -111,7 +111,7 @@ class TestListApplications:
         newer = create_note(application, title='Newer')
         notes = api_client.get(APPLICATIONS_URL).json()[0]['notes']
         assert [note['id'] for note in notes] == [newer.id, older.id]
-        assert set(notes[0]) == {'id', 'title', 'text', 'updated_at'}
+        assert set(notes[0]) == {'id', 'title', 'text', 'created_at', 'updated_at'}
 
 
 class TestRetrieveApplication:

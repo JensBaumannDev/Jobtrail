@@ -71,6 +71,7 @@ class Note(models.Model):
     application = models.ForeignKey(Application, on_delete=models.CASCADE, related_name='notes')
     title = models.CharField(max_length=SHORT_TEXT_LENGTH, blank=True)
     text = models.TextField(max_length=LONG_TEXT_LENGTH, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:

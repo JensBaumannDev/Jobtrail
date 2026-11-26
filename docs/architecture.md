@@ -64,7 +64,7 @@ Statuses: `not_applied`, `awaiting_response`, `intro_call_scheduled`, `further_i
 | `application` | FK → Application | deleted with the application |
 | `title` | text | title or text is required (database constraint) |
 | `text` | text | |
-| `updated_at` | datetime | |
+| `created_at`, `updated_at` | datetime | |
 
 ### WatchItem
 
