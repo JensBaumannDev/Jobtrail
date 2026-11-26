@@ -49,7 +49,6 @@ For a guest, `is_guest` is `true` and `expires_at` is the time the guest gets de
   "location": "Hamburg",
   "work_mode": "hybrid",
   "status": "awaiting_response",
-  "applied_on": "2026-11-27",
   "next_step": "Technical interview",
   "next_step_on": "2026-12-03",
   "job_ad_url": "example.com/jobs/42",
@@ -58,7 +57,14 @@ For a guest, `is_guest` is `true` and `expires_at` is the time the guest gets de
 }
 ```
 
-Response `201`: the created application with `id`, the normalized `website` (`https://example.com/`), `responded_on`, `notes: []`, `created_at` and `updated_at`.
+Only `company` and `website` are required. Left-out fields get their defaults: role `Fullstack Developer`, work mode `remote`, status `not_applied`, empty text for the rest.
+
+Response `201`: the created application with `id`, the normalized `website` (`https://example.com/`), `applied_on`, `responded_on`, `notes: []`, `created_at` and `updated_at`.
+
+- `website` and `job_ad_url` accept `http` and `https` only. Input without a scheme gets `https://`.
+- `applied_on` and `responded_on` are read-only. The server sets them to today on the first matching status change and never overwrites them.
+- `PUT` is not supported, use `PATCH`.
+- Text fields are trimmed. Numbers, booleans, lists or objects in a text field return `400`.
 
 Validation errors return `400` with one list of messages per field.
 

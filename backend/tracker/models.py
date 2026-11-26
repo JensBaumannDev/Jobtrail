@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.db.models import Q
+from django.utils import timezone
 
 SHORT_TEXT_LENGTH = 120
 URL_LENGTH = 500
@@ -44,6 +45,26 @@ class Application(models.Model):
 
     def __str__(self):
         return self.company
+
+    def save(self, *args, **kwargs):
+        self.record_status_dates()
+        super().save(*args, **kwargs)
+
+    def record_status_dates(self):
+        today = timezone.localdate()
+        if self.status != self.Status.NOT_APPLIED and self.applied_on is None:
+            self.applied_on = today
+        if self.status in STATUSES_WITH_RESPONSE and self.responded_on is None:
+            self.responded_on = today
+
+
+STATUSES_WITH_RESPONSE = {
+    Application.Status.INTRO_CALL_SCHEDULED,
+    Application.Status.FURTHER_INTERVIEW,
+    Application.Status.OFFER,
+    Application.Status.REJECTED_AFTER_APPLICATION,
+    Application.Status.REJECTED_AFTER_INTERVIEW,
+}
 
 
 class Note(models.Model):

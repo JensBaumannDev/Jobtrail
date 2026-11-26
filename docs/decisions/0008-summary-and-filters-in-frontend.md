@@ -1,6 +1,6 @@
 # 8. Summary, filters and sorting in the frontend
 
-- Status: Proposed
+- Status: Accepted
 - Date: 2026-11-25
 
 ## Context
@@ -16,4 +16,5 @@ The API returns all applications in one request. The frontend calculates figures
 - Instant feedback while typing, no request per filter change.
 - Fewer endpoints and no pagination.
 - Rules like "follow-up due" live in the frontend, so they need unit tests there.
-- With thousands of entries I would have to move filtering and pagination to the server.
+- A test keeps the number of database queries for the list the same for 1 and for 10 applications, so the one big request stays cheap.
+- At around 1,000 applications, or when the list request gets noticeably slow, I move filtering and pagination to the server.

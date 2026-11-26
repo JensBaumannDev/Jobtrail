@@ -44,8 +44,8 @@ Every model that belongs to a user has a foreign key to that user, and every que
 | `location` | text | optional |
 | `work_mode` | choice | `remote` (default), `hybrid`, `on_site` |
 | `status` | choice | see below, default `not_applied` |
-| `applied_on` | date | set when the status leaves `not_applied` |
-| `responded_on` | date | set on the first status that implies a response |
+| `applied_on` | date | set to today when the status first leaves `not_applied`, never overwritten, read-only in the API |
+| `responded_on` | date | set to today on the first status after `awaiting_response` (calls, interviews, offer, both rejections), never overwritten, read-only in the API |
 | `next_step` | text | optional |
 | `next_step_on` | date | optional appointment |
 | `job_ad_url` | URL | optional |
