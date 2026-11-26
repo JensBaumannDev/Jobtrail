@@ -1,14 +1,8 @@
-from django.contrib.auth import get_user_model
-
+from accounts.tests.helpers import create_user
 from tracker.models import Application, Note, WatchItem
 
 APPLICATIONS_URL = '/api/applications/'
 WATCHLIST_URL = '/api/watchlist/'
-TEST_PASSWORD = 'test-password-123'
-
-
-def create_user(username='jens', **fields):
-    return get_user_model().objects.create_user(username=username, password=TEST_PASSWORD, **fields)
 
 
 def create_application(user, **fields):

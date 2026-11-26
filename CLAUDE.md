@@ -25,6 +25,7 @@ Never run `git init` or commit outside this folder. Never copy content from `../
 # backend and database run in Docker (from the repository root)
 docker compose up -d
 docker compose exec backend python manage.py migrate
+docker compose exec backend python manage.py createcachetable           # once per database, for the login rate limit
 docker compose exec backend pytest <path>                              # one file while working
 docker compose exec backend pytest --cov --cov-report=term-missing     # full suite once
 

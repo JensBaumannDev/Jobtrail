@@ -86,7 +86,7 @@ A guest is a temporary user with its own guest ID, a profile flag `is_guest` and
 ## Authentication
 
 - Django session authentication. The frontend fetches a CSRF cookie before the first write.
-- Login attempts are rate limited.
+- Login attempts are rate limited per IP with DRF throttling; the counters live in the database cache (ADR 0011).
 - There is no registration endpoint. I create my own account through the Django admin.
 
 ## Guest access

@@ -1,6 +1,6 @@
 # 5. Session authentication instead of tokens
 
-- Status: Proposed
+- Status: Accepted
 - Date: 2026-11-25
 
 ## Context
