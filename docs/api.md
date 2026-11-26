@@ -21,13 +21,42 @@ All endpoints except `csrf`, `login` and `guest` need a logged-in user. Everyone
 
 ```json
 {
-  "username": "jens",
+  "username": "<username>",
   "is_guest": false,
   "expires_at": null
 }
 ```
 
 For a guest, `is_guest` is `true` and `expires_at` is the time the guest gets deleted.
+
+`GET /api/auth/csrf/` returns `204` and sets the `csrftoken` cookie. The frontend calls it before logging in and sends the value as `X-CSRFToken` with every write, the login included.
+
+`POST /api/auth/login/`
+
+```json
+{
+  "username": "<username>",
+  "password": "<password>"
+}
+```
+
+Response `200`: the current user, like `me`. A new session starts and the session cookie is `HttpOnly` and `SameSite=Lax`.
+
+- Wrong username, wrong password and an inactive account all return the same `400`: `{"non_field_errors": ["Wrong username or password."]}`.
+- 10 login attempts per IP and hour, successful ones included. After that `429` with a `Retry-After` header (ADR 0011).
+
+`POST /api/auth/logout/` returns `204` and ends the session.
+
+`POST /api/auth/password/change/`
+
+```json
+{
+  "old_password": "<current password>",
+  "new_password": "<new password>"
+}
+```
+
+Response `204`. The current session stays logged in, every other session of the user is logged out. A wrong `old_password`, a weak `new_password` (Django's password validators) or the same password as before return `400` under the field name.
 
 ## Applications
 

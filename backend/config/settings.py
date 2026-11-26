@@ -100,6 +100,13 @@ MAILERS = {
     },
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'jobtrail_cache',
+    }
+}
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'accounts.authentication.SessionAuthenticationWith401',
@@ -117,6 +124,7 @@ REST_FRAMEWORK = {
         'login': '10/hour',
         'guest_login': '5/hour',
     },
+    'NUM_PROXIES': int(os.environ.get('DJANGO_NUM_PROXIES', '0')),
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 }
 
