@@ -29,6 +29,14 @@ def application_url(application_id):
     return f'{APPLICATIONS_URL}{application_id}/'
 
 
+def notes_url(application_id):
+    return f'{application_url(application_id)}notes/'
+
+
+def note_url(note_id):
+    return f'/api/notes/{note_id}/'
+
+
 def application_payload(**fields):
     return {'company': 'Example GmbH', 'website': 'example.com', **fields}
 

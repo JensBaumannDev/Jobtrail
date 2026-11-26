@@ -76,7 +76,33 @@ Validation errors return `400` with one list of messages per field.
 | PATCH | `/api/notes/{id}/` | Update a note |
 | DELETE | `/api/notes/{id}/` | Delete a note |
 
-Notes are listed inside each application, so there is no separate list endpoint.
+Notes are listed inside each application, newest update first, so there is no separate list or detail endpoint.
+
+`POST /api/applications/{id}/notes/`
+
+```json
+{
+  "title": "First call",
+  "text": "Talked to the team lead."
+}
+```
+
+Response `201`:
+
+```json
+{
+  "id": 7,
+  "title": "First call",
+  "text": "Talked to the team lead.",
+  "created_at": "2026-11-27T10:15:00+01:00",
+  "updated_at": "2026-11-27T10:15:00+01:00"
+}
+```
+
+- A note needs a title or a text. Without both the response is `400` with `non_field_errors`.
+- Title up to 120 characters, text up to 5000. Both are trimmed, line breaks inside the text stay.
+- A note can't be moved to another application. An `application` field in the body is ignored.
+- A note of someone else's application returns `404`.
 
 ## Watchlist
 

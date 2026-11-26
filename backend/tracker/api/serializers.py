@@ -17,8 +17,15 @@ class StrictModelSerializer(serializers.ModelSerializer):
 class NoteSerializer(StrictModelSerializer):
     class Meta:
         model = Note
-        fields = ['id', 'title', 'text', 'updated_at']
-        read_only_fields = ['updated_at']
+        fields = ['id', 'title', 'text', 'created_at', 'updated_at']
+        read_only_fields = ['created_at', 'updated_at']
+
+    def validate(self, attributes):
+        title = attributes.get('title', getattr(self.instance, 'title', ''))
+        text = attributes.get('text', getattr(self.instance, 'text', ''))
+        if not title and not text:
+            raise serializers.ValidationError('Enter a title or a text.')
+        return attributes
 
 
 class ApplicationSerializer(StrictModelSerializer):
