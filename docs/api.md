@@ -45,7 +45,11 @@ Response `200`: the current user, like `me`. A new session starts and the sessio
 - Wrong username, wrong password and an inactive account all return the same `400`: `{"non_field_errors": ["Wrong username or password."]}`.
 - 10 login attempts per IP and hour, successful ones included. After that `429` with a `Retry-After` header (ADR 0011).
 
-`POST /api/auth/logout/` returns `204` and ends the session.
+`POST /api/auth/guest/` needs the CSRF token and no body. It creates a new guest with sample data, logs it in and returns `201` with the current user (`is_guest: true`, `expires_at` three hours later). The session ends at the same time. 5 guest logins per IP and hour, then `429`.
+
+A guest older than three hours gets `401` on every request. A guest reaching the demo limit gets `429` with `{"detail": "The demo limit is reached. Delete something first."}`. Guests get `403` on the password change.
+
+`POST /api/auth/logout/` returns `204` and ends the session. For a guest it also deletes the guest and all its data.
 
 `POST /api/auth/password/change/`
 

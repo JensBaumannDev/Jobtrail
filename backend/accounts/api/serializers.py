@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
+from accounts.guests import guest_expires_at
 from tracker.api.fields import StrictCharField
 
 USERNAME_LENGTH = 150
@@ -14,14 +15,12 @@ def password_field():
 
 class CurrentUserSerializer(serializers.Serializer):
     username = serializers.CharField()
-    is_guest = serializers.SerializerMethodField()
+    is_guest = serializers.BooleanField()
     expires_at = serializers.SerializerMethodField()
 
-    def get_is_guest(self, user):
-        return False
-
     def get_expires_at(self, user):
-        return None
+        expires_at = guest_expires_at(user)
+        return serializers.DateTimeField().to_representation(expires_at) if expires_at else None
 
 
 class LoginSerializer(serializers.Serializer):

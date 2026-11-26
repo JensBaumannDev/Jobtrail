@@ -81,7 +81,7 @@ Statuses: `not_applied`, `awaiting_response`, `intro_call_scheduled`, `further_i
 
 ### Guest marker
 
-A guest is a temporary user with its own guest ID, a profile flag `is_guest` and a creation time. All data the guest creates belongs to that user and is deleted with it after three hours. Guest users have no usable password.
+A guest is a temporary user named `guest-<random id>` with the flag `is_guest` on the user model. `date_joined` is the creation time, the guest expires three hours later. All data the guest creates belongs to that user and is deleted with it after three hours. Guest users have no usable password.
 
 ## Authentication
 
@@ -95,7 +95,10 @@ A guest is a temporary user with its own guest ID, a profile flag `is_guest` and
 2. The guest session expires after three hours. Every request from a guest older than three hours is rejected, even before cleanup has run.
 3. Logging out deletes the guest account immediately.
 4. A management command runs every hour and deletes all expired guests, together with their data.
-5. Limits: guest logins per IP and hour, and a maximum number of applications, notes and watchlist entries per guest.
+5. Limits: 5 guest logins per IP and hour, and per guest 50 applications, 50 notes and 30 watchlist entries. The sample data counts. Reaching a limit returns `429` and creates nothing, also for `convert`.
+6. Sample data: seven applications covering every status, three notes and three watchlist entries, with dates relative to the day of the login. One application is due for a follow-up and two have an appointment in the next week.
+
+The cleanup runs as `python manage.py delete_expired_guests`.
 
 Guests can't change a password or open the admin.
 

@@ -1,7 +1,14 @@
+import datetime
+
 import pytest
+from django.utils import timezone
 from rest_framework.test import APIClient
 
+from accounts import guests
 from accounts.tests.helpers import create_user
+
+FROZEN_TODAY = datetime.date(2026, 11, 27)
+FROZEN_NOW = datetime.datetime(2026, 11, 27, 12, 0, tzinfo=datetime.UTC)
 
 
 @pytest.fixture
@@ -37,3 +44,15 @@ def client_for(user):
 @pytest.fixture
 def api_client(client_for):
     return client_for()
+
+
+@pytest.fixture
+def frozen_today(monkeypatch):
+    monkeypatch.setattr(timezone, 'localdate', lambda *args, **kwargs: FROZEN_TODAY)
+    return FROZEN_TODAY
+
+
+@pytest.fixture
+def frozen_now(monkeypatch):
+    monkeypatch.setattr(guests, 'current_time', lambda: FROZEN_NOW)
+    return FROZEN_NOW
