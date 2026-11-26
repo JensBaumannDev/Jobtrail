@@ -1,6 +1,7 @@
 import datetime
 import uuid
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import transaction
 from django.utils import timezone
@@ -21,11 +22,18 @@ class GuestLimitReached(APIException):
     default_code = 'guest_limit_reached'
 
 
+class GuestCapacityReached(APIException):
+    status_code = status.HTTP_503_SERVICE_UNAVAILABLE
+    default_detail = 'The demo is busy right now. Please try again later.'
+    default_code = 'guest_capacity_reached'
+
+
 def current_time():
     return timezone.now()
 
 
 def create_guest_account():
+    ensure_guest_capacity()
     with transaction.atomic():
         guest = get_user_model().objects.create_user(
             username=f'guest-{uuid.uuid4().hex[:12]}',
@@ -35,6 +43,15 @@ def create_guest_account():
         )
         create_sample_data(guest, timezone.localdate())
     return guest
+
+
+def ensure_guest_capacity():
+    if active_guests().count() >= settings.GUEST_MAX_ACTIVE:
+        raise GuestCapacityReached()
+
+
+def active_guests():
+    return get_user_model().objects.filter(is_guest=True, date_joined__gt=current_time() - GUEST_LIFETIME)
 
 
 def guest_expires_at(user):

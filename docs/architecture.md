@@ -95,7 +95,7 @@ A guest is a temporary user named `guest-<random id>` with the flag `is_guest` o
 2. The guest session expires after three hours. Every request from a guest older than three hours is rejected, even before cleanup has run.
 3. Logging out deletes the guest account immediately.
 4. A management command runs every hour and deletes all expired guests, together with their data.
-5. Limits: 5 guest logins per IP and hour, and per guest 50 applications, 50 notes and 30 watchlist entries. The sample data counts. Reaching a limit returns `429` and creates nothing, also for `convert`.
+5. Limits: at most 30 active guests at a time, 5 guest logins per IP (IPv6 per /64 network) and hour, and per guest 50 applications, 50 notes and 30 watchlist entries. The sample data counts. Reaching a limit returns `429` and creates nothing, also for `convert`.
 6. Sample data: seven applications covering every status, three notes and three watchlist entries, with dates relative to the day of the login. One application is due for a follow-up and two have an appointment in the next week.
 
 The cleanup runs as `python manage.py delete_expired_guests`.

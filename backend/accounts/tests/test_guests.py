@@ -25,6 +25,7 @@ pytestmark = pytest.mark.django_db
 
 User = get_user_model()
 GUEST_LIFETIME = datetime.timedelta(hours=3)
+GUEST_CAP = 30
 
 
 @pytest.fixture
@@ -228,3 +229,40 @@ class TestGuestLoginRateLimit:
         for _ in range(5):
             login_as_guest(csrf_checking_client)
         assert login_as_guest(csrf_checking_client, REMOTE_ADDR='192.0.2.60').status_code == 201
+
+
+def fill_guests(amount, joined):
+    User.objects.bulk_create(
+        User(username=f'guest-filled-{number}', is_guest=True, date_joined=joined) for number in range(amount)
+    )
+
+
+class TestGuestCapacity:
+    def test_guest_login_below_the_cap_works(self, csrf_checking_client, frozen_now, frozen_today):
+        fill_guests(GUEST_CAP - 1, frozen_now)
+        assert login_as_guest(csrf_checking_client).status_code == 201
+
+    def test_guest_login_at_the_cap_returns_503_and_creates_nothing(self, csrf_checking_client, frozen_now):
+        fill_guests(GUEST_CAP, frozen_now)
+        response = login_as_guest(csrf_checking_client)
+        assert response.status_code == 503
+        assert response.json() == {'detail': 'The demo is busy right now. Please try again later.'}
+        assert User.objects.filter(is_guest=True).count() == GUEST_CAP
+        assert csrf_checking_client.get(ME_URL).status_code == 401
+
+    def test_expired_guests_do_not_count(self, csrf_checking_client, frozen_now, frozen_today):
+        fill_guests(GUEST_CAP, frozen_now - GUEST_LIFETIME)
+        assert login_as_guest(csrf_checking_client).status_code == 201
+
+    def test_regular_users_do_not_count(self, csrf_checking_client, frozen_now, frozen_today):
+        User.objects.bulk_create(User(username=f'user-{number}') for number in range(GUEST_CAP))
+        assert login_as_guest(csrf_checking_client).status_code == 201
+
+    def test_cap_comes_from_the_settings(self, csrf_checking_client, frozen_now, frozen_today, settings):
+        settings.GUEST_MAX_ACTIVE = 2
+        fill_guests(2, frozen_now)
+        assert login_as_guest(csrf_checking_client).status_code == 503
+
+    def test_cap_does_not_block_my_login(self, csrf_checking_client, user, frozen_now):
+        fill_guests(GUEST_CAP, frozen_now)
+        assert login(csrf_checking_client).status_code == 200
