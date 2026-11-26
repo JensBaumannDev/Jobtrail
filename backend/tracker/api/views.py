@@ -2,9 +2,10 @@ from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from tracker.models import Application, Note
+from tracker.models import Application, Note, WatchItem
+from tracker.services import convert_watch_item
 
-from .serializers import ApplicationSerializer, NoteSerializer
+from .serializers import ApplicationSerializer, NoteSerializer, WatchItemSerializer
 
 
 class ApplicationViewSet(viewsets.ModelViewSet):
@@ -32,3 +33,19 @@ class NoteViewSet(mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.Ge
 
     def get_queryset(self):
         return Note.objects.filter(application__user=self.request.user)
+
+
+class WatchItemViewSet(viewsets.ModelViewSet):
+    serializer_class = WatchItemSerializer
+    http_method_names = ['get', 'post', 'patch', 'delete', 'head', 'options']
+
+    def get_queryset(self):
+        return WatchItem.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    @action(detail=True, methods=['post'])
+    def convert(self, request, pk=None):
+        application = convert_watch_item(self.get_object())
+        return Response(ApplicationSerializer(application).data, status=status.HTTP_201_CREATED)

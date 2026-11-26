@@ -1,7 +1,7 @@
 from django.db import models
 from rest_framework import serializers
 
-from tracker.models import URL_LENGTH, Application, Note
+from tracker.models import URL_LENGTH, Application, Note, WatchItem
 
 from .fields import StrictCharField, WebsiteField
 
@@ -41,3 +41,13 @@ class ApplicationSerializer(StrictModelSerializer):
             'created_at', 'updated_at',
         ]
         read_only_fields = ['applied_on', 'responded_on', 'created_at', 'updated_at']
+
+
+class WatchItemSerializer(StrictModelSerializer):
+    website = WebsiteField(max_length=URL_LENGTH)
+    careers_url = WebsiteField(max_length=URL_LENGTH, required=False, allow_blank=True)
+
+    class Meta:
+        model = WatchItem
+        fields = ['id', 'company', 'website', 'careers_url', 'location', 'plan', 'note', 'created_at', 'updated_at']
+        read_only_fields = ['created_at', 'updated_at']
