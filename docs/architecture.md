@@ -42,8 +42,8 @@ Every model that belongs to a user has a foreign key to that user, and every que
 | `website` | URL | required |
 | `role` | text | default "Fullstack Developer" |
 | `location` | text | optional |
-| `work_mode` | choice | `remote`, `hybrid`, `on_site` |
-| `status` | choice | see below |
+| `work_mode` | choice | `remote` (default), `hybrid`, `on_site` |
+| `status` | choice | see below, default `not_applied` |
 | `applied_on` | date | set when the status leaves `not_applied` |
 | `responded_on` | date | set on the first status that implies a response |
 | `next_step` | text | optional |
@@ -53,6 +53,8 @@ Every model that belongs to a user has a foreign key to that user, and every que
 | `salary_expectation` | text | optional |
 | `created_at`, `updated_at` | datetime | |
 
+Text fields hold at most 120 characters (next step 200, salary expectation 60), URLs 500, note texts 5000. Lists come newest first, notes by last update.
+
 Statuses: `not_applied`, `awaiting_response`, `intro_call_scheduled`, `further_interview`, `offer`, `rejected_after_application`, `rejected_after_interview`.
 
 ### Note
@@ -60,7 +62,7 @@ Statuses: `not_applied`, `awaiting_response`, `intro_call_scheduled`, `further_i
 | Field | Type | Notes |
 |---|---|---|
 | `application` | FK → Application | deleted with the application |
-| `title` | text | title or text is required |
+| `title` | text | title or text is required (database constraint) |
 | `text` | text | |
 | `updated_at` | datetime | |
 
@@ -73,7 +75,7 @@ Statuses: `not_applied`, `awaiting_response`, `intro_call_scheduled`, `further_i
 | `website` | URL | required |
 | `careers_url` | URL | optional |
 | `location` | text | optional |
-| `plan` | choice | `apply`, `watch` |
+| `plan` | choice | `apply` (default), `watch` |
 | `note` | text | optional |
 | `created_at`, `updated_at` | datetime | |
 
