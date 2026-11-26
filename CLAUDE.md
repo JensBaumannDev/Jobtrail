@@ -42,7 +42,27 @@ The local `backend/.venv` only holds Django, DRF, django-cors-headers and pytest
 - While working on one endpoint or component, run only its tests: one file, one class (`::`), `-k <name>`, or `--lf` after a failure.
 - Never run the whole suite after every change. Run the full suite with coverage once, when a larger step is done or before a commit: `pytest --cov=<app> --cov-report=term-missing` (inside the backend container, with `--reuse-db`).
 - Keep backend tests split per resource (`test_applications.py`, `test_notes.py`, `test_watchlist.py`, `test_auth.py`, `test_guests.py`).
-- Every resource gets tests for: success, validation errors, unauthenticated access, and another user's data being invisible.
+- Test every situation that can happen, not only the happy path. Before writing code, list the cases of the checklist in the `add-endpoint` skill (backend) or the `add-component` skill (frontend) that apply, and write one test per case. A case that doesn't apply is skipped on purpose, not forgotten.
+- Every endpoint is tested for at least:
+  - success for each method, with the exact status code and the exact response body (field names, normalized values, nested data)
+  - each required field missing, empty and whitespace only
+  - each length limit at exactly the limit (accepted) and one character over (rejected)
+  - each choice field with every valid value and one unknown value
+  - each URL field with `example.com`, `http://`, `https://`, `ftp://`, `javascript:` and plain text
+  - each date field with a valid date, an invalid date (`2026-02-30`), a wrong format and `null` where allowed
+  - read-only fields (`id`, `user`, `created_at`, `updated_at`, automatic dates) sent in the request and ignored
+  - unknown fields ignored, wrong JSON types (number instead of text, list instead of object) rejected with 400
+  - not logged in: 401 for every method
+  - write without CSRF token: 403
+  - another user's object: 404 on read, update, delete and every action, and the object is unchanged afterwards in the database
+  - a guest: same isolation from me and from other guests, expired guest gets 401, guest limits reached gets 429
+  - a non-existing id: 404
+  - side effects checked in the database, not only in the response (counts, cascades, nothing half-written after a failed transaction)
+  - number of queries for list endpoints with several objects (`django_assert_max_num_queries`), so N+1 shows up
+- Every model is tested for defaults, choices, required fields, constraints, ordering, `__str__`, cascades on delete and admin registration.
+- Dates and times are tested at their edges: today, yesterday, tomorrow, exactly 14 days, exactly 3 hours (guest expiry) one second before and after. Time is frozen in these tests, never taken from the real clock.
+- A bug fix starts with a test that reproduces the bug.
+- Line coverage is checked, but it isn't the goal: a line counts as tested only when a test asserts what it does.
 
 ## Product rules
 
