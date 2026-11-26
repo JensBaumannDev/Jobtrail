@@ -157,6 +157,7 @@ src/styles/
 ## Git
 
 - Branches `feature/*` / `fix/*`; commits like `feat(applications): ...`
+- Every commit has a subject line and a body: a short bullet list of the main changes (what was added or changed, important rules, tests, docs). Rough details, no file-by-file list.
 - Commit after each finished section, but only after the user has reviewed the changes and approved them. Show the changes first, then commit.
 - Never push, never create a pull request, never merge. The user does that.
 - Never add a "Co-Authored-By" line or any other AI attribution
