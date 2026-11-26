@@ -20,6 +20,6 @@ description: Use when a section is finished; runs the full checks once, hands th
 6. **Hand over for review** (in German): what changed, test and coverage result, which checklist cases are covered and which were skipped on purpose (with the reason), which files to review first, and the proposed commit message. Then wait.
 7. **Commit only after the user approved the review**:
    - branch `feature/*` or `fix/*`, never commit directly to `main`
-   - message like `feat(applications): add status filter`
+   - message like `feat(applications): add status filter`, followed by a blank line and a short bullet list of the main changes (rough details, no file-by-file list); show the full message in the handover
    - no "Co-Authored-By" line, no AI attribution
 8. **Never push, create a pull request or merge.** The user does that.
