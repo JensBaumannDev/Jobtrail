@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from tracker.models import Application, Note, WatchItem
 
 APPLICATIONS_URL = '/api/applications/'
+WATCHLIST_URL = '/api/watchlist/'
 TEST_PASSWORD = 'test-password-123'
 
 
@@ -35,6 +36,18 @@ def notes_url(application_id):
 
 def note_url(note_id):
     return f'/api/notes/{note_id}/'
+
+
+def watch_item_url(watch_item_id):
+    return f'{WATCHLIST_URL}{watch_item_id}/'
+
+
+def convert_url(watch_item_id):
+    return f'{watch_item_url(watch_item_id)}convert/'
+
+
+def watch_item_payload(**fields):
+    return {'company': 'Watched AG', 'website': 'watched.example', **fields}
 
 
 def application_payload(**fields):

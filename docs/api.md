@@ -114,7 +114,28 @@ Response `201`:
 | DELETE | `/api/watchlist/{id}/` | Remove |
 | POST | `/api/watchlist/{id}/convert/` | Turn the entry into an application |
 
+`POST /api/watchlist/`
+
+```json
+{
+  "company": "Acme",
+  "website": "acme.example",
+  "careers_url": "acme.example/jobs",
+  "location": "Hamburg",
+  "plan": "watch",
+  "note": "Ask about the frontend team."
+}
+```
+
+Response `201`: the entry with `id`, normalized `website` and `careers_url`, `created_at` and `updated_at`. Only `company` and `website` are required, `plan` defaults to `apply`. URLs and text fields follow the same rules as for applications.
+
 `convert` runs in one transaction. It creates an application with status `not_applied`, moves the entry's note over, deletes the watchlist entry and returns the new application (`201`).
+
+- Company, website and location are copied. The careers page becomes `job_ad_url`.
+- A non-empty note becomes the application's first note (text only, no title).
+- The request body is ignored.
+- If any step fails, nothing is changed: no application, no note, the entry stays.
+- Converting the same entry twice returns `404` the second time.
 
 ## Errors
 
