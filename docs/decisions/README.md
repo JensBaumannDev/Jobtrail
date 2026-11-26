@@ -15,3 +15,4 @@ Every file here describes one decision: why it came up, what I decided and what 
 | [0009](0009-website-required.md) | Company website is required | Accepted |
 | [0010](0010-no-license.md) | No open source license | Accepted |
 | [0011](0011-login-rate-limit-with-drf-throttling.md) | Login rate limit with DRF throttling | Accepted |
+| [0012](0012-cap-on-active-guests.md) | Cap on active guests | Accepted |

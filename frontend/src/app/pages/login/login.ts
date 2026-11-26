@@ -1,13 +1,11 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { PageHero } from '../../components/page-hero/page-hero';
+import { loginErrorKey } from '../../core/login-errors';
 import { AuthService } from '../../services/auth.service';
 
-const CREDENTIAL_ERROR_STATUSES = [400, 401];
-const RATE_LIMIT_STATUS = 429;
 const USERNAME_MAX_LENGTH = 150;
 const PASSWORD_MAX_LENGTH = 128;
 
@@ -63,21 +61,11 @@ export class Login {
       await action();
       await this.router.navigate(['/applications']);
     } catch (error) {
-      this.errorKey.set(errorKeyFor(error, rejectedKey));
+      this.errorKey.set(loginErrorKey(error, rejectedKey));
     } finally {
       this.form.controls.password.reset();
       this.submitted.set(false);
       this.submitting.set(false);
     }
   }
-}
-
-function errorKeyFor(error: unknown, rejectedKey: string): string {
-  if (!(error instanceof HttpErrorResponse)) {
-    return 'login.genericError';
-  }
-  if (error.status === RATE_LIMIT_STATUS) {
-    return 'login.rateLimitError';
-  }
-  return CREDENTIAL_ERROR_STATUSES.includes(error.status) ? rejectedKey : 'login.genericError';
 }

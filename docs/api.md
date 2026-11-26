@@ -45,7 +45,7 @@ Response `200`: the current user, like `me`. A new session starts and the sessio
 - Wrong username, wrong password and an inactive account all return the same `400`: `{"non_field_errors": ["Wrong username or password."]}`.
 - 10 login attempts per IP and hour, successful ones included. After that `429` with a `Retry-After` header (ADR 0011).
 
-`POST /api/auth/guest/` needs the CSRF token and no body. It creates a new guest with sample data, logs it in and returns `201` with the current user (`is_guest: true`, `expires_at` three hours later). The session ends at the same time. 5 guest logins per IP and hour, then `429`.
+`POST /api/auth/guest/` needs the CSRF token and no body. It creates a new guest with sample data, logs it in and returns `201` with the current user (`is_guest: true`, `expires_at` three hours later). The session ends at the same time. 5 guest logins per IP and hour, then `429`. IPv6 addresses count per /64 network. With 30 active guests the guest login returns `503` until one expires (ADR 0012).
 
 A guest older than three hours gets `401` on every request. A guest reaching the demo limit gets `429` with `{"detail": "The demo limit is reached. Delete something first."}`. Guests get `403` on the password change.
 
@@ -179,3 +179,4 @@ Response `201`: the entry with `id`, normalized `website` and `careers_url`, `cr
 | 403 | Missing CSRF token, or not allowed (for example a guest changing the password) |
 | 404 | Not found, or belongs to another user |
 | 429 | Too many login or guest login attempts, or a guest limit reached |
+| 503 | The demo is busy: too many active guests |

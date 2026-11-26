@@ -100,6 +100,8 @@ MAILERS = {
     },
 }
 
+GUEST_MAX_ACTIVE = int(os.environ.get('GUEST_MAX_ACTIVE', '30'))
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',

@@ -205,6 +205,7 @@
     "credentialsError": "Username or password is not correct.",
     "rateLimitError": "Too many attempts. Wait a moment and try again.",
     "genericError": "That didn't work. Please try again.",
+    "demoBusyError": "The demo is busy right now. Please try again later.",
     "sessionExpired": "Your session has expired. Please log in again."
   },
   "notFound": {
