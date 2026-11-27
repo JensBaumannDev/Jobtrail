@@ -352,8 +352,6 @@
     "loading": "Deine Bewerbungen werden geladen …"
   },
   "pdfOptions": {
-    "settingsToggle": "Einstellungen anpassen",
-    "settingsHint": "Titel, Inhalte, Spalten, Status, Sortierung",
     "title": "Titel",
     "sectionsLegend": "Inhalte",
     "sections": {
@@ -365,6 +363,8 @@
     "columns": {
       "role": "Rolle",
       "location": "Ort und Arbeitsmodell",
+      "nextStep": "Nächster Schritt",
+      "nextStepOn": "Termin",
       "appliedOn": "Beworben am",
       "contact": "Ansprechpartner",
       "website": "Website"
@@ -387,7 +387,7 @@
     "asOf": "Stand {{date}}",
     "statsHeading": "Kennzahlen",
     "stats": {
-      "sent": "Verschickt",
+      "sent": "Bewerbungen",
       "active": "Aktiv",
       "responseRate": "Antwortquote",
       "averageResponse": "Ø Antwortzeit"
@@ -396,11 +396,13 @@
     "percent": "{{value}} %",
     "days": "{{value}} Tage",
     "distributionHeading": "Verteilung nach Status",
-    "listHeading": "Bewerbungen ({{count}})",
+    "listHeading": "Bewerbungen",
     "columns": {
       "company": "Firma",
       "status": "Status"
     },
-    "empty": "Keine Bewerbungen mit den gewählten Status."
+    "empty": "Keine Bewerbungen mit den gewählten Status.",
+    "countOne": "{{count}} Bewerbung",
+    "countOther": "{{count}} Bewerbungen"
   }
 }

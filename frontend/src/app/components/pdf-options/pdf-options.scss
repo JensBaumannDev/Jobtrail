@@ -10,64 +10,6 @@
   gap: $space-lg;
 }
 
-.pdf-options__toggle {
-  @include flex(row, nowrap, flex-start, center);
-  display: none;
-  gap: $space-sm;
-  width: 100%;
-  padding: $space-sm $space-md;
-  border: 1px solid $color-field-line;
-  border-radius: $radius-button;
-  background: $color-field;
-  color: $color-ink;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  transition: border-color $duration-fast;
-
-  &:hover {
-    border-color: $color-field-line-hover;
-  }
-}
-
-.pdf-options__toggle-symbol {
-  flex: none;
-  width: $icon-size;
-  height: $icon-size;
-  color: $color-blue;
-}
-
-.pdf-options__toggle-text {
-  display: grid;
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.pdf-options__toggle-title {
-  font-weight: $font-weight-bold;
-}
-
-.pdf-options__toggle-hint {
-  color: $color-label;
-}
-
-.pdf-options__toggle-icon {
-  flex: none;
-  width: $icon-size;
-  height: $icon-size;
-  color: $color-label;
-  transition: transform $duration-base $ease;
-}
-
-.pdf-options__toggle-icon--open {
-  transform: rotate(180deg);
-}
-
-.pdf-options__settings {
-  display: grid;
-  gap: $space-lg;
-}
-
 .pdf-options__field {
   display: grid;
   gap: $space-xs;
@@ -142,15 +84,3 @@
   margin: 0;
   color: $color-label;
 }
-
-/* #region RESPONSIVE */
-@include below-tablet {
-  .pdf-options__toggle {
-    display: flex;
-  }
-
-  .pdf-options__settings--collapsed {
-    display: none;
-  }
-}
-/* #endregion */

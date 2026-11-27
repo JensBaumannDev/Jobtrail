@@ -1,75 +1,53 @@
 <form class="pdf-options" [formGroup]="form" novalidate>
-  <button
-    class="pdf-options__toggle"
-    type="button"
-    aria-controls="pdf-options-settings"
-    [attr.aria-expanded]="settingsOpen()"
-    (click)="toggleSettings()"
-  >
-    <svg class="pdf-options__toggle-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12" /><circle cx="16" cy="6" r="2" /><circle cx="10" cy="12" r="2" /><circle cx="18" cy="18" r="2" /></svg>
-    <span class="pdf-options__toggle-text">
-      <span class="pdf-options__toggle-title">{{ 'pdfOptions.settingsToggle' | translate }}</span>
-      <span class="pdf-options__toggle-hint">{{ 'pdfOptions.settingsHint' | translate }}</span>
-    </span>
-    <svg class="pdf-options__toggle-icon" [class.pdf-options__toggle-icon--open]="settingsOpen()" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
-  </button>
+  <div class="pdf-options__field">
+    <label class="pdf-options__label" for="pdf-title">{{ 'pdfOptions.title' | translate }}</label>
+    <input
+      class="pdf-options__input"
+      id="pdf-title"
+      formControlName="title"
+      autocomplete="off"
+      maxlength="120"
+      [placeholder]="'pdfPreview.defaultTitle' | translate"
+    />
+  </div>
 
-  <div
-    class="pdf-options__settings"
-    id="pdf-options-settings"
-    [class.pdf-options__settings--collapsed]="!settingsOpen()"
-  >
-    <div class="pdf-options__field">
-      <label class="pdf-options__label" for="pdf-title">{{ 'pdfOptions.title' | translate }}</label>
-      <input
-        class="pdf-options__input"
-        id="pdf-title"
-        formControlName="title"
-        autocomplete="off"
-        maxlength="120"
-        [placeholder]="'pdfPreview.defaultTitle' | translate"
-      />
-    </div>
+  <fieldset class="pdf-options__group" formGroupName="sections">
+    <legend class="pdf-options__legend">{{ 'pdfOptions.sectionsLegend' | translate }}</legend>
+    @for (section of sections; track section) {
+      <label class="pdf-options__check">
+        <input class="pdf-options__checkbox" type="checkbox" [formControlName]="section" />
+        {{ 'pdfOptions.sections.' + section | translate }}
+      </label>
+    }
+  </fieldset>
 
-    <fieldset class="pdf-options__group" formGroupName="sections">
-      <legend class="pdf-options__legend">{{ 'pdfOptions.sectionsLegend' | translate }}</legend>
-      @for (section of sections; track section) {
-        <label class="pdf-options__check">
-          <input class="pdf-options__checkbox" type="checkbox" [formControlName]="section" />
-          {{ 'pdfOptions.sections.' + section | translate }}
-        </label>
+  <fieldset class="pdf-options__group" formGroupName="columns">
+    <legend class="pdf-options__legend">{{ 'pdfOptions.columnsLegend' | translate }}</legend>
+    @for (column of columns; track column) {
+      <label class="pdf-options__check">
+        <input class="pdf-options__checkbox" type="checkbox" [formControlName]="column" />
+        {{ 'pdfOptions.columns.' + column | translate }}
+      </label>
+    }
+  </fieldset>
+
+  <fieldset class="pdf-options__group" formGroupName="statuses">
+    <legend class="pdf-options__legend">{{ 'pdfOptions.statusesLegend' | translate }}</legend>
+    @for (status of statuses; track status) {
+      <label class="pdf-options__check">
+        <input class="pdf-options__checkbox" type="checkbox" [formControlName]="status" />
+        <app-status-pill [status]="status" />
+      </label>
+    }
+  </fieldset>
+
+  <div class="pdf-options__field">
+    <label class="pdf-options__label" for="pdf-sort">{{ 'pdfOptions.sort' | translate }}</label>
+    <select class="pdf-options__input pdf-options__select" id="pdf-sort" formControlName="sort">
+      @for (sort of sorts; track sort) {
+        <option [value]="sort">{{ 'pdfOptions.sorts.' + sort | translate }}</option>
       }
-    </fieldset>
-
-    <fieldset class="pdf-options__group" formGroupName="columns">
-      <legend class="pdf-options__legend">{{ 'pdfOptions.columnsLegend' | translate }}</legend>
-      @for (column of columns; track column) {
-        <label class="pdf-options__check">
-          <input class="pdf-options__checkbox" type="checkbox" [formControlName]="column" />
-          {{ 'pdfOptions.columns.' + column | translate }}
-        </label>
-      }
-    </fieldset>
-
-    <fieldset class="pdf-options__group" formGroupName="statuses">
-      <legend class="pdf-options__legend">{{ 'pdfOptions.statusesLegend' | translate }}</legend>
-      @for (status of statuses; track status) {
-        <label class="pdf-options__check">
-          <input class="pdf-options__checkbox" type="checkbox" [formControlName]="status" />
-          <app-status-pill [status]="status" />
-        </label>
-      }
-    </fieldset>
-
-    <div class="pdf-options__field">
-      <label class="pdf-options__label" for="pdf-sort">{{ 'pdfOptions.sort' | translate }}</label>
-      <select class="pdf-options__input pdf-options__select" id="pdf-sort" formControlName="sort">
-        @for (sort of sorts; track sort) {
-          <option [value]="sort">{{ 'pdfOptions.sorts.' + sort | translate }}</option>
-        }
-      </select>
-    </div>
-
+    </select>
   </div>
 
   <div class="pdf-options__actions">

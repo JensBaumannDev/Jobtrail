@@ -207,6 +207,7 @@ $page-hero-padding-top: clamp(#{fn.rem(56)}, 8vw, #{fn.rem(112)});
 $page-hero-padding-bottom: clamp(#{fn.rem(48)}, 6vw, #{fn.rem(88)});
 $page-hero-margin-bottom: clamp(#{fn.rem(32)}, 4vw, #{fn.rem(56)});
 $pdf-sheet-width: fn.rem(832);
+$pdf-sheet-min-width: fn.rem(600);
 
 // Radius
 

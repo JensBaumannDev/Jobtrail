@@ -6,6 +6,8 @@ export type PdfSection = (typeof PDF_SECTIONS)[number];
 export const PDF_COLUMNS = [
   'role',
   'location',
+  'nextStep',
+  'nextStepOn',
   'appliedOn',
   'contact',
   'website',
@@ -23,7 +25,7 @@ export interface PdfReportOptions {
   sort: PdfSort;
 }
 
-export const DEFAULT_PDF_COLUMNS: readonly PdfColumn[] = ['role', 'location', 'appliedOn'];
+export const DEFAULT_PDF_COLUMNS: readonly PdfColumn[] = ['role', 'location', 'nextStep', 'appliedOn'];
 
 export const DEFAULT_PDF_OPTIONS: PdfReportOptions = {
   title: '',
