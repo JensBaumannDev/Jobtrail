@@ -1,14 +1,14 @@
 @use 'sass:map';
 @use 'src/styles/abstracts' as *;
 
-$status-chart-colors: (
-  'not-applied': map.get($theme-light, 'subtle'),
-  'awaiting-response': map.get($theme-light, 'blue'),
-  'intro-call-scheduled': map.get($theme-light, 'status-yellow-text'),
-  'further-interview': map.get($theme-light, 'status-yellow-text'),
+$pdf-chart-colors: (
+  'not-applied': map.get($theme-light, 'status-grey-text'),
+  'awaiting-response': map.get($theme-light, 'status-blue-text'),
+  'intro-call-scheduled': map.get($theme-light, 'chart-intro-call'),
+  'further-interview': map.get($theme-light, 'chart-further-interview'),
   'offer': map.get($theme-light, 'status-green-text'),
-  'rejected-after-application': map.get($theme-light, 'error'),
-  'rejected-after-interview': map.get($theme-light, 'status-red-text'),
+  'rejected-after-application': map.get($theme-light, 'chart-rejected-after-application'),
+  'rejected-after-interview': map.get($theme-light, 'chart-rejected-after-interview'),
 );
 
 :host {
@@ -30,10 +30,9 @@ $status-chart-colors: (
 
   @include flex(column, nowrap);
   gap: $space-xl;
-  width: 100%;
-  min-width: $pdf-sheet-min-width;
-  max-width: $pdf-sheet-width;
+  width: $pdf-sheet-width;
   aspect-ratio: 210 / 297;
+  zoom: var(--sheet-scale, 1);
   margin-inline: auto;
   padding: clamp(#{$space-lg}, 4vw, #{$space-2xl});
   border-radius: $radius-small;
@@ -72,6 +71,10 @@ $status-chart-colors: (
 
 .pdf-preview__section {
   break-inside: avoid-page;
+}
+
+.pdf-preview__section--list {
+  break-inside: auto;
 }
 
 .pdf-preview__heading {
@@ -142,7 +145,7 @@ $status-chart-colors: (
   border-radius: $radius-pill;
 }
 
-@each $status, $color in $status-chart-colors {
+@each $status, $color in $pdf-chart-colors {
   .pdf-preview__segment--#{$status},
   .pdf-preview__dot--#{$status} {
     background: $color;
@@ -173,7 +176,8 @@ $status-chart-colors: (
   border-bottom: 1px solid $color-line;
   text-align: left;
   vertical-align: top;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .pdf-preview__company {
@@ -191,13 +195,6 @@ $status-chart-colors: (
   color: $color-label;
 }
 
-.pdf-preview__foot {
-  margin-top: auto;
-  padding-top: $space-sm;
-  border-top: 1px solid $color-line;
-  color: $color-label;
-}
-
 /* #region RESPONSIVE */
 @media print {
   .pdf-preview {
@@ -208,9 +205,9 @@ $status-chart-colors: (
   }
 
   .pdf-preview__sheet {
-    min-width: 0;
-    max-width: none;
+    width: auto;
     aspect-ratio: auto;
+    zoom: 1;
     padding: 0;
     border-radius: 0;
   }

@@ -1,7 +1,18 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  afterNextRender,
+  computed,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ApplicationSummary, summarize } from '../../core/application-stats';
 import { parseIsoDate, todayIso } from '../../core/dates';
+import { scaleToFit } from '../../core/fit-scale';
 import { PdfReportOptions, PdfSection, selectApplications, statusCounts } from '../../core/pdf-report';
 import { displayHost } from '../../core/url';
 import { Application, ApplicationStatus } from '../../models/application.model';
@@ -12,6 +23,15 @@ interface ReportStat {
   labelKey: string;
   valueKey: string;
   value: number;
+}
+
+function horizontalSpace(element: HTMLElement): number {
+  const style = getComputedStyle(element);
+  return element.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+}
+
+function fitScale(frame: HTMLElement, sheet: HTMLElement): number {
+  return scaleToFit(horizontalSpace(frame), parseFloat(getComputedStyle(sheet).width));
 }
 
 function reportStats(summary: ApplicationSummary): ReportStat[] {
@@ -36,11 +56,14 @@ function reportStats(summary: ApplicationSummary): ReportStat[] {
 })
 export class PdfPreview {
   private readonly language = inject(LanguageService);
+  private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly options = input.required<PdfReportOptions>();
   readonly applications = input.required<readonly Application[]>();
 
   readonly today = todayIso();
+  readonly sheetScale = signal(1);
 
   readonly items = computed(() =>
     selectApplications(this.applications(), this.options().statuses, this.options().sort),
@@ -59,6 +82,10 @@ export class PdfPreview {
       }),
   );
 
+  constructor() {
+    afterNextRender(() => this.fitSheetToWidth());
+  }
+
   hasSection(section: PdfSection): boolean {
     return this.options().sections.includes(section);
   }
@@ -73,5 +100,16 @@ export class PdfPreview {
 
   modifier(status: ApplicationStatus): string {
     return statusModifier(status);
+  }
+
+  private fitSheetToWidth(): void {
+    const frame = this.element.nativeElement.querySelector<HTMLElement>('.pdf-preview');
+    const sheet = frame?.querySelector<HTMLElement>('.pdf-preview__sheet');
+    if (!frame || !sheet || typeof ResizeObserver === 'undefined') {
+      return;
+    }
+    const observer = new ResizeObserver(() => this.sheetScale.set(fitScale(frame, sheet)));
+    observer.observe(frame);
+    this.destroyRef.onDestroy(() => observer.disconnect());
   }
 }
