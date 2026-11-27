@@ -109,7 +109,7 @@ Guests can't change a password or open the admin.
 - Pages: login, applications, watchlist, PDF overview
 - Summary figures, filters and sorting are computed in the browser from the loaded list
 - All texts in German and English
-- PDF through the browser's print dialog with its own print stylesheet
+- PDF through the browser's print dialog with its own print stylesheet. Page numbers sit in `@page` margin boxes, which also hide the browser's own header and footer. The preview shows the whole A4 page scaled down to the available width
 - Guests see a yellow demo notice under the navigation with the time their data is deleted
 - A `429` in a form names the demo limit that is reached. On the guest login a `429` says too many guest logins came from the network, a `503` says the demo is busy
 

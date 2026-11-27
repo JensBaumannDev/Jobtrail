@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -38,6 +38,7 @@ export class PdfOptions {
   readonly columns = PDF_COLUMNS;
   readonly statuses = APPLICATION_STATUSES;
   readonly sorts = PDF_SORTS;
+  readonly settingsOpen = signal(false);
 
   readonly form = this.formBuilder.group({
     title: [DEFAULT_PDF_OPTIONS.title, Validators.maxLength(120)],
@@ -46,6 +47,10 @@ export class PdfOptions {
     statuses: this.checkboxGroup(APPLICATION_STATUSES, DEFAULT_PDF_OPTIONS.statuses),
     sort: [DEFAULT_PDF_OPTIONS.sort as PdfSort],
   });
+
+  toggleSettings(): void {
+    this.settingsOpen.update((open) => !open);
+  }
 
   constructor() {
     this.form.valueChanges
