@@ -4,7 +4,7 @@
   tabindex="0"
   [attr.aria-label]="'pdfPreview.regionLabel' | translate"
 >
-  <article class="pdf-preview__sheet">
+  <article class="pdf-preview__sheet" [style.--sheet-scale]="sheetScale()">
     <header class="pdf-preview__head">
       <div>
         <p class="pdf-preview__author">{{ 'pdfPreview.author' | translate }}</p>
@@ -55,8 +55,8 @@
     }
 
     @if (hasSection('list')) {
-      <section class="pdf-preview__section">
-        <h3 class="pdf-preview__heading">{{ 'pdfPreview.listHeading' | translate }}</h3>
+      <section class="pdf-preview__section pdf-preview__section--list">
+        <h3 class="pdf-preview__heading">{{ 'pdfPreview.listHeading' | translate: { count: items().length } }}</h3>
         @if (items().length) {
           <table class="pdf-preview__table">
             <thead>
@@ -82,12 +82,6 @@
                           {{ application.location || '–' }}
                           <span class="pdf-preview__secondary">{{ 'workMode.' + application.work_mode | translate }}</span>
                         }
-                        @case ('nextStep') {
-                          {{ application.next_step || '–' }}
-                        }
-                        @case ('nextStepOn') {
-                          {{ formatDate(application.next_step_on) }}
-                        }
                         @case ('appliedOn') {
                           {{ formatDate(application.applied_on) }}
                         }
@@ -112,9 +106,5 @@
         }
       </section>
     }
-
-    <footer class="pdf-preview__foot">
-      {{ (items().length === 1 ? 'pdfPreview.countOne' : 'pdfPreview.countOther') | translate: { count: items().length } }}
-    </footer>
   </article>
 </div>

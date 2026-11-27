@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use 'src/styles/abstracts' as *;
 
 :host {
@@ -51,6 +52,17 @@
   @page {
     size: A4;
     margin: 14mm;
+
+    @top-center {
+      content: '';
+    }
+
+    @bottom-right {
+      content: counter(page) ' / ' counter(pages);
+      color: map.get($theme-light, 'label');
+      font-family: $font-family-base;
+      font-size: $font-size-base;
+    }
   }
 
   .pdf-overview__hero,

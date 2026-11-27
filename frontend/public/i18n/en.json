@@ -352,6 +352,8 @@
     "loading": "Loading your applications …"
   },
   "pdfOptions": {
+    "settingsToggle": "Adjust settings",
+    "settingsHint": "Title, content, columns, statuses, sorting",
     "title": "Title",
     "sectionsLegend": "Contents",
     "sections": {
@@ -363,8 +365,6 @@
     "columns": {
       "role": "Role",
       "location": "Location and work mode",
-      "nextStep": "Next step",
-      "nextStepOn": "Date",
       "appliedOn": "Applied on",
       "contact": "Contact",
       "website": "Website"
@@ -387,7 +387,7 @@
     "asOf": "As of {{date}}",
     "statsHeading": "Key figures",
     "stats": {
-      "sent": "Applications",
+      "sent": "Sent",
       "active": "Active",
       "responseRate": "Response rate",
       "averageResponse": "Avg. response time"
@@ -396,13 +396,11 @@
     "percent": "{{value}} %",
     "days": "{{value}} days",
     "distributionHeading": "Distribution by status",
-    "listHeading": "Applications",
+    "listHeading": "Applications ({{count}})",
     "columns": {
       "company": "Company",
       "status": "Status"
     },
-    "empty": "No applications with the selected statuses.",
-    "countOne": "{{count}} application",
-    "countOther": "{{count}} applications"
+    "empty": "No applications with the selected statuses."
   }
 }
