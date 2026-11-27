@@ -12,19 +12,23 @@
   <label class="visually-hidden" for="application-status-filter">
     {{ 'filters.status' | translate }}
   </label>
-  <select
-    class="application-filters__status"
-    id="application-status-filter"
-    [class]="statusClass()"
-    [formControl]="status"
-  >
-    <option value="all">{{ 'filters.allStatuses' | translate: { count: counts().all } }}</option>
-    @for (option of statuses; track option) {
-      <option [value]="option">
-        {{ 'status.' + option | translate }} ({{ counts().byStatus[option] }})
+  <span class="application-filters__status" [class]="statusClass()">
+    <select class="application-filters__status-select" id="application-status-filter" [formControl]="status">
+      <option class="application-filters__option" value="all">
+        {{ 'filters.allStatuses' | translate: { count: counts().all } }}
       </option>
-    }
-  </select>
+      @for (option of statuses; track option) {
+        <option
+          class="application-filters__option application-filters__option--status"
+          [class]="'application-filters__option--' + statusModifier(option)"
+          [value]="option"
+        >
+          {{ 'status.' + option | translate }} ({{ counts().byStatus[option] }})
+        </option>
+      }
+    </select>
+    <svg class="application-filters__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+  </span>
   <button
     class="application-filters__chip"
     type="button"

@@ -1,4 +1,3 @@
-@use 'sass:list';
 @use 'src/styles/abstracts' as *;
 
 .status-distribution {
@@ -56,9 +55,9 @@
 }
 
 .status-distribution__dot {
-  width: $space-sm;
-  height: $space-sm;
-  border-radius: 50%;
+  width: $status-dot-size;
+  height: $status-dot-size;
+  border-radius: $radius-pill;
 }
 
 .status-distribution__count {
@@ -67,10 +66,10 @@
   font-variant-numeric: tabular-nums;
 }
 
-@each $name, $colors in $status-colors {
+@each $name, $color in $status-chart-colors {
   .status-distribution__segment--#{$name},
   .status-distribution__dot--#{$name} {
-    background: list.nth($colors, 2);
+    background: $color;
   }
 }
 

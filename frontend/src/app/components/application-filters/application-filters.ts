@@ -24,6 +24,7 @@ export class ApplicationFilters {
   readonly counts = input.required<StatusFilterCounts>();
 
   protected readonly statuses = APPLICATION_STATUSES;
+  protected readonly statusModifier = statusModifier;
   protected readonly searchMaxLength = SEARCH_MAX_LENGTH;
   protected readonly search = new FormControl('', { nonNullable: true });
   protected readonly status = new FormControl<StatusFilter>('all', { nonNullable: true });

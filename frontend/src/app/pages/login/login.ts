@@ -47,21 +47,30 @@ export class Login {
       return;
     }
     const { username, password } = this.form.getRawValue();
-    await this.authenticate(() => this.auth.login(username, password), 'login.credentialsError');
+    await this.authenticate(
+      () => this.auth.login(username, password),
+      (error) => loginErrorKey(error, 'login.credentialsError'),
+    );
   }
 
   protected async loginAsGuest(): Promise<void> {
-    await this.authenticate(() => this.auth.loginAsGuest(), 'login.genericError');
+    await this.authenticate(
+      () => this.auth.loginAsGuest(),
+      (error) => loginErrorKey(error, 'login.genericError', 'login.guestRateLimitError'),
+    );
   }
 
-  private async authenticate(action: () => Promise<void>, rejectedKey: string): Promise<void> {
+  private async authenticate(
+    action: () => Promise<void>,
+    toErrorKey: (error: unknown) => string,
+  ): Promise<void> {
     this.submitting.set(true);
     this.errorKey.set(null);
     try {
       await action();
       await this.router.navigate(['/applications']);
     } catch (error) {
-      this.errorKey.set(loginErrorKey(error, rejectedKey));
+      this.errorKey.set(toErrorKey(error));
     } finally {
       this.form.controls.password.reset();
       this.submitted.set(false);

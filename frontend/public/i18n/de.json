@@ -11,6 +11,11 @@
     "invalidUrl": "Bitte gib eine gültige Adresse ein, z. B. firma.de",
     "opensInNewTab": "öffnet in neuem Tab"
   },
+  "guestLimits": {
+    "applications": "Die Demo erlaubt höchstens 50 Bewerbungen. Lösch eine, um eine neue anzulegen.",
+    "notes": "Die Demo erlaubt höchstens 50 Notizen. Lösch eine, um eine neue anzulegen.",
+    "watchItems": "Die Demo erlaubt höchstens 30 Einträge auf der Watchlist. Lösch einen, um einen neuen anzulegen."
+  },
   "status": {
     "not_applied": "Noch nicht beworben",
     "awaiting_response": "Warten auf Rückmeldung",
@@ -175,7 +180,7 @@
     "logout": "Abmelden",
     "openMenu": "Menü öffnen",
     "closeMenu": "Menü schließen",
-    "guestNotice": "Du nutzt die Demo als Gast. Deine Daten werden um {{time}} Uhr gelöscht.",
+    "guestNotice": "Demo-Modus: Deine Daten werden um {{time}} Uhr gelöscht. Bitte gib keine echten persönlichen Daten ein.",
     "logoutFailed": "Abmelden hat nicht geklappt. Bitte versuch es noch einmal."
   },
   "footer": {
@@ -206,7 +211,8 @@
     "rateLimitError": "Zu viele Versuche. Warte kurz und versuch es dann noch einmal.",
     "genericError": "Das hat nicht geklappt. Bitte versuch es noch einmal.",
     "demoBusyError": "Die Demo ist gerade ausgelastet. Bitte versuch es später noch einmal.",
-    "sessionExpired": "Deine Sitzung ist abgelaufen. Bitte melde dich neu an."
+    "sessionExpired": "Deine Sitzung ist abgelaufen. Bitte melde dich neu an.",
+    "guestRateLimitError": "Zu viele Gast-Anmeldungen aus deinem Netzwerk. Bitte versuch es in einer Stunde noch einmal."
   },
   "notFound": {
     "eyebrow": "Fehler 404",

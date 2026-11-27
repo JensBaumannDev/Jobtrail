@@ -1,13 +1,13 @@
 @use 'src/styles/abstracts' as *;
 
-.note-list {
+:host {
   display: grid;
-  gap: $space-xs;
+  gap: $space-sm;
   min-width: 0;
 }
 
 .note-list__heading {
-  margin: $space-xs 0 0;
+  margin: 0;
   color: $color-ink;
   font-size: $font-size-base;
   font-weight: $font-weight-bold;
@@ -15,7 +15,7 @@
 
 .note-list__items {
   display: grid;
-  gap: $space-xs;
+  gap: $space-sm;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -25,7 +25,7 @@
   min-width: 0;
   padding: $space-sm $space-md;
   border-radius: $radius-button;
-  background: $color-surface;
+  background: $color-card-fill;
 }
 
 .note-list__item--editing {
@@ -60,7 +60,7 @@
 .note-list__tools {
   @include flex(row, wrap, flex-start, center);
   gap: $space-lg;
-  margin-top: $space-xs;
+  margin-top: $space-sm;
 }
 
 .note-list__text-button {
@@ -89,8 +89,8 @@
 
 .note-list__form {
   display: grid;
-  gap: $space-xs;
-  padding-top: $space-2xs;
+  gap: $space-sm;
+  padding-top: $space-xs;
 }
 
 .note-list__input,
@@ -99,7 +99,7 @@
   padding: $space-xs $space-sm;
   border: 1px solid $color-field-line;
   border-radius: $radius-button;
-  background: $color-background;
+  background: $color-field;
   color: $color-ink;
   font: inherit;
   transition: border-color $duration-fast;

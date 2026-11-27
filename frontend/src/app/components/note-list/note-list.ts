@@ -18,6 +18,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
+import { guestLimitKey } from '../../core/server-errors';
 import { Application, Note, NoteInput } from '../../models/application.model';
 import { LanguageService } from '../../services/language.service';
 import { NoteService } from '../../services/note.service';
@@ -126,8 +127,8 @@ export class NoteList {
     try {
       await this.persist(editingId, input);
       this.finishSave(editingId);
-    } catch {
-      this.errorKey.set('common.saveError');
+    } catch (error) {
+      this.errorKey.set(guestLimitKey(error, 'notes') ?? 'common.saveError');
     } finally {
       this.saving.set(false);
     }

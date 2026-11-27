@@ -115,22 +115,12 @@
           </div>
 
           <div class="application-list__cell">
-            <div class="application-list__tags">
-              <span class="application-list__tag">
-                {{ application.location || ('list.locationOpen' | translate) }}
-              </span>
-              <span
-                class="application-list__tag"
-                [class.application-list__tag--info]="application.work_mode === 'remote'"
-              >
-                {{ 'workMode.' + application.work_mode | translate }}
-              </span>
-              @if (row.followUpDue) {
-                <span class="application-list__tag application-list__tag--warning">
-                  {{ 'list.followUp' | translate }}
-                </span>
-              }
-            </div>
+            <p class="application-list__location">
+              {{ application.location || ('list.locationOpen' | translate) }}
+            </p>
+            <p class="application-list__work-mode">
+              {{ 'workMode.' + application.work_mode | translate }}
+            </p>
           </div>
 
           <div class="application-list__cell">
@@ -147,6 +137,11 @@
                   {{ 'list.date.' + chip.kind | translate: { date: chip.label } }}
                 </span>
               }
+              @if (row.followUpDue) {
+                <span class="application-list__tag application-list__tag--warning">
+                  {{ 'list.followUp' | translate }}
+                </span>
+              }
               <span class="application-list__applied">
                 {{ row.appliedKey | translate: { date: row.appliedDate, days: row.appliedDays } }}
               </span>
@@ -154,19 +149,31 @@
           </div>
 
           <div class="application-list__status-cell">
-            <select
-              class="application-list__status"
-              [class]="row.statusClass"
-              [id]="'application-status-' + application.id"
-              [attr.aria-label]="'list.statusOf' | translate: { company: application.company }"
-              (change)="changeStatus(application, $event)"
-            >
-              @for (status of statuses; track status) {
-                <option [value]="status" [selected]="status === application.status">
-                  {{ 'status.' + status | translate }}
-                </option>
-              }
-            </select>
+            <span class="application-list__status" [class]="'application-list__status--' + row.statusModifier">
+              <span
+                class="application-list__status-dot"
+                [class]="'application-list__status-dot--' + row.statusModifier"
+                aria-hidden="true"
+              ></span>
+              <select
+                class="application-list__status-select"
+                [id]="'application-status-' + application.id"
+                [attr.aria-label]="'list.statusOf' | translate: { company: application.company }"
+                (change)="changeStatus(application, $event)"
+              >
+                @for (status of statuses; track status) {
+                  <option
+                    class="application-list__status-option"
+                    [class]="'application-list__status-option--' + statusModifier(status)"
+                    [value]="status"
+                    [selected]="status === application.status"
+                  >
+                    {{ 'status.' + status | translate }}
+                  </option>
+                }
+              </select>
+              <svg class="application-list__status-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </span>
           </div>
 
           <div class="application-list__tools">

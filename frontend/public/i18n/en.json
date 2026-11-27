@@ -11,6 +11,11 @@
     "invalidUrl": "Please enter a valid address, e.g. company.com",
     "opensInNewTab": "opens in a new tab"
   },
+  "guestLimits": {
+    "applications": "The demo allows up to 50 applications. Delete one to add a new one.",
+    "notes": "The demo allows up to 50 notes. Delete one to add a new one.",
+    "watchItems": "The demo allows up to 30 watchlist entries. Delete one to add a new one."
+  },
   "status": {
     "not_applied": "Not applied yet",
     "awaiting_response": "Awaiting response",
@@ -175,7 +180,7 @@
     "logout": "Log out",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "guestNotice": "You're using the demo as a guest. Your data will be deleted at {{time}}.",
+    "guestNotice": "Demo mode: your data will be deleted at {{time}}. Please don't enter real personal data.",
     "logoutFailed": "Logging out didn't work. Please try again."
   },
   "footer": {
@@ -206,7 +211,8 @@
     "rateLimitError": "Too many attempts. Wait a moment and try again.",
     "genericError": "That didn't work. Please try again.",
     "demoBusyError": "The demo is busy right now. Please try again later.",
-    "sessionExpired": "Your session has expired. Please log in again."
+    "sessionExpired": "Your session has expired. Please log in again.",
+    "guestRateLimitError": "Too many guest logins from your network. Please try again in an hour."
   },
   "notFound": {
     "eyebrow": "Error 404",

@@ -110,6 +110,8 @@ Guests can't change a password or open the admin.
 - Summary figures, filters and sorting are computed in the browser from the loaded list
 - All texts in German and English
 - PDF through the browser's print dialog with its own print stylesheet
+- Guests see a yellow demo notice under the navigation with the time their data is deleted
+- A `429` in a form names the demo limit that is reached. On the guest login a `429` says too many guest logins came from the network, a `503` says the demo is busy
 
 ## Deployment
 

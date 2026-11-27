@@ -14,6 +14,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { guestLimitKey } from '../../core/server-errors';
 import { safeHttpUrl } from '../../core/url';
 import { WATCH_PLANS, WatchItem, WatchPlan } from '../../models/watch-item.model';
 import { ToastService } from '../../services/toast.service';
@@ -128,8 +129,9 @@ export class WatchlistList {
       this.convertedCompany.set(item.company);
       this.toast.show('watchlist.converted', { company: item.company });
       return true;
-    } catch {
-      this.toast.show('watchlist.convertFailed', { company: item.company });
+    } catch (error) {
+      const limitKey = guestLimitKey(error, 'applications');
+      this.toast.show(limitKey ?? 'watchlist.convertFailed', { company: item.company });
       return false;
     }
   }
