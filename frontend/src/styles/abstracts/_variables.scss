@@ -7,6 +7,7 @@ $color-black: #000000;
 $color-stage: $color-black;
 $color-on-stage: #f5f5f7;
 $color-glow: rgba(150, 165, 255, 0.22);
+$select-chevron-color: #86868b;
 
 // Themes
 
@@ -19,6 +20,14 @@ $theme-light: (
   'line': #e5e5e5,
   'surface': #f4f4f4,
   'surface-hover': #e8e8ea,
+  'list': #ffffff,
+  'card': #ffffff,
+  'card-fill': #f4f4f4,
+  'card-fill-hover': #e8e8ea,
+  'field': #ffffff,
+  'notice': #fff3d1,
+  'notice-line': #f0d98c,
+  'notice-text': #7a5200,
   'field-line': #86868b,
   'field-line-hover': #6e6e73,
   'blue': #0071e3,
@@ -39,6 +48,10 @@ $theme-light: (
   'status-green-text': #17703a,
   'status-red': #fde8ea,
   'status-red-text': #b8001a,
+  'chart-intro-call': #b07800,
+  'chart-further-interview': #7a5200,
+  'chart-rejected-after-application': #e5484d,
+  'chart-rejected-after-interview': #a3001b,
 );
 
 $theme-dark: (
@@ -50,6 +63,14 @@ $theme-dark: (
   'line': #2c2c2e,
   'surface': #1c1c1e,
   'surface-hover': #2c2c2e,
+  'list': #1c1c1e,
+  'card': #2c2c2e,
+  'card-fill': #363638,
+  'card-fill-hover': #444446,
+  'field': #2c2c2e,
+  'notice': #3a3110,
+  'notice-line': #4d4116,
+  'notice-text': #ffd60a,
   'field-line': #6e6e73,
   'field-line-hover': #8e8e93,
   'blue': #0071e3,
@@ -60,7 +81,7 @@ $theme-dark: (
   'dark-button-hover': #3a3a3c,
   'on-dark-button': #f5f5f7,
   'error': #ff6961,
-  'status-grey': #2c2c2e,
+  'status-grey': #363638,
   'status-grey-text': #d2d2d7,
   'status-blue': rgba(41, 151, 255, 0.18),
   'status-blue-text': #64b5ff,
@@ -70,6 +91,10 @@ $theme-dark: (
   'status-green-text': #30d158,
   'status-red': rgba(255, 69, 58, 0.18),
   'status-red-text': #ff8a80,
+  'chart-intro-call': #ffd60a,
+  'chart-further-interview': #c99700,
+  'chart-rejected-after-application': #ff8a80,
+  'chart-rejected-after-interview': #e0303a,
 );
 
 $color-background: var(--color-background);
@@ -80,6 +105,14 @@ $color-subtle: var(--color-subtle);
 $color-line: var(--color-line);
 $color-surface: var(--color-surface);
 $color-surface-hover: var(--color-surface-hover);
+$color-list: var(--color-list);
+$color-card: var(--color-card);
+$color-card-fill: var(--color-card-fill);
+$color-card-fill-hover: var(--color-card-fill-hover);
+$color-field: var(--color-field);
+$color-notice: var(--color-notice);
+$color-notice-line: var(--color-notice-line);
+$color-notice-text: var(--color-notice-text);
 $color-field-line: var(--color-field-line);
 $color-field-line-hover: var(--color-field-line-hover);
 $color-blue: var(--color-blue);
@@ -99,6 +132,16 @@ $status-colors: (
   'offer': (var(--color-status-green), var(--color-status-green-text)),
   'rejected-after-application': (var(--color-status-red), var(--color-status-red-text)),
   'rejected-after-interview': (var(--color-status-red), var(--color-status-red-text)),
+);
+
+$status-chart-colors: (
+  'not-applied': var(--color-status-grey-text),
+  'awaiting-response': var(--color-status-blue-text),
+  'intro-call-scheduled': var(--color-chart-intro-call),
+  'further-interview': var(--color-chart-further-interview),
+  'offer': var(--color-status-green-text),
+  'rejected-after-application': var(--color-chart-rejected-after-application),
+  'rejected-after-interview': var(--color-chart-rejected-after-interview),
 );
 
 // Typography
@@ -150,6 +193,8 @@ $button-height: fn.rem(46);
 $field-height: fn.rem(46);
 $control-size: fn.rem(40);
 $control-size-small: fn.rem(36);
+$status-dot-size: fn.rem(12);
+$status-select-width: fn.rem(260);
 $icon-size-small: fn.rem(14);
 $icon-size-medium: fn.rem(18);
 $icon-size: fn.rem(20);

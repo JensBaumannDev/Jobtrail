@@ -49,7 +49,7 @@ interface ApplicationRow {
   appliedKey: string;
   appliedDate: string;
   appliedDays: number;
-  statusClass: string;
+  statusModifier: string;
 }
 
 interface SortColumn {
@@ -88,7 +88,7 @@ const SOON_WITHIN_DAYS = 7;
   selector: 'app-application-list',
   imports: [TranslatePipe, ApplicationForm, ApplicationDetails],
   templateUrl: './application-list.html',
-  styleUrl: './application-list.scss',
+  styleUrls: ['./application-list.scss', './application-list-status.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApplicationList {
@@ -104,6 +104,7 @@ export class ApplicationList {
   readonly deleteRequested = output<Application>();
 
   protected readonly statuses = APPLICATION_STATUSES;
+  protected readonly statusModifier = statusModifier;
   protected readonly sortOptions = SORT_OPTIONS;
   protected readonly sort = signal<SortState>(UNSORTED);
   protected readonly expandedIds = signal<ReadonlySet<number>>(new Set());
@@ -213,7 +214,7 @@ export class ApplicationList {
       appliedKey: this.appliedKey(appliedOn, appliedDays),
       appliedDate: appliedOn ? this.formats().short.format(parseIsoDate(appliedOn)) : '',
       appliedDays,
-      statusClass: `application-list__status--${statusModifier(application.status)}`,
+      statusModifier: statusModifier(application.status),
     };
   }
 

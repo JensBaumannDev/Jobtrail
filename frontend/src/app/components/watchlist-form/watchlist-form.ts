@@ -19,6 +19,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
+import { INVALID_URL_MESSAGE, guestLimitKey } from '../../core/server-errors';
 import { normalizeWebsite } from '../../core/url';
 import { FieldErrors } from '../../models/api-error.model';
 import { WATCH_PLANS, WatchItem, WatchItemInput, WatchPlan } from '../../models/watch-item.model';
@@ -62,7 +63,7 @@ function serverMessageKey(message: string): string {
   if (/required|blank|null/i.test(message)) {
     return 'watchForm.errors.required';
   }
-  if (/valid url/i.test(message)) {
+  if (INVALID_URL_MESSAGE.test(message)) {
     return 'common.invalidUrl';
   }
   return /no more than/i.test(message) ? 'watchForm.errors.tooLong' : 'watchForm.errors.checkField';
@@ -180,7 +181,7 @@ export class WatchlistForm {
     const fieldErrors = fieldErrorsFrom(error);
     const applied = fieldErrors ? this.applyFieldErrors(fieldErrors) : false;
     if (!applied) {
-      this.generalError.set('common.saveError');
+      this.generalError.set(guestLimitKey(error, 'watchItems') ?? 'common.saveError');
       return;
     }
     this.focusFirstInvalid();

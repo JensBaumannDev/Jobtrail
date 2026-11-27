@@ -23,6 +23,7 @@ import {
 } from '@angular/forms';
 import { NgTemplateOutlet } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+import { guestLimitKey } from '../../core/server-errors';
 import { normalizeWebsite } from '../../core/url';
 import { FieldErrors } from '../../models/api-error.model';
 import {
@@ -136,7 +137,7 @@ export class ApplicationForm {
   readonly idPrefix = `application-form-${nextFormId++}`;
   readonly isEditing = computed(() => this.application() !== null);
   readonly saving = signal(false);
-  readonly saveFailed = signal(false);
+  readonly saveErrorKey = signal<string | null>(null);
   readonly submitted = signal(false);
 
   readonly form = this.formBuilder.group({
@@ -195,7 +196,7 @@ export class ApplicationForm {
 
   async submit(): Promise<void> {
     this.submitted.set(true);
-    this.saveFailed.set(false);
+    this.saveErrorKey.set(null);
     this.form.markAllAsTouched();
     if (this.form.invalid) {
       this.focusFirstInvalid();
@@ -226,7 +227,7 @@ export class ApplicationForm {
     }
     this.prefilledId = id;
     this.submitted.set(false);
-    this.saveFailed.set(false);
+    this.saveErrorKey.set(null);
     this.form.reset(application ? this.valuesFrom(application) : {});
   }
 
@@ -270,7 +271,7 @@ export class ApplicationForm {
       afterNextRender(() => this.focusFirstInvalid(), { injector: this.injector });
       return;
     }
-    this.saveFailed.set(true);
+    this.saveErrorKey.set(guestLimitKey(error, 'applications') ?? 'common.saveError');
   }
 
   private applyFieldErrors(errors: FieldErrors): boolean {

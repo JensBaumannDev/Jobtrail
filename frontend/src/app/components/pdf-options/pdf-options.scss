@@ -27,7 +27,7 @@
   padding: 0 $space-sm;
   border: 1px solid $color-field-line;
   border-radius: $radius-button;
-  background: $color-background;
+  background: $color-field;
   color: $color-ink;
   font: inherit;
   transition: border-color $duration-fast;
@@ -38,7 +38,7 @@
 }
 
 .pdf-options__select {
-  cursor: pointer;
+  @include styled-select-field($space-sm);
 }
 
 .pdf-options__group {

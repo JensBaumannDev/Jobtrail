@@ -27,7 +27,7 @@ $plan-apply-colors: map.get($status-colors, 'awaiting-response');
   padding: 0 $space-md;
   border: 1px solid $color-field-line;
   border-radius: $radius-button;
-  background: $color-background;
+  background: $color-field;
   color: $color-ink;
   font: inherit;
   transition: border-color $duration-fast;
@@ -42,9 +42,9 @@ $plan-apply-colors: map.get($status-colors, 'awaiting-response');
 }
 
 .watchlist-list__filter {
+  @include styled-select-field($space-md);
   flex: 1 1 0;
   font-weight: $font-weight-semibold;
-  cursor: pointer;
 }
 
 .watchlist-list__hint {
@@ -80,7 +80,7 @@ $plan-apply-colors: map.get($status-colors, 'awaiting-response');
   min-width: 0;
   padding: $space-md $space-lg;
   border-radius: $radius-button;
-  background: $color-background;
+  background: $color-card;
 }
 
 .watchlist-list__card--editing {
@@ -96,7 +96,7 @@ $plan-apply-colors: map.get($status-colors, 'awaiting-response');
 .watchlist-list__plan {
   padding: $space-2xs $space-xs;
   border-radius: $radius-small;
-  background: $color-surface;
+  background: $color-card-fill;
   color: $color-label;
   font-weight: $font-weight-semibold;
   line-height: 1.25;
@@ -176,7 +176,7 @@ $plan-apply-colors: map.get($status-colors, 'awaiting-response');
   padding: 0 $space-sm;
   border: 0;
   border-radius: $radius-button;
-  background: $color-surface;
+  background: $color-card-fill;
   color: $color-label;
   font: inherit;
   font-weight: $font-weight-semibold;
@@ -187,7 +187,7 @@ $plan-apply-colors: map.get($status-colors, 'awaiting-response');
     color $duration-fast;
 
   &:hover {
-    background: $color-surface-hover;
+    background: $color-card-fill-hover;
     color: $color-ink;
   }
 

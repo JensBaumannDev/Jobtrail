@@ -1,0 +1,83 @@
+@use 'sass:list';
+@use 'src/styles/abstracts' as *;
+
+$chevron-space: calc(#{$space-sm} + #{$icon-size-small} + #{$space-xs});
+$dot-space: calc(#{$space-sm} + #{$status-dot-size} + #{$space-xs});
+
+.application-list__status {
+  position: relative;
+  justify-self: start;
+  width: 100%;
+  max-width: $status-select-width;
+  border-radius: $radius-small;
+  color: $color-ink;
+
+  &:has(:focus-visible) {
+    @include focus-ring;
+  }
+}
+
+.application-list__status-dot {
+  position: absolute;
+  top: 50%;
+  left: $space-sm;
+  width: $status-dot-size;
+  height: $status-dot-size;
+  border-radius: $radius-pill;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.application-list__status-select {
+  width: 100%;
+  overflow: clip;
+  overflow-clip-margin: content-box;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: $space-tight $chevron-space $space-tight $dot-space;
+  border: 0;
+  border-radius: inherit;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-weight: $font-weight-semibold;
+  line-height: 1.3;
+  cursor: pointer;
+
+  @include styled-select-picker;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.application-list__status-option {
+  @include styled-select-option;
+  @include status-dot-before;
+}
+
+.application-list__status-chevron {
+  position: absolute;
+  top: 50%;
+  right: $space-sm;
+  width: $icon-size-small;
+  height: $icon-size-small;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+@each $name, $colors in $status-colors {
+  .application-list__status--#{$name} {
+    background: list.nth($colors, 1);
+  }
+}
+
+@each $name, $color in $status-chart-colors {
+  .application-list__status-dot--#{$name} {
+    background: $color;
+  }
+
+  .application-list__status-option--#{$name} {
+    --status-dot-color: #{$color};
+  }
+}

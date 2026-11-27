@@ -15,6 +15,12 @@ describe('loginErrorKey', () => {
     expect(loginErrorKey(httpError(429), 'login.credentialsError')).toBe('login.rateLimitError');
   });
 
+  it('shows the given rate limit message for 429', () => {
+    expect(loginErrorKey(httpError(429), 'login.genericError', 'login.guestRateLimitError')).toBe(
+      'login.guestRateLimitError',
+    );
+  });
+
   it('shows the demo busy message for 503', () => {
     expect(loginErrorKey(httpError(503), 'login.genericError')).toBe('login.demoBusyError');
   });

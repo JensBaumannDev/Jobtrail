@@ -10,24 +10,24 @@ $tone-danger: map.get($status-colors, 'rejected-after-application');
 
 .application-list {
   display: grid;
-  gap: $space-tight;
-  padding: $space-xs;
+  padding: $space-xs 0;
+  border: 1px solid $color-line;
   border-radius: $radius-surface;
-  background: $color-surface;
+  background: $color-list;
 }
 
 .application-list__head,
 .application-list__row {
   display: grid;
   grid-template-columns:
-    minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.8fr) minmax(0, 1.6fr)
+    minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1.8fr) minmax(0, 1.8fr)
     $tools-width;
   gap: $space-md;
   align-items: center;
 }
 
 .application-list__head {
-  padding: $space-snug $space-xl $space-tight;
+  padding: $space-snug $space-xl $space-sm;
 }
 
 .application-list__sort {
@@ -75,9 +75,10 @@ $tone-danger: map.get($status-colors, 'rejected-after-application');
   padding: 0 $space-sm;
   border: 1px solid $color-field-line;
   border-radius: $radius-button;
-  background: $color-background;
+  background: $color-field;
   color: $color-ink;
   font: inherit;
+  @include styled-select-field($space-sm);
 }
 
 .application-list__empty {
@@ -88,7 +89,6 @@ $tone-danger: map.get($status-colors, 'rejected-after-application');
 
 .application-list__rows {
   display: grid;
-  gap: $space-tight;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -96,9 +96,8 @@ $tone-danger: map.get($status-colors, 'rejected-after-application');
 
 .application-list__row {
   min-width: 0;
-  padding: $space-md $space-xl;
-  border-radius: $radius-button;
-  background: $color-background;
+  padding: $space-lg $space-xl;
+  border-top: 1px solid $color-line;
 }
 
 .application-list__cell,
@@ -130,16 +129,23 @@ $tone-danger: map.get($status-colors, 'rejected-after-application');
 }
 
 .application-list__role,
-.application-list__next {
+.application-list__next,
+.application-list__location {
   margin: 0;
   color: $color-text;
   overflow-wrap: anywhere;
+}
+
+.application-list__work-mode {
+  margin: 0;
+  color: $color-label;
 }
 
 .application-list__actions {
   @include flex(row, wrap, flex-start, center);
   gap: $space-tight;
   margin-top: $space-2xs;
+  margin-inline-start: calc(-1 * #{$space-snug});
 }
 
 .application-list__action {
@@ -150,7 +156,7 @@ $tone-danger: map.get($status-colors, 'rejected-after-application');
   padding: 0 $space-snug;
   border: 0;
   border-radius: $radius-small;
-  background: $color-surface;
+  background: none;
   color: $color-label;
   font: inherit;
   font-weight: $font-weight-semibold;
@@ -174,8 +180,8 @@ $tone-danger: map.get($status-colors, 'rejected-after-application');
 
 .application-list__action--open,
 .application-list__action--open:hover {
-  background: $color-ink;
-  color: $color-background;
+  background: $color-surface-hover;
+  color: $color-ink;
 }
 
 .application-list__action--icon {
@@ -217,7 +223,6 @@ $tone-danger: map.get($status-colors, 'rejected-after-application');
   font-variant-numeric: tabular-nums;
 }
 
-.application-list__tags,
 .application-list__next-meta {
   @include flex(row, wrap, flex-start, center);
   gap: $space-tight $space-snug;
@@ -229,13 +234,12 @@ $tone-danger: map.get($status-colors, 'rejected-after-application');
   gap: $space-tight;
   padding: $space-tight $space-xs;
   border-radius: $radius-small;
-  background: $color-surface;
+  background: $color-surface-hover;
   color: $color-label;
   font-weight: $font-weight-semibold;
   line-height: 1;
 }
 
-.application-list__tag--info,
 .application-list__date--soon {
   background: list.nth($tone-info, 1);
   color: list.nth($tone-info, 2);
@@ -258,25 +262,6 @@ $tone-danger: map.get($status-colors, 'rejected-after-application');
   font-variant-numeric: tabular-nums;
 }
 
-.application-list__status {
-  justify-self: start;
-  max-width: 100%;
-  padding: $space-tight $space-sm;
-  border: 0;
-  border-radius: $radius-small;
-  font: inherit;
-  font-weight: $font-weight-semibold;
-  line-height: 1.3;
-  cursor: pointer;
-}
-
-@each $name, $colors in $status-colors {
-  .application-list__status--#{$name} {
-    background-color: list.nth($colors, 1);
-    color: list.nth($colors, 2);
-  }
-}
-
 .application-list__tools {
   @include flex(row, nowrap, flex-end, center);
   justify-self: end;
@@ -287,12 +272,13 @@ $tone-danger: map.get($status-colors, 'rejected-after-application');
 .application-list__details {
   grid-column: 1 / -1;
   min-width: 0;
-  padding-top: $space-md;
+  margin-top: $space-2xs;
+  padding-top: $space-lg;
   border-top: 1px solid $color-line;
 }
 
 /* #region RESPONSIVE */
-@include phone {
+@include below-tablet {
   .application-list__head {
     display: none;
   }
@@ -305,7 +291,7 @@ $tone-danger: map.get($status-colors, 'rejected-after-application');
 
   .application-list__row {
     grid-template-columns: minmax(0, 1fr) auto;
-    padding: $space-md $space-lg;
+    padding: $space-lg;
   }
 
   .application-list__cell:not(:first-child),

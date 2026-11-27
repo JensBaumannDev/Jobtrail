@@ -1,15 +1,15 @@
 @use 'src/styles/abstracts' as *;
 
-.application-details {
+:host {
   display: grid;
-  gap: $space-sm;
+  gap: $space-lg;
   min-width: 0;
 }
 
 .application-details__facts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, #{$space-3xl * 3}), 1fr));
-  gap: $space-xs;
+  gap: $space-sm;
   margin: 0;
 }
 
@@ -17,7 +17,7 @@
   min-width: 0;
   padding: $space-sm $space-md;
   border-radius: $radius-button;
-  background: $color-surface;
+  background: $color-card-fill;
 }
 
 .application-details__term {

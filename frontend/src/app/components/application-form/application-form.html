@@ -37,14 +37,14 @@
 
       @switch (field.kind) {
         @case ('workMode') {
-          <select class="application-form__control" [id]="fieldId(field.name)" [formControlName]="field.name">
+          <select class="application-form__control application-form__control--select" [id]="fieldId(field.name)" [formControlName]="field.name">
             @for (mode of workModes; track mode) {
               <option [value]="mode">{{ 'workMode.' + mode | translate }}</option>
             }
           </select>
         }
         @case ('status') {
-          <select class="application-form__control" [id]="fieldId(field.name)" [formControlName]="field.name">
+          <select class="application-form__control application-form__control--select" [id]="fieldId(field.name)" [formControlName]="field.name">
             @for (status of statuses; track status) {
               <option [value]="status">{{ 'status.' + status | translate }}</option>
             }
@@ -99,8 +99,8 @@
       {{ 'common.cancel' | translate }}
     </button>
     <p class="application-form__save-error" role="alert">
-      @if (saveFailed()) {
-        {{ 'common.saveError' | translate }}
+      @if (saveErrorKey(); as key) {
+        {{ key | translate }}
       }
     </p>
   </div>

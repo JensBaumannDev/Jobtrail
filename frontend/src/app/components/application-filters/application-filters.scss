@@ -7,15 +7,16 @@
   width: 100%;
 }
 
+$chevron-space: calc(#{$space-md} + #{$icon-size-small} + #{$space-xs});
+
 .application-filters__search,
 .application-filters__status {
   min-width: 0;
   min-height: $field-height;
   border: 1px solid $color-field-line;
   border-radius: $radius-button;
-  background-color: $color-background;
+  background-color: $color-field;
   color: $color-ink;
-  font: inherit;
 
   &:hover {
     border-color: $color-field-line-hover;
@@ -25,13 +26,59 @@
 .application-filters__search {
   flex: 2 1 0;
   padding: 0 $space-md;
+  font: inherit;
 }
 
 .application-filters__status {
+  position: relative;
   flex: 1 1 0;
-  padding: 0 $space-md;
+
+  &:has(:focus-visible) {
+    @include focus-ring;
+  }
+}
+
+.application-filters__status-select {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: calc(#{$field-height} - 2px);
+  overflow: clip;
+  overflow-clip-margin: content-box;
+  white-space: nowrap;
+  padding: 0 $chevron-space 0 $space-md;
+  border: 0;
+  border-radius: inherit;
+  background: none;
+  color: inherit;
+  font: inherit;
   font-weight: $font-weight-semibold;
   cursor: pointer;
+
+  @include styled-select-picker;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.application-filters__option {
+  @include styled-select-option;
+}
+
+.application-filters__option--status {
+  @include status-dot-before;
+}
+
+.application-filters__chevron {
+  position: absolute;
+  top: 50%;
+  right: $space-md;
+  width: $icon-size-small;
+  height: $icon-size-small;
+  color: $color-label;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .application-filters__chip {
@@ -64,7 +111,12 @@
   .application-filters__status--#{$name} {
     border-color: transparent;
     background-color: list.nth($colors, 1);
-    color: list.nth($colors, 2);
+  }
+}
+
+@each $name, $color in $status-chart-colors {
+  .application-filters__option--#{$name} {
+    --status-dot-color: #{$color};
   }
 }
 

@@ -152,6 +152,7 @@ src/styles/
 - Radius 16 (surfaces), 10 (buttons); flat grey cards, no shadows, no hover lift
 - One blue button per group, first; secondary is the dark button
 - Status pills: grey (not applied), blue (awaiting response), yellow (intro call, further interview), green (offer), red (both rejections)
+- The status field in the application list has the pill background, ink text and the dot from the status distribution legend in front; each status has its own dot colour (`$status-chart-colors`), so statuses with the same background stay apart
 - Textareas can be resized to at most double their starting height
 - Navigation with an opaque background, no transparency or blur
 - Footer on every page with copyright, imprint and privacy links

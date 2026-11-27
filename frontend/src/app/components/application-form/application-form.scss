@@ -1,7 +1,6 @@
 @use 'src/styles/abstracts' as *;
 
-.application-form {
-  @include surface-card;
+:host {
   display: block;
 }
 
@@ -46,7 +45,7 @@
   padding: 0 $space-sm;
   border: 1px solid $color-field-line;
   border-radius: $radius-button;
-  background: $color-background;
+  background: $color-field;
   color: $color-ink;
   font: inherit;
   transition: border-color $duration-fast;
@@ -58,6 +57,10 @@
   &[aria-invalid='true'] {
     border-color: $color-error;
   }
+}
+
+.application-form__control--select {
+  @include styled-select-field($space-sm);
 }
 
 .application-form__error {

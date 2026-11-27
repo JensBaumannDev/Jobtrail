@@ -103,3 +103,82 @@
     color: vars.$color-ink;
   }
 }
+
+@mixin styled-select-picker {
+  appearance: none;
+
+  @supports (appearance: base-select) {
+    &,
+    &::picker(select) {
+      appearance: base-select;
+    }
+  }
+
+  &::picker-icon {
+    display: none;
+  }
+
+  &::picker(select) {
+    margin-block: vars.$space-2xs;
+    padding: vars.$space-2xs;
+    border: 1px solid vars.$color-line;
+    border-radius: vars.$radius-button;
+    background: vars.$color-card;
+    color: vars.$color-text;
+  }
+}
+
+@mixin styled-select-option {
+  display: flex;
+  align-items: center;
+  gap: vars.$space-xs;
+  padding: vars.$space-xs vars.$space-sm;
+  border-radius: vars.$radius-small;
+  font-weight: vars.$font-weight-semibold;
+  cursor: pointer;
+
+  &::checkmark {
+    display: none;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: vars.$color-card-fill-hover;
+    outline: none;
+  }
+
+  &:checked {
+    background: vars.$color-card-fill;
+  }
+}
+
+@mixin status-dot-before {
+  &::before {
+    content: '';
+    flex: none;
+    width: vars.$status-dot-size;
+    height: vars.$status-dot-size;
+    border-radius: vars.$radius-pill;
+    background: var(--status-dot-color);
+  }
+}
+
+@mixin styled-select-field($inline-padding) {
+  padding-inline: $inline-padding calc(#{$inline-padding} + #{vars.$icon-size-small} + #{vars.$space-xs});
+  background-image: fn.chevron-icon(vars.$select-chevron-color);
+  background-position: right $inline-padding center;
+  background-repeat: no-repeat;
+  background-size: vars.$icon-size-small;
+  cursor: pointer;
+
+  @include styled-select-picker;
+
+  @supports (appearance: base-select) {
+    display: flex;
+    align-items: center;
+  }
+
+  option {
+    @include styled-select-option;
+  }
+}
