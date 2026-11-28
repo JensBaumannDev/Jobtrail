@@ -1,0 +1,18 @@
+@use 'src/styles/abstracts' as *;
+
+:host {
+  display: block;
+}
+
+.connection-notice {
+  border-block-end: 1px solid $color-notice-line;
+  background: $color-notice;
+  color: $color-notice-text;
+  font-weight: $font-weight-semibold;
+  text-align: center;
+}
+
+.connection-notice__text {
+  display: block;
+  padding-block: $space-xs;
+}

@@ -16,3 +16,4 @@ Every file here describes one decision: why it came up, what I decided and what 
 | [0010](0010-no-license.md) | No open source license | Accepted |
 | [0011](0011-login-rate-limit-with-drf-throttling.md) | Login rate limit with DRF throttling | Accepted |
 | [0012](0012-cap-on-active-guests.md) | Cap on active guests | Accepted |
+| [0013](0013-offline-only-app-shell.md) | Offline only the app shell, no API data | Accepted |
