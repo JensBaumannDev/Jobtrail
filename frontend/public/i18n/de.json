@@ -402,5 +402,8 @@
       "status": "Status"
     },
     "empty": "Keine Bewerbungen mit den gewählten Status."
+  },
+  "connection": {
+    "offline": "Keine Internetverbindung. Deine Daten können gerade nicht geladen oder gespeichert werden."
   }
 }

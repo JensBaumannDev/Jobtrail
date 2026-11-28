@@ -111,6 +111,8 @@ Guests can't change a password or open the admin.
 - All texts in German and English
 - PDF through the browser's print dialog with its own print stylesheet. Page numbers sit in `@page` margin boxes, which also hide the browser's own header and footer. The preview shows the whole A4 page scaled down to the available width
 - Guests see a yellow demo notice under the navigation with the time their data is deleted
+- Installable as a PWA. The Angular service worker caches only the app shell (HTML, JavaScript, CSS, fonts, translations, icons) and never API responses (ADR 0013). It is only active in the production build
+- Without a connection a yellow notice under the navigation says that data can't be loaded or saved
 - A `429` in a form names the demo limit that is reached. On the guest login a `429` says too many guest logins came from the network, a `503` says the demo is busy
 
 ## Deployment
