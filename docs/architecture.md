@@ -117,4 +117,25 @@ Guests can't change a password or open the admin.
 
 ## Deployment
 
-Comes after the first deployment.
+Jobtrail runs with Docker on my Hetzner Cloud server (ADR 0014). `compose.prod.yaml` starts three containers in their own network:
+
+- `db`: PostgreSQL, no port outside the network
+- `backend`: Django with gunicorn, collects the admin static files on start
+- `frontend`: nginx with the built Angular app and the admin static files
+
+Both app containers listen only on localhost. The nginx on the server handles HTTPS and sends `/api/` and `/admin/` to the backend and everything else to the frontend (template in `deploy/nginx/jobtrail.conf`). That makes one proxy in front of Django, so `DJANGO_NUM_PROXIES` is `1`.
+
+Settings come from `.env.production` on the server. `.env.production.example` lists the variables.
+
+First deployment:
+
+```bash
+docker compose -f compose.prod.yaml up -d --build
+docker compose -f compose.prod.yaml exec backend python manage.py migrate
+docker compose -f compose.prod.yaml exec backend python manage.py createcachetable
+docker compose -f compose.prod.yaml exec backend python manage.py createsuperuser
+```
+
+Update: `git pull`, then `docker compose -f compose.prod.yaml up -d --build` and `migrate`.
+
+A cron job on the server runs `delete_expired_guests` every hour.
