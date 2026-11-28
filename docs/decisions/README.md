@@ -17,3 +17,4 @@ Every file here describes one decision: why it came up, what I decided and what 
 | [0011](0011-login-rate-limit-with-drf-throttling.md) | Login rate limit with DRF throttling | Accepted |
 | [0012](0012-cap-on-active-guests.md) | Cap on active guests | Accepted |
 | [0013](0013-offline-only-app-shell.md) | Offline only the app shell, no API data | Accepted |
+| [0014](0014-host-on-my-hetzner-cloud-server.md) | Host on my existing Hetzner Cloud server | Accepted |
